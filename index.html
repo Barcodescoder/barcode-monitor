@@ -148,9 +148,9 @@ function getApiKey() { return document.getElementById('apiKey').value.trim(); }
 function onKeyInput() {
   const key = getApiKey();
   const status = document.getElementById('apiStatus');
-  if (key.startsWith('AIza') && key.length > 20) {
+  if (key.length > 20) {
     status.textContent = 'Set'; status.className = 'api-status set';
-    localStorage.setItem('barcodeMonitor_gemini_key', key);
+    localStorage.setItem('barcodeMonitor_key', key);
   } else {
     status.textContent = 'Not set'; status.className = 'api-status unset';
   }
@@ -300,7 +300,7 @@ function renderPosts(posts) {
 // --- Main ---
 async function runCheck() {
   const apiKey = getApiKey();
-  if (!apiKey || !apiKey.startsWith('AIza')) {
+  if (!apiKey || apiKey.length < 10) {
     showError('Please enter your Claude API key above.'); return;
   }
   hideError();
@@ -436,7 +436,7 @@ async function runCheck() {
 }
 
 window.addEventListener('load', () => {
-  const saved = localStorage.getItem('barcodeMonitor_gemini_key');
+  const saved = localStorage.getItem('barcodeMonitor_key');
   if (saved) { document.getElementById('apiKey').value = saved; onKeyInput(); }
   const last = localStorage.getItem(LAST_KEY);
   if (last) document.getElementById('lastChecked').textContent = last;
