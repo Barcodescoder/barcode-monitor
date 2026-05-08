@@ -200,9 +200,29 @@ function parseRSS(xml) {
 
 async function fetchKeyword(keyword) {
   const url = `https://www.reddit.com/search/.rss?q=${encodeURIComponent(keyword)}&sort=new&limit=15`;
-  const resp = await fetch(url, { headers: { 'Accept': 'application/rss+xml, application/xml, text/xml' } });
+  log(`  URL: ${url}`);
+  let resp;
+  try {
+    resp = await fetch(url, { headers: { 'Accept': 'application/rss+xml, application/xml, text/xml' } });
+  } catch(e) {
+    log(`  fetch() threw: name=${e.name}, message=${e.message}`);
+    log(`  type=${e.constructor?.name}, stack=${(e.stack||'').slice(0,200)}`);
+    // Try again with no-cors to see if it's a CORS issue
+    log(`  Retrying with mode:no-cors to test CORS...`);
+    try {
+      const r2 = await fetch(url, { mode: 'no-cors' });
+      log(`  no-cors response type: ${r2.type}, status: ${r2.status}`);
+      if (r2.type === 'opaque') logWarn(`  → CORS is the problem (opaque response). Reddit is blocking cross-origin requests.`);
+    } catch(e2) {
+      logErr(`  no-cors also failed: ${e2.message} — likely a network/DNS issue, not CORS`);
+    }
+    throw new Error(`fetch failed: ${e.message}`);
+  }
+  log(`  HTTP ${resp.status} ${resp.statusText}`);
+  log(`  Headers: ${[...resp.headers.entries()].map(([k,v])=>k+':'+v).join(', ').slice(0,300)}`);
   if (!resp.ok) throw new Error(`HTTP ${resp.status} ${resp.statusText}`);
   const text = await resp.text();
+  log(`  Body length: ${text.length}, preview: ${text.slice(0,100)}`);
   return parseRSS(text);
 }
 
