@@ -148,7 +148,7 @@ function getApiKey() { return document.getElementById('apiKey').value.trim(); }
 function onKeyInput() {
   const key = getApiKey();
   const status = document.getElementById('apiStatus');
-  if (key.length > 20) {
+  if (key.length > 10) {
     status.textContent = 'Set'; status.className = 'api-status set';
     localStorage.setItem('barcodeMonitor_key', key);
   } else {
@@ -241,7 +241,7 @@ priority: "high"=clear buying intent, "medium"=good engagement opportunity, "low
 Posts:
 ${items}`;
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-001:generateContent?key=${apiKey}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
   const resp = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
