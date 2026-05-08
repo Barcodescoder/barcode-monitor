@@ -10,7 +10,7 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
     --bg: #F7F5F0; --surface: #FFFFFF; --border: #E2DDD6; --border-strong: #C8C2B8;
-    --text: #1A1814; --text-muted: #7A756C; --text-faint: #ADA89F; --accent: #1A1814;
+    --text: #1A1814; --text-muted: #7A756C; --text-faint: #ADA89F;
     --high-bg: #EAF3DE; --high-text: #27500A; --med-bg: #FAEEDA; --med-text: #633806;
     --low-bg: #F1EFE8; --low-text: #5F5E5A; --danger-bg: #FCEBEB; --danger-text: #791F1F;
   }
@@ -33,7 +33,7 @@
   .btn:active { transform: scale(0.98); }
   .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
   .btn.primary { background: var(--text); color: var(--bg); border-color: var(--text); }
-  .btn.primary:hover { opacity: 0.85; background: var(--text); }
+  .btn.primary:hover { opacity: 0.85; }
   .status-text { font-size: 11px; color: var(--text-muted); letter-spacing: 0.02em; }
   .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 2rem; }
   .stat { background: var(--surface); padding: 1rem 1.25rem; }
@@ -103,7 +103,7 @@
   <div id="postsContainer">
     <div class="empty"><span class="big">&#9632;</span>Click "Check for new posts" to scan Reddit</div>
   </div>
-  <div class="log-wrap" id="logWrap">
+  <div class="log-wrap">
     <div class="log-header" onclick="toggleLog()">
       <span>&#9654; Activity log</span>
       <span id="logToggleLabel">show</span>
@@ -119,8 +119,8 @@ const KEYWORDS = [
 ];
 const SEEN_KEY = 'barcodeMonitor_seen';
 const LAST_KEY = 'barcodeMonitor_last';
+const KEY_STORE = 'barcodeMonitor_key';
 
-// --- Logging ---
 function toggleLog() {
   const body = document.getElementById('logBody');
   const label = document.getElementById('logToggleLabel');
@@ -128,7 +128,6 @@ function toggleLog() {
   body.style.display = open ? 'none' : 'block';
   label.textContent = open ? 'show' : 'hide';
 }
-
 function log(msg, cls) {
   const body = document.getElementById('logBody');
   const d = document.createElement('div');
@@ -143,30 +142,30 @@ function logErr(msg)  { log(msg, 'lerr'); }
 function logHead(msg) { log(msg, 'lhead'); }
 function clearLog()   { document.getElementById('logBody').innerHTML = ''; }
 
-// --- API key ---
 function getApiKey() { return document.getElementById('apiKey').value.trim(); }
 function onKeyInput() {
   const key = getApiKey();
   const status = document.getElementById('apiStatus');
-  if (key.length > 10) {
-    status.textContent = 'Set'; status.className = 'api-status set';
-    localStorage.setItem('barcodeMonitor_key', key);
+  if (key.startsWith('AIza') && key.length > 20) {
+    status.textContent = 'Set';
+    status.className = 'api-status set';
+    localStorage.setItem(KEY_STORE, key);
   } else {
-    status.textContent = 'Not set'; status.className = 'api-status unset';
+    status.textContent = 'Not set';
+    status.className = 'api-status unset';
   }
 }
 
-// --- Seen IDs ---
 function getSeenIds() { try { return JSON.parse(localStorage.getItem(SEEN_KEY) || '[]'); } catch { return []; } }
 function saveSeenIds(ids) { localStorage.setItem(SEEN_KEY, JSON.stringify(ids)); }
 function clearSeen() {
   localStorage.removeItem(SEEN_KEY);
   document.getElementById('statSeen').textContent = '0';
   document.getElementById('statusMsg').innerHTML = 'Seen posts cleared';
-  clearLog(); log('Seen posts cleared — next run will show all results.');
+  clearLog();
+  log('Seen posts cleared — next run will show all results.');
 }
 
-// --- Progress ---
 function setProgress(label, pct) {
   document.getElementById('progressWrap').style.display = 'block';
   document.getElementById('progressLabel').textContent = label;
@@ -176,7 +175,6 @@ function hideProgress() { document.getElementById('progressWrap').style.display 
 function showError(msg) { const el = document.getElementById('errorBar'); el.textContent = msg; el.style.display = 'block'; }
 function hideError() { document.getElementById('errorBar').style.display = 'none'; }
 
-// --- RSS fetch ---
 function parseRSS(xml) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(xml, 'text/xml');
@@ -199,49 +197,36 @@ function parseRSS(xml) {
 }
 
 async function fetchKeyword(keyword) {
-  const redditUrl = `https://www.reddit.com/search/.rss?q=${encodeURIComponent(keyword)}&sort=new&limit=15`;
-  const proxyUrl = `https://still-leaf-77c4.barcodes.workers.dev/?url=${encodeURIComponent(redditUrl)}`;
-  log(`  Fetching via proxy...`);
-  let resp;
-  try {
-    resp = await fetch(proxyUrl);
-  } catch(e) {
-    logErr(`  fetch() threw: ${e.name} — ${e.message}`);
-    throw new Error(`fetch failed: ${e.message}`);
-  }
-  log(`  HTTP ${resp.status} ${resp.statusText}`);
-  if (!resp.ok) throw new Error(`HTTP ${resp.status} ${resp.statusText}`);
+  const redditUrl = 'https://www.reddit.com/search/.rss?q=' + encodeURIComponent(keyword) + '&sort=new&limit=15';
+  const proxyUrl = 'https://still-leaf-77c4.barcodes.workers.dev/?url=' + encodeURIComponent(redditUrl);
+  log('  Fetching via proxy...');
+  const resp = await fetch(proxyUrl);
+  log('  HTTP ' + resp.status + ' ' + resp.statusText);
+  if (!resp.ok) throw new Error('HTTP ' + resp.status);
   const text = await resp.text();
-  log(`  Body length: ${text.length}, preview: ${text.slice(0,80)}`);
+  log('  Body length: ' + text.length + ', preview: ' + text.slice(0, 80));
   return parseRSS(text);
 }
 
-// --- Gemini filter ---
-async function filterWithClaude(posts, apiKey) {
+async function filterWithGemini(posts, apiKey) {
   if (!posts.length) return [];
-  const items = posts.map((p, i) =>
-    `[${i}] TITLE: ${p.title}\nSUBREDDIT: r/${p.sub}\nSNIPPET: ${p.snippet.slice(0, 300)}`
-  ).join('\n\n---\n\n');
+  const items = posts.map(function(p, i) {
+    return '[' + i + '] TITLE: ' + p.title + '\nSUBREDDIT: r/' + p.sub + '\nSNIPPET: ' + p.snippet.slice(0, 300);
+  }).join('\n\n---\n\n');
 
-  const prompt = `You are helping a barcode retailer (barcode1.co.uk — sells EAN-13, UPC, GTIN, 2D barcodes) find Reddit posts worth engaging with.
+  const prompt = 'You are helping a barcode retailer (barcode1.co.uk) find Reddit posts worth engaging with.\n\n' +
+    'Mark relevant=true if the person:\n' +
+    '- Wants to buy or get barcodes for a product\n' +
+    '- Is confused about barcode types (EAN, UPC, GTIN, FNSKU, Data Matrix, etc.)\n' +
+    '- Is launching a product and likely needs barcodes\n' +
+    '- Has a question about barcode standards you could helpfully answer\n\n' +
+    'NOT relevant if about: barcode scanning apps, barcode printer hardware, QR codes only, purely academic.\n\n' +
+    'Respond ONLY with a JSON array, one object per post:\n' +
+    '[{"index":0,"relevant":true,"priority":"high","reason":"one sentence"}]\n\n' +
+    'priority: high=clear buying intent, medium=good engagement opportunity, low=tangential\n\n' +
+    'Posts:\n' + items;
 
-Mark relevant=true if the person:
-- Wants to buy or get barcodes for a product
-- Is confused about barcode types (EAN, UPC, GTIN, FNSKU, Data Matrix, etc.)
-- Is launching a product and likely needs barcodes
-- Has a question about barcode standards you could helpfully answer
-
-NOT relevant if about: barcode scanning apps, barcode printer hardware, QR codes only, purely academic with no commercial angle.
-
-Respond ONLY with a JSON array, one object per post in order:
-[{"index":0,"relevant":true,"priority":"high","reason":"one sentence"}]
-
-priority: "high"=clear buying intent, "medium"=good engagement opportunity, "low"=tangential
-
-Posts:
-${items}`;
-
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' + apiKey;
   const resp = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -252,25 +237,24 @@ ${items}`;
   });
 
   if (!resp.ok) {
-    const err = await resp.json().catch(() => ({}));
-    throw new Error(err.error?.message || `API ${resp.status}`);
+    const err = await resp.json().catch(function() { return {}; });
+    throw new Error(err.error && err.error.message ? err.error.message : 'API ' + resp.status);
   }
   const data = await resp.json();
-  const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-  log(`  AI raw response: ${text.slice(0, 300)}`);
+  const text = data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0] ? data.candidates[0].content.parts[0].text : '';
+  log('  Gemini response: ' + text.slice(0, 200));
   const match = text.match(/\[[\s\S]*\]/);
-  if (!match) { logWarn("  Could not find JSON array in AI response'); return []; }
+  if (!match) { logWarn('  No JSON array in Gemini response'); return []; }
   try { return JSON.parse(match[0]); } catch(e) { logErr('  JSON parse failed: ' + e.message); return []; }
 }
 
-// --- Render ---
 function timeAgo(iso) {
   if (!iso) return '';
   const diff = Math.floor((Date.now() - new Date(iso)) / 1000);
-  if (diff < 60) return `${diff}s ago`;
-  if (diff < 3600) return `${Math.floor(diff/60)}m ago`;
-  if (diff < 86400) return `${Math.floor(diff/3600)}h ago`;
-  return `${Math.floor(diff/86400)}d ago`;
+  if (diff < 60) return diff + 's ago';
+  if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
+  if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+  return Math.floor(diff / 86400) + 'd ago';
 }
 
 function renderPosts(posts) {
@@ -279,33 +263,32 @@ function renderPosts(posts) {
     container.innerHTML = '<div class="empty"><span class="big">&mdash;</span>No new relevant posts found this run</div>';
     return;
   }
-  container.innerHTML = '<div class="posts">' + posts.map(p => `
-    <div class="post">
-      <div class="post-top">
-        <span class="badge badge-${p.priority}">${p.priority}</span>
-        <div class="post-title"><a href="${p.link}" target="_blank" rel="noopener">${p.title}</a></div>
-      </div>
-      <div class="post-meta">
-        <span>r/${p.sub}</span>
-        <span>${timeAgo(p.updated)}</span>
-        ${p.author ? `<span>u/${p.author}</span>` : ''}
-        <span class="kw-tag">${p.keyword}</span>
-      </div>
-      ${p.snippet ? `<div class="post-snippet">${p.snippet.slice(0,200)}${p.snippet.length>200?'...':''}</div>` : ''}
-      <div class="post-reason"><strong>AI &rarr;</strong> ${p.reason}</div>
-    </div>
-  `).join('') + '</div>';
+  container.innerHTML = '<div class="posts">' + posts.map(function(p) {
+    return '<div class="post">' +
+      '<div class="post-top">' +
+        '<span class="badge badge-' + p.priority + '">' + p.priority + '</span>' +
+        '<div class="post-title"><a href="' + p.link + '" target="_blank" rel="noopener">' + p.title + '</a></div>' +
+      '</div>' +
+      '<div class="post-meta">' +
+        '<span>r/' + p.sub + '</span>' +
+        '<span>' + timeAgo(p.updated) + '</span>' +
+        (p.author ? '<span>u/' + p.author + '</span>' : '') +
+        '<span class="kw-tag">' + p.keyword + '</span>' +
+      '</div>' +
+      (p.snippet ? '<div class="post-snippet">' + p.snippet.slice(0, 200) + (p.snippet.length > 200 ? '...' : '') + '</div>' : '') +
+      '<div class="post-reason"><strong>AI &rarr;</strong> ' + p.reason + '</div>' +
+    '</div>';
+  }).join('') + '</div>';
 }
 
-// --- Main ---
 async function runCheck() {
   const apiKey = getApiKey();
-  if (!apiKey || apiKey.length < 10) {
-    showError('Please enter your Claude API key above.'); return;
+  if (!apiKey || !apiKey.startsWith('AIza')) {
+    showError('Please enter your Gemini API key above.');
+    return;
   }
   hideError();
   clearLog();
-  // Auto-open log
   document.getElementById('logBody').style.display = 'block';
   document.getElementById('logToggleLabel').textContent = 'hide';
 
@@ -315,7 +298,7 @@ async function runCheck() {
   document.getElementById('statHigh').textContent = '—';
 
   const seenIds = getSeenIds();
-  logHead(`Starting check — ${seenIds.length} posts previously seen`);
+  logHead('Starting check — ' + seenIds.length + ' posts previously seen');
   document.getElementById('statSeen').textContent = seenIds.length;
 
   let allPosts = [];
@@ -323,64 +306,60 @@ async function runCheck() {
 
   for (let i = 0; i < KEYWORDS.length; i++) {
     const kw = KEYWORDS[i];
-    setProgress(`Fetching Reddit: "${kw}" (${i+1}/${KEYWORDS.length})`, Math.round(((i+1)/KEYWORDS.length)*60));
-    log(`Fetching "${kw}"...`);
+    setProgress('Fetching Reddit: "' + kw + '" (' + (i + 1) + '/' + KEYWORDS.length + ')', Math.round(((i + 1) / KEYWORDS.length) * 60));
+    log('Fetching "' + kw + '"...');
     try {
       const posts = await fetchKeyword(kw);
-      logOk(`  → ${posts.length} posts found`);
-      posts.forEach(p => log(`    · ${p.title.slice(0,70)} (r/${p.sub})`));
-      allPosts.push(...posts.map(p => ({ ...p, keyword: kw })));
+      logOk('  -> ' + posts.length + ' posts found');
+      posts.forEach(function(p) { log('    . ' + p.title.slice(0, 70) + ' (r/' + p.sub + ')'); });
+      allPosts = allPosts.concat(posts.map(function(p) { return Object.assign({}, p, { keyword: kw }); }));
     } catch(e) {
-      logErr(`  → FAILED: ${e.message}`);
-      errors.push(`${kw}: ${e.message}`);
+      logErr('  -> FAILED: ' + e.message);
+      errors.push(kw + ': ' + e.message);
     }
-    await new Promise(r => setTimeout(r, 2000));
+    await new Promise(function(r) { setTimeout(r, 2000); });
   }
 
-  // Deduplicate
   const seenSet = new Set();
-  allPosts = allPosts.filter(p => { if (seenSet.has(p.id)) return false; seenSet.add(p.id); return true; });
-  logHead(`Total unique posts fetched: ${allPosts.length}`);
+  allPosts = allPosts.filter(function(p) { if (seenSet.has(p.id)) return false; seenSet.add(p.id); return true; });
+  logHead('Total unique posts fetched: ' + allPosts.length);
 
-  // Filter already-seen
-  const newPosts = allPosts.filter(p => !seenIds.includes(p.id));
-  logHead(`New posts (not seen before): ${newPosts.length}`);
+  const newPosts = allPosts.filter(function(p) { return !seenIds.includes(p.id); });
+  logHead('New posts (not seen before): ' + newPosts.length);
 
   if (!newPosts.length) {
     hideProgress();
     document.getElementById('statFound').textContent = '0';
     document.getElementById('statHigh').textContent = '0';
-    document.getElementById('statusMsg').innerHTML = `Done &mdash; no new posts since last check`;
+    document.getElementById('statusMsg').innerHTML = 'Done &mdash; no new posts since last check';
     log('No new posts to analyse — done.');
     renderPosts([]);
     btn.disabled = false;
     return;
   }
 
-  // AI filtering
   const BATCH = 20;
   let relevant = [];
-  logHead(`Sending to Gemini for relevance filtering (batches of ${BATCH})...`);
+  logHead('Sending to Gemini for relevance filtering (batches of ' + BATCH + ')...');
 
   for (let i = 0; i < newPosts.length; i += BATCH) {
     const batch = newPosts.slice(i, i + BATCH);
-    const batchNum = Math.floor(i/BATCH)+1;
-    setProgress(`Analysing posts ${i+1}–${Math.min(i+BATCH, newPosts.length)} of ${newPosts.length}...`, 70 + Math.round((i/newPosts.length)*28));
-    log(`Batch ${batchNum}: sending ${batch.length} posts to Gemini...`);
+    const batchNum = Math.floor(i / BATCH) + 1;
+    setProgress('Analysing posts ' + (i + 1) + '-' + Math.min(i + BATCH, newPosts.length) + ' of ' + newPosts.length + '...', 70 + Math.round((i / newPosts.length) * 28));
+    log('Batch ' + batchNum + ': sending ' + batch.length + ' posts to Gemini...');
 
-    // Retry up to 3 times on transient errors
     let results = null;
     for (let attempt = 1; attempt <= 3; attempt++) {
       try {
-        results = await filterWithClaude(batch, apiKey);
+        results = await filterWithGemini(batch, apiKey);
         break;
       } catch(e) {
         const isTransient = e.message.includes('high demand') || e.message.includes('503') || e.message.includes('429');
         if (isTransient && attempt < 3) {
-          logWarn(`  Batch ${batchNum} attempt ${attempt} failed (${e.message.slice(0,60)}) — retrying in 5s...`);
-          await new Promise(r => setTimeout(r, 5000));
+          logWarn('  Attempt ' + attempt + ' failed (' + e.message.slice(0, 60) + ') — retrying in 5s...');
+          await new Promise(function(r) { setTimeout(r, 5000); });
         } else {
-          logErr(`  Batch ${batchNum} failed after ${attempt} attempt(s): ${e.message}`);
+          logErr('  Batch ' + batchNum + ' failed after ' + attempt + ' attempt(s): ' + e.message);
           results = null;
           break;
         }
@@ -388,55 +367,55 @@ async function runCheck() {
     }
 
     if (results) {
-      logOk(`  Gemini returned ${results.length} verdicts`);
-      results.forEach(r => {
+      logOk('  Gemini returned ' + results.length + ' verdicts');
+      results.forEach(function(r) {
         const p = batch[r.index];
         if (!p) return;
         if (r.relevant) {
-          logOk(`  ✓ RELEVANT [${r.priority}] "${p.title.slice(0,60)}" — ${r.reason}`);
-          relevant.push({ ...p, priority: r.priority, reason: r.reason });
+          logOk('  RELEVANT [' + r.priority + '] "' + p.title.slice(0, 60) + '" — ' + r.reason);
+          relevant.push(Object.assign({}, p, { priority: r.priority, reason: r.reason }));
         } else {
-          log(`  ✗ skipped: "${p.title.slice(0,60)}"`);
+          log('  skipped: "' + p.title.slice(0, 60) + '"');
         }
       });
     } else {
-      logWarn(`  Batch ${batchNum} skipped — continuing with remaining batches`);
+      logWarn('  Batch ' + batchNum + ' skipped — continuing with remaining batches');
     }
 
-    // Render results so far after each batch
-    const sorted = [...relevant].sort((a,b) => ({'high':0,'medium':1,'low':2}[a.priority]||2) - ({'high':0,'medium':1,'low':2}[b.priority]||2));
+    const sorted = relevant.slice().sort(function(a, b) {
+      return ({'high':0,'medium':1,'low':2}[a.priority] || 2) - ({'high':0,'medium':1,'low':2}[b.priority] || 2);
+    });
     renderPosts(sorted);
     document.getElementById('statFound').textContent = relevant.length;
-    document.getElementById('statHigh').textContent = relevant.filter(p => p.priority==='high').length;
+    document.getElementById('statHigh').textContent = relevant.filter(function(p) { return p.priority === 'high'; }).length;
   }
 
-  // Sort by priority
-  const order = { high: 0, medium: 1, low: 2 };
-  relevant.sort((a, b) => (order[a.priority]||2) - (order[b.priority]||2));
+  relevant.sort(function(a, b) {
+    return ({'high':0,'medium':1,'low':2}[a.priority] || 2) - ({'high':0,'medium':1,'low':2}[b.priority] || 2);
+  });
 
-  // Save seen
-  const newSeenIds = [...new Set([...seenIds, ...newPosts.map(p => p.id)])];
+  const newSeenIds = Array.from(new Set(seenIds.concat(newPosts.map(function(p) { return p.id; }))));
   saveSeenIds(newSeenIds);
 
   document.getElementById('statFound').textContent = relevant.length;
-  document.getElementById('statHigh').textContent = relevant.filter(p => p.priority==='high').length;
+  document.getElementById('statHigh').textContent = relevant.filter(function(p) { return p.priority === 'high'; }).length;
   document.getElementById('statSeen').textContent = newSeenIds.length;
 
   const now = new Date().toLocaleString();
   localStorage.setItem(LAST_KEY, now);
   document.getElementById('lastChecked').textContent = now;
-  document.getElementById('statusMsg').innerHTML = `Done &mdash; ${relevant.length} relevant from ${newPosts.length} new posts`;
+  document.getElementById('statusMsg').innerHTML = 'Done &mdash; ' + relevant.length + ' relevant from ' + newPosts.length + ' new posts';
 
-  logHead(`Done — ${relevant.length} relevant posts found`);
-  if (errors.length) { logWarn(`Feed errors: ${errors.join(', ')}`); showError(`Some feeds failed: ${errors.join(', ')}`); }
+  logHead('Done — ' + relevant.length + ' relevant posts found');
+  if (errors.length) { logWarn('Feed errors: ' + errors.join(', ')); showError('Some feeds failed: ' + errors.join(', ')); }
 
   hideProgress();
   renderPosts(relevant);
   btn.disabled = false;
 }
 
-window.addEventListener('load', () => {
-  const saved = localStorage.getItem('barcodeMonitor_key');
+window.addEventListener('load', function() {
+  const saved = localStorage.getItem(KEY_STORE);
   if (saved) { document.getElementById('apiKey').value = saved; onKeyInput(); }
   const last = localStorage.getItem(LAST_KEY);
   if (last) document.getElementById('lastChecked').textContent = last;
