@@ -8,381 +8,108 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --bg: #F7F5F0;
-    --surface: #FFFFFF;
-    --border: #E2DDD6;
-    --border-strong: #C8C2B8;
-    --text: #1A1814;
-    --text-muted: #7A756C;
-    --text-faint: #ADA89F;
-    --accent: #1A1814;
-    --high-bg: #EAF3DE;
-    --high-text: #27500A;
-    --med-bg: #FAEEDA;
-    --med-text: #633806;
-    --low-bg: #F1EFE8;
-    --low-text: #5F5E5A;
-    --danger-bg: #FCEBEB;
-    --danger-text: #791F1F;
+    --bg: #F7F5F0; --surface: #FFFFFF; --border: #E2DDD6; --border-strong: #C8C2B8;
+    --text: #1A1814; --text-muted: #7A756C; --text-faint: #ADA89F; --accent: #1A1814;
+    --high-bg: #EAF3DE; --high-text: #27500A; --med-bg: #FAEEDA; --med-text: #633806;
+    --low-bg: #F1EFE8; --low-text: #5F5E5A; --danger-bg: #FCEBEB; --danger-text: #791F1F;
   }
-
-  body {
-    font-family: 'DM Mono', monospace;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    padding: 0;
-  }
-
-  .page {
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 3rem 2rem 6rem;
-  }
-
-  header {
-    margin-bottom: 3rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .wordmark {
-    font-family: 'Fraunces', serif;
-    font-size: 28px;
-    font-weight: 300;
-    letter-spacing: -0.5px;
-    color: var(--text);
-    margin-bottom: 6px;
-  }
-
-  .wordmark span {
-    font-style: italic;
-  }
-
-  .subtitle {
-    font-size: 11px;
-    color: var(--text-muted);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .api-section {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1.25rem 1.5rem;
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .api-label {
-    font-size: 11px;
-    color: var(--text-muted);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-
-  .api-input {
-    flex: 1;
-    min-width: 200px;
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 8px 12px;
-    background: var(--bg);
-    color: var(--text);
-    outline: none;
-    transition: border-color 0.15s;
-  }
-
+  body { font-family: 'DM Mono', monospace; background: var(--bg); color: var(--text); min-height: 100vh; }
+  .page { max-width: 780px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+  header { margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+  .wordmark { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 300; letter-spacing: -0.5px; margin-bottom: 6px; }
+  .wordmark span { font-style: italic; }
+  .subtitle { font-size: 11px; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; }
+  .api-section { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem 1.5rem; margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .api-label { font-size: 11px; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+  .api-input { flex: 1; min-width: 200px; font-family: 'DM Mono', monospace; font-size: 12px; border: 1px solid var(--border); border-radius: 4px; padding: 8px 12px; background: var(--bg); color: var(--text); outline: none; transition: border-color 0.15s; }
   .api-input:focus { border-color: var(--border-strong); }
-
-  .api-status {
-    font-size: 11px;
-    padding: 4px 10px;
-    border-radius: 99px;
-    white-space: nowrap;
-  }
-
+  .api-status { font-size: 11px; padding: 4px 10px; border-radius: 99px; white-space: nowrap; }
   .api-status.set { background: var(--high-bg); color: var(--high-text); }
   .api-status.unset { background: var(--low-bg); color: var(--low-text); }
-
-  .controls {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-  }
-
-  .btn {
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    padding: 10px 20px;
-    border-radius: 4px;
-    border: 1px solid var(--border-strong);
-    background: transparent;
-    color: var(--text);
-    cursor: pointer;
-    transition: all 0.15s;
-    letter-spacing: 0.02em;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-
+  .controls { display: flex; align-items: center; gap: 12px; margin-bottom: 2rem; flex-wrap: wrap; }
+  .btn { font-family: 'DM Mono', monospace; font-size: 12px; padding: 10px 20px; border-radius: 4px; border: 1px solid var(--border-strong); background: transparent; color: var(--text); cursor: pointer; transition: all 0.15s; letter-spacing: 0.02em; display: inline-flex; align-items: center; gap: 8px; }
   .btn:hover { background: var(--surface); border-color: var(--text); }
   .btn:active { transform: scale(0.98); }
   .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-
-  .btn.primary {
-    background: var(--text);
-    color: var(--bg);
-    border-color: var(--text);
-  }
-
+  .btn.primary { background: var(--text); color: var(--bg); border-color: var(--text); }
   .btn.primary:hover { opacity: 0.85; background: var(--text); }
-
-  .status-text {
-    font-size: 11px;
-    color: var(--text-muted);
-    letter-spacing: 0.02em;
-  }
-
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-    margin-bottom: 2rem;
-  }
-
-  .stat {
-    background: var(--surface);
-    padding: 1rem 1.25rem;
-  }
-
-  .stat-label {
-    font-size: 10px;
-    color: var(--text-muted);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-
-  .stat-value {
-    font-family: 'Fraunces', serif;
-    font-size: 28px;
-    font-weight: 300;
-    color: var(--text);
-    line-height: 1;
-  }
-
-  .progress-wrap {
-    display: none;
-    margin-bottom: 2rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1.25rem 1.5rem;
-  }
-
-  .progress-label {
-    font-size: 11px;
-    color: var(--text-muted);
-    margin-bottom: 10px;
-    letter-spacing: 0.02em;
-  }
-
-  .progress-track {
-    height: 2px;
-    background: var(--border);
-    border-radius: 99px;
-    overflow: hidden;
-  }
-
-  .progress-fill {
-    height: 100%;
-    background: var(--text);
-    border-radius: 99px;
-    transition: width 0.4s ease;
-    width: 0%;
-  }
-
-  .error-bar {
-    display: none;
-    background: var(--danger-bg);
-    border: 1px solid #F09595;
-    border-radius: 6px;
-    padding: 10px 14px;
-    font-size: 12px;
-    color: var(--danger-text);
-    margin-bottom: 1.5rem;
-  }
-
+  .status-text { font-size: 11px; color: var(--text-muted); letter-spacing: 0.02em; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 2rem; }
+  .stat { background: var(--surface); padding: 1rem 1.25rem; }
+  .stat-label { font-size: 10px; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+  .stat-value { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 300; color: var(--text); line-height: 1; }
+  .progress-wrap { display: none; margin-bottom: 2rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem 1.5rem; }
+  .progress-label { font-size: 11px; color: var(--text-muted); margin-bottom: 10px; letter-spacing: 0.02em; }
+  .progress-track { height: 2px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--text); border-radius: 99px; transition: width 0.4s ease; width: 0%; }
+  .error-bar { display: none; background: var(--danger-bg); border: 1px solid #F09595; border-radius: 6px; padding: 10px 14px; font-size: 12px; color: var(--danger-text); margin-bottom: 1.5rem; }
   .posts { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-
-  .post {
-    background: var(--surface);
-    padding: 1.25rem 1.5rem;
-    transition: background 0.1s;
-  }
-
+  .post { background: var(--surface); padding: 1.25rem 1.5rem; transition: background 0.1s; }
   .post:hover { background: #FDFCFA; }
-
-  .post-top {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-
-  .badge {
-    font-size: 10px;
-    font-weight: 500;
-    padding: 3px 8px;
-    border-radius: 3px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    white-space: nowrap;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
+  .post-top { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+  .badge { font-size: 10px; font-weight: 500; padding: 3px 8px; border-radius: 3px; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
   .badge-high { background: var(--high-bg); color: var(--high-text); }
   .badge-medium { background: var(--med-bg); color: var(--med-text); }
   .badge-low { background: var(--low-bg); color: var(--low-text); }
-
-  .post-title {
-    font-family: 'Fraunces', serif;
-    font-size: 15px;
-    font-weight: 300;
-    line-height: 1.4;
-    flex: 1;
-  }
-
-  .post-title a {
-    color: var(--text);
-    text-decoration: none;
-    border-bottom: 1px solid var(--border);
-    transition: border-color 0.15s;
-  }
-
+  .post-title { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 300; line-height: 1.4; flex: 1; }
+  .post-title a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); transition: border-color 0.15s; }
   .post-title a:hover { border-color: var(--text); }
-
-  .post-meta {
-    display: flex;
-    gap: 16px;
-    font-size: 11px;
-    color: var(--text-faint);
-    margin-bottom: 10px;
-    flex-wrap: wrap;
-    letter-spacing: 0.02em;
-  }
-
-  .kw-tag {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    padding: 1px 7px;
-    font-size: 10px;
-    color: var(--text-muted);
-    letter-spacing: 0.04em;
-  }
-
-  .post-snippet {
-    font-size: 12px;
-    color: var(--text-muted);
-    line-height: 1.6;
-    margin-bottom: 10px;
-  }
-
-  .post-reason {
-    font-size: 11px;
-    color: var(--text-muted);
-    line-height: 1.6;
-    padding-top: 10px;
-    border-top: 1px solid var(--border);
-    letter-spacing: 0.01em;
-  }
-
+  .post-meta { display: flex; gap: 16px; font-size: 11px; color: var(--text-faint); margin-bottom: 10px; flex-wrap: wrap; letter-spacing: 0.02em; }
+  .kw-tag { background: var(--bg); border: 1px solid var(--border); border-radius: 3px; padding: 1px 7px; font-size: 10px; color: var(--text-muted); letter-spacing: 0.04em; }
+  .post-snippet { font-size: 12px; color: var(--text-muted); line-height: 1.6; margin-bottom: 10px; }
+  .post-reason { font-size: 11px; color: var(--text-muted); line-height: 1.6; padding-top: 10px; border-top: 1px solid var(--border); letter-spacing: 0.01em; }
   .post-reason strong { color: var(--text-faint); font-weight: 500; }
-
-  .empty {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    text-align: center;
-    padding: 4rem 2rem;
-    color: var(--text-muted);
-    font-size: 12px;
-    line-height: 2;
-    letter-spacing: 0.02em;
-  }
-
-  .empty .big {
-    font-family: 'Fraunces', serif;
-    font-size: 40px;
-    font-weight: 300;
-    font-style: italic;
-    color: var(--border-strong);
-    display: block;
-    margin-bottom: 8px;
-  }
-
-  @media (max-width: 500px) {
-    .page { padding: 2rem 1rem 4rem; }
-    .stats { grid-template-columns: 1fr; }
-  }
+  .empty { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; text-align: center; padding: 4rem 2rem; color: var(--text-muted); font-size: 12px; line-height: 2; letter-spacing: 0.02em; }
+  .empty .big { font-family: 'Fraunces', serif; font-size: 40px; font-weight: 300; font-style: italic; color: var(--border-strong); display: block; margin-bottom: 8px; }
+  .log-wrap { margin-top: 2rem; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .log-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: var(--surface); border-bottom: 1px solid var(--border); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); cursor: pointer; user-select: none; }
+  .log-header:hover { background: #FDFCFA; }
+  .log-body { font-family: 'DM Mono', monospace; font-size: 11px; background: #FAFAF8; padding: 1rem; max-height: 400px; overflow-y: auto; line-height: 1.9; }
+  .ll { color: var(--text-muted); }
+  .lok { color: #3B6D11; }
+  .lwarn { color: #854F0B; }
+  .lerr { color: #A32D2D; }
+  .lhead { color: var(--text); font-weight: 500; padding-top: 4px; display: block; }
+  @media (max-width: 500px) { .page { padding: 2rem 1rem 4rem; } .stats { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 <div class="page">
-
   <header>
     <div class="wordmark">barcode <span>monitor</span></div>
     <div class="subtitle">Reddit opportunity scanner &mdash; barcode1.co.uk</div>
   </header>
-
   <div class="api-section">
     <span class="api-label">Claude API key</span>
     <input class="api-input" type="password" id="apiKey" placeholder="sk-ant-..." autocomplete="off" oninput="onKeyInput()">
     <span class="api-status unset" id="apiStatus">Not set</span>
   </div>
-
   <div class="controls">
     <button class="btn primary" id="checkBtn" onclick="runCheck()">&#8635; Check for new posts</button>
     <button class="btn" onclick="clearSeen()">&#x2715; Reset seen</button>
     <span class="status-text" id="statusMsg">Ready &mdash; last checked: <span id="lastChecked">never</span></span>
   </div>
-
   <div class="stats">
     <div class="stat"><div class="stat-label">Found this run</div><div class="stat-value" id="statFound">—</div></div>
     <div class="stat"><div class="stat-label">High priority</div><div class="stat-value" id="statHigh">—</div></div>
     <div class="stat"><div class="stat-label">Total seen</div><div class="stat-value" id="statSeen">0</div></div>
   </div>
-
   <div class="progress-wrap" id="progressWrap">
     <div class="progress-label" id="progressLabel">Starting...</div>
     <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
   </div>
-
   <div class="error-bar" id="errorBar"></div>
-
   <div id="postsContainer">
     <div class="empty"><span class="big">&#9632;</span>Click "Check for new posts" to scan Reddit</div>
   </div>
-
+  <div class="log-wrap" id="logWrap">
+    <div class="log-header" onclick="toggleLog()">
+      <span>&#9654; Activity log</span>
+      <span id="logToggleLabel">show</span>
+    </div>
+    <div class="log-body" id="logBody" style="display:none"></div>
+  </div>
 </div>
 <script>
 const KEYWORDS = [
@@ -390,62 +117,71 @@ const KEYWORDS = [
   'Data Matrix','2D barcode','buy barcode','get barcode',
   'product barcode','retail barcode','Shopify barcode','FNSKU'
 ];
-
 const SEEN_KEY = 'barcodeMonitor_seen';
 const LAST_KEY = 'barcodeMonitor_last';
 
-function getApiKey() { return document.getElementById('apiKey').value.trim(); }
+// --- Logging ---
+function toggleLog() {
+  const body = document.getElementById('logBody');
+  const label = document.getElementById('logToggleLabel');
+  const open = body.style.display !== 'none';
+  body.style.display = open ? 'none' : 'block';
+  label.textContent = open ? 'show' : 'hide';
+}
 
+function log(msg, cls) {
+  const body = document.getElementById('logBody');
+  const d = document.createElement('div');
+  d.className = cls || 'll';
+  d.textContent = msg;
+  body.appendChild(d);
+  body.scrollTop = body.scrollHeight;
+}
+function logOk(msg)   { log(msg, 'lok'); }
+function logWarn(msg) { log(msg, 'lwarn'); }
+function logErr(msg)  { log(msg, 'lerr'); }
+function logHead(msg) { log(msg, 'lhead'); }
+function clearLog()   { document.getElementById('logBody').innerHTML = ''; }
+
+// --- API key ---
+function getApiKey() { return document.getElementById('apiKey').value.trim(); }
 function onKeyInput() {
   const key = getApiKey();
   const status = document.getElementById('apiStatus');
   if (key.startsWith('sk-ant-') && key.length > 20) {
-    status.textContent = 'Set';
-    status.className = 'api-status set';
+    status.textContent = 'Set'; status.className = 'api-status set';
     localStorage.setItem('barcodeMonitor_key', key);
   } else {
-    status.textContent = 'Not set';
-    status.className = 'api-status unset';
+    status.textContent = 'Not set'; status.className = 'api-status unset';
   }
 }
 
-function getSeenIds() {
-  try { return JSON.parse(localStorage.getItem(SEEN_KEY) || '[]'); } catch { return []; }
-}
-
-function saveSeenIds(ids) {
-  localStorage.setItem(SEEN_KEY, JSON.stringify(ids));
-}
-
+// --- Seen IDs ---
+function getSeenIds() { try { return JSON.parse(localStorage.getItem(SEEN_KEY) || '[]'); } catch { return []; } }
+function saveSeenIds(ids) { localStorage.setItem(SEEN_KEY, JSON.stringify(ids)); }
 function clearSeen() {
   localStorage.removeItem(SEEN_KEY);
   document.getElementById('statSeen').textContent = '0';
   document.getElementById('statusMsg').innerHTML = 'Seen posts cleared';
+  clearLog(); log('Seen posts cleared — next run will show all results.');
 }
 
+// --- Progress ---
 function setProgress(label, pct) {
   document.getElementById('progressWrap').style.display = 'block';
   document.getElementById('progressLabel').textContent = label;
   document.getElementById('progressFill').style.width = pct + '%';
 }
+function hideProgress() { document.getElementById('progressWrap').style.display = 'none'; }
+function showError(msg) { const el = document.getElementById('errorBar'); el.textContent = msg; el.style.display = 'block'; }
+function hideError() { document.getElementById('errorBar').style.display = 'none'; }
 
-function hideProgress() {
-  document.getElementById('progressWrap').style.display = 'none';
-}
-
-function showError(msg) {
-  const el = document.getElementById('errorBar');
-  el.textContent = msg;
-  el.style.display = 'block';
-}
-
-function hideError() {
-  document.getElementById('errorBar').style.display = 'none';
-}
-
+// --- RSS fetch ---
 function parseRSS(xml) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(xml, 'text/xml');
+  const parseErr = doc.querySelector('parsererror');
+  if (parseErr) throw new Error('XML parse error: ' + parseErr.textContent.slice(0, 100));
   const entries = doc.querySelectorAll('entry');
   const posts = [];
   entries.forEach(e => {
@@ -464,39 +200,33 @@ function parseRSS(xml) {
 
 async function fetchKeyword(keyword) {
   const url = `https://www.reddit.com/search/.rss?q=${encodeURIComponent(keyword)}&sort=new&limit=15`;
-  const resp = await fetch(url, {
-    headers: { 'Accept': 'application/rss+xml, application/xml, text/xml' }
-  });
-  if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+  const resp = await fetch(url, { headers: { 'Accept': 'application/rss+xml, application/xml, text/xml' } });
+  if (!resp.ok) throw new Error(`HTTP ${resp.status} ${resp.statusText}`);
   const text = await resp.text();
   return parseRSS(text);
 }
 
+// --- Claude filter ---
 async function filterWithClaude(posts, apiKey) {
   if (!posts.length) return [];
-
   const items = posts.map((p, i) =>
     `[${i}] TITLE: ${p.title}\nSUBREDDIT: r/${p.sub}\nSNIPPET: ${p.snippet.slice(0, 300)}`
   ).join('\n\n---\n\n');
 
-  const prompt = `You are helping a barcode retailer (barcode1.co.uk — sells EAN-13, UPC, GTIN, 2D barcodes for products) find Reddit posts worth engaging with.
+  const prompt = `You are helping a barcode retailer (barcode1.co.uk — sells EAN-13, UPC, GTIN, 2D barcodes) find Reddit posts worth engaging with.
 
-Mark a post as relevant if the person:
+Mark relevant=true if the person:
 - Wants to buy or get barcodes for a product
 - Is confused about barcode types (EAN, UPC, GTIN, FNSKU, Data Matrix, etc.)
 - Is launching a product and likely needs barcodes
-- Has a question about barcode standards you could helpfully answer to build goodwill
+- Has a question about barcode standards you could helpfully answer
 
-NOT relevant if about:
-- Barcode scanning software or apps
-- Barcode printer hardware
-- QR codes only (no product barcode angle)
-- Purely academic/technical with no commercial angle
+NOT relevant if about: barcode scanning apps, barcode printer hardware, QR codes only, purely academic with no commercial angle.
 
 Respond ONLY with a JSON array, one object per post in order:
-{"index":0,"relevant":true,"priority":"high","reason":"one sentence"}
+[{"index":0,"relevant":true,"priority":"high","reason":"one sentence"}]
 
-priority: "high" = clear buying intent, "medium" = good engagement opportunity, "low" = tangential but worth a look
+priority: "high"=clear buying intent, "medium"=good engagement opportunity, "low"=tangential
 
 Posts:
 ${items}`;
@@ -510,7 +240,7 @@ ${items}`;
       'anthropic-dangerous-direct-browser-access': 'true'
     },
     body: JSON.stringify({
-      model: 'claude-opus-4-5',
+      model: 'claude-haiku-4-5-20251001',
       max_tokens: 1000,
       messages: [{ role: 'user', content: prompt }]
     })
@@ -518,23 +248,24 @@ ${items}`;
 
   if (!resp.ok) {
     const err = await resp.json().catch(() => ({}));
-    throw new Error(err.error?.message || `API error ${resp.status}`);
+    throw new Error(err.error?.message || `API ${resp.status}`);
   }
-
   const data = await resp.json();
   const text = (data.content || []).map(c => c.text || '').join('');
+  log(`  Claude raw response: ${text.slice(0, 300)}`);
   const match = text.match(/\[[\s\S]*\]/);
-  if (!match) return [];
-  try { return JSON.parse(match[0]); } catch { return []; }
+  if (!match) { logWarn('  Could not find JSON array in Claude response'); return []; }
+  try { return JSON.parse(match[0]); } catch(e) { logErr('  JSON parse failed: ' + e.message); return []; }
 }
 
+// --- Render ---
 function timeAgo(iso) {
   if (!iso) return '';
   const diff = Math.floor((Date.now() - new Date(iso)) / 1000);
   if (diff < 60) return `${diff}s ago`;
-  if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
-  if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
-  return `${Math.floor(diff / 86400)}d ago`;
+  if (diff < 3600) return `${Math.floor(diff/60)}m ago`;
+  if (diff < 86400) return `${Math.floor(diff/3600)}h ago`;
+  return `${Math.floor(diff/86400)}d ago`;
 }
 
 function renderPosts(posts) {
@@ -555,26 +286,31 @@ function renderPosts(posts) {
         ${p.author ? `<span>u/${p.author}</span>` : ''}
         <span class="kw-tag">${p.keyword}</span>
       </div>
-      ${p.snippet ? `<div class="post-snippet">${p.snippet.slice(0, 200)}${p.snippet.length > 200 ? '...' : ''}</div>` : ''}
+      ${p.snippet ? `<div class="post-snippet">${p.snippet.slice(0,200)}${p.snippet.length>200?'...':''}</div>` : ''}
       <div class="post-reason"><strong>AI &rarr;</strong> ${p.reason}</div>
     </div>
   `).join('') + '</div>';
 }
 
+// --- Main ---
 async function runCheck() {
   const apiKey = getApiKey();
   if (!apiKey || !apiKey.startsWith('sk-ant-')) {
-    showError('Please enter your Claude API key above before running a check.');
-    return;
+    showError('Please enter your Claude API key above.'); return;
   }
-
   hideError();
+  clearLog();
+  // Auto-open log
+  document.getElementById('logBody').style.display = 'block';
+  document.getElementById('logToggleLabel').textContent = 'hide';
+
   const btn = document.getElementById('checkBtn');
   btn.disabled = true;
   document.getElementById('statFound').textContent = '—';
   document.getElementById('statHigh').textContent = '—';
 
   const seenIds = getSeenIds();
+  logHead(`Starting check — ${seenIds.length} posts previously seen`);
   document.getElementById('statSeen').textContent = seenIds.length;
 
   let allPosts = [];
@@ -582,53 +318,64 @@ async function runCheck() {
 
   for (let i = 0; i < KEYWORDS.length; i++) {
     const kw = KEYWORDS[i];
-    setProgress(`Fetching Reddit: "${kw}" (${i + 1} / ${KEYWORDS.length})`, Math.round(((i + 1) / KEYWORDS.length) * 60));
+    setProgress(`Fetching Reddit: "${kw}" (${i+1}/${KEYWORDS.length})`, Math.round(((i+1)/KEYWORDS.length)*60));
+    log(`Fetching "${kw}"...`);
     try {
       const posts = await fetchKeyword(kw);
+      logOk(`  → ${posts.length} posts found`);
+      posts.forEach(p => log(`    · ${p.title.slice(0,70)} (r/${p.sub})`));
       allPosts.push(...posts.map(p => ({ ...p, keyword: kw })));
     } catch(e) {
+      logErr(`  → FAILED: ${e.message}`);
       errors.push(`${kw}: ${e.message}`);
     }
     await new Promise(r => setTimeout(r, 200));
   }
 
-  // Deduplicate by post id
+  // Deduplicate
   const seenSet = new Set();
-  allPosts = allPosts.filter(p => {
-    if (seenSet.has(p.id)) return false;
-    seenSet.add(p.id);
-    return true;
-  });
+  allPosts = allPosts.filter(p => { if (seenSet.has(p.id)) return false; seenSet.add(p.id); return true; });
+  logHead(`Total unique posts fetched: ${allPosts.length}`);
 
-  // Filter out already-seen
+  // Filter already-seen
   const newPosts = allPosts.filter(p => !seenIds.includes(p.id));
+  logHead(`New posts (not seen before): ${newPosts.length}`);
 
   if (!newPosts.length) {
     hideProgress();
     document.getElementById('statFound').textContent = '0';
     document.getElementById('statHigh').textContent = '0';
     document.getElementById('statusMsg').innerHTML = `Done &mdash; no new posts since last check`;
+    log('No new posts to analyse — done.');
     renderPosts([]);
     btn.disabled = false;
     return;
   }
 
-  // Filter with Claude in batches of 20
-  setProgress(`Analysing ${newPosts.length} posts with AI...`, 70);
+  // Claude filtering
   const BATCH = 20;
   let relevant = [];
+  logHead(`Sending to Claude for relevance filtering (batches of ${BATCH})...`);
 
   for (let i = 0; i < newPosts.length; i += BATCH) {
     const batch = newPosts.slice(i, i + BATCH);
-    setProgress(`Analysing posts ${i + 1}–${Math.min(i + BATCH, newPosts.length)} of ${newPosts.length}...`, 70 + Math.round((i / newPosts.length) * 28));
+    setProgress(`Analysing posts ${i+1}–${Math.min(i+BATCH, newPosts.length)} of ${newPosts.length}...`, 70 + Math.round((i/newPosts.length)*28));
+    log(`Batch ${Math.floor(i/BATCH)+1}: sending ${batch.length} posts to Claude...`);
     try {
       const results = await filterWithClaude(batch, apiKey);
+      logOk(`  Claude returned ${results.length} verdicts`);
       results.forEach(r => {
-        if (r.relevant && batch[r.index]) {
-          relevant.push({ ...batch[r.index], priority: r.priority, reason: r.reason });
+        const p = batch[r.index];
+        if (!p) return;
+        if (r.relevant) {
+          logOk(`  ✓ RELEVANT [${r.priority}] "${p.title.slice(0,60)}" — ${r.reason}`);
+          relevant.push({ ...p, priority: r.priority, reason: r.reason });
+        } else {
+          log(`  ✗ skipped: "${p.title.slice(0,60)}"`);
         }
       });
     } catch(e) {
+      logErr(`Claude error: ${e.message}`);
       showError('Claude API error: ' + e.message);
       btn.disabled = false;
       hideProgress();
@@ -638,40 +385,35 @@ async function runCheck() {
 
   // Sort by priority
   const order = { high: 0, medium: 1, low: 2 };
-  relevant.sort((a, b) => (order[a.priority] || 2) - (order[b.priority] || 2));
+  relevant.sort((a, b) => (order[a.priority]||2) - (order[b.priority]||2));
 
-  // Save seen ids
+  // Save seen
   const newSeenIds = [...new Set([...seenIds, ...newPosts.map(p => p.id)])];
   saveSeenIds(newSeenIds);
 
   document.getElementById('statFound').textContent = relevant.length;
-  document.getElementById('statHigh').textContent = relevant.filter(p => p.priority === 'high').length;
+  document.getElementById('statHigh').textContent = relevant.filter(p => p.priority==='high').length;
   document.getElementById('statSeen').textContent = newSeenIds.length;
 
   const now = new Date().toLocaleString();
   localStorage.setItem(LAST_KEY, now);
   document.getElementById('lastChecked').textContent = now;
-  document.getElementById('statusMsg').innerHTML = `Done &mdash; ${relevant.length} relevant from ${newPosts.length} new posts &mdash; last checked: <span id="lastChecked">${now}</span>`;
+  document.getElementById('statusMsg').innerHTML = `Done &mdash; ${relevant.length} relevant from ${newPosts.length} new posts`;
+
+  logHead(`Done — ${relevant.length} relevant posts found`);
+  if (errors.length) { logWarn(`Feed errors: ${errors.join(', ')}`); showError(`Some feeds failed: ${errors.join(', ')}`); }
 
   hideProgress();
-  if (errors.length) showError(`Some feeds failed: ${errors.join(', ')}`);
   renderPosts(relevant);
   btn.disabled = false;
-  setProgress('Complete', 100);
-  setTimeout(hideProgress, 1000);
 }
 
-// Restore saved key and last check time on load
 window.addEventListener('load', () => {
   const saved = localStorage.getItem('barcodeMonitor_key');
-  if (saved) {
-    document.getElementById('apiKey').value = saved;
-    onKeyInput();
-  }
+  if (saved) { document.getElementById('apiKey').value = saved; onKeyInput(); }
   const last = localStorage.getItem(LAST_KEY);
   if (last) document.getElementById('lastChecked').textContent = last;
-  const seen = getSeenIds();
-  document.getElementById('statSeen').textContent = seen.length;
+  document.getElementById('statSeen').textContent = getSeenIds().length;
 });
 </script>
 </body>
