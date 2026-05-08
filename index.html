@@ -334,7 +334,7 @@ async function runCheck() {
       logErr(`  → FAILED: ${e.message}`);
       errors.push(`${kw}: ${e.message}`);
     }
-    await new Promise(r => setTimeout(r, 200));
+    await new Promise(r => setTimeout(r, 2000));
   }
 
   // Deduplicate
