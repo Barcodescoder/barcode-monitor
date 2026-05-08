@@ -241,7 +241,7 @@ priority: "high"=clear buying intent, "medium"=good engagement opportunity, "low
 Posts:
 ${items}`;
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-001:generateContent?key=${apiKey}`;
   const resp = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -257,9 +257,9 @@ ${items}`;
   }
   const data = await resp.json();
   const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-  log(`  Gemini raw response: ${text.slice(0, 300)}`);
+  log(`  AI raw response: ${text.slice(0, 300)}`);
   const match = text.match(/\[[\s\S]*\]/);
-  if (!match) { logWarn('  Could not find JSON array in Gemini response'); return []; }
+  if (!match) { logWarn("  Could not find JSON array in AI response'); return []; }
   try { return JSON.parse(match[0]); } catch(e) { logErr('  JSON parse failed: ' + e.message); return []; }
 }
 
@@ -357,18 +357,38 @@ async function runCheck() {
     return;
   }
 
-  // Claude filtering
+  // AI filtering
   const BATCH = 20;
   let relevant = [];
-  logHead(`Sending to Claude for relevance filtering (batches of ${BATCH})...`);
+  logHead(`Sending to Gemini for relevance filtering (batches of ${BATCH})...`);
 
   for (let i = 0; i < newPosts.length; i += BATCH) {
     const batch = newPosts.slice(i, i + BATCH);
+    const batchNum = Math.floor(i/BATCH)+1;
     setProgress(`Analysing posts ${i+1}–${Math.min(i+BATCH, newPosts.length)} of ${newPosts.length}...`, 70 + Math.round((i/newPosts.length)*28));
-    log(`Batch ${Math.floor(i/BATCH)+1}: sending ${batch.length} posts to Claude...`);
-    try {
-      const results = await filterWithClaude(batch, apiKey);
-      logOk(`  Claude returned ${results.length} verdicts`);
+    log(`Batch ${batchNum}: sending ${batch.length} posts to Gemini...`);
+
+    // Retry up to 3 times on transient errors
+    let results = null;
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      try {
+        results = await filterWithClaude(batch, apiKey);
+        break;
+      } catch(e) {
+        const isTransient = e.message.includes('high demand') || e.message.includes('503') || e.message.includes('429');
+        if (isTransient && attempt < 3) {
+          logWarn(`  Batch ${batchNum} attempt ${attempt} failed (${e.message.slice(0,60)}) — retrying in 5s...`);
+          await new Promise(r => setTimeout(r, 5000));
+        } else {
+          logErr(`  Batch ${batchNum} failed after ${attempt} attempt(s): ${e.message}`);
+          results = null;
+          break;
+        }
+      }
+    }
+
+    if (results) {
+      logOk(`  Gemini returned ${results.length} verdicts`);
       results.forEach(r => {
         const p = batch[r.index];
         if (!p) return;
@@ -379,13 +399,15 @@ async function runCheck() {
           log(`  ✗ skipped: "${p.title.slice(0,60)}"`);
         }
       });
-    } catch(e) {
-      logErr(`Claude error: ${e.message}`);
-      showError('Claude API error: ' + e.message);
-      btn.disabled = false;
-      hideProgress();
-      return;
+    } else {
+      logWarn(`  Batch ${batchNum} skipped — continuing with remaining batches`);
     }
+
+    // Render results so far after each batch
+    const sorted = [...relevant].sort((a,b) => ({'high':0,'medium':1,'low':2}[a.priority]||2) - ({'high':0,'medium':1,'low':2}[b.priority]||2));
+    renderPosts(sorted);
+    document.getElementById('statFound').textContent = relevant.length;
+    document.getElementById('statHigh').textContent = relevant.filter(p => p.priority==='high').length;
   }
 
   // Sort by priority
