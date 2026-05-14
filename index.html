@@ -13,23 +13,20 @@
     --text: #1A1814; --text-muted: #7A756C; --text-faint: #ADA89F;
     --high-bg: #EAF3DE; --high-text: #27500A; --med-bg: #FAEEDA; --med-text: #633806;
     --low-bg: #F1EFE8; --low-text: #5F5E5A; --danger-bg: #FCEBEB; --danger-text: #791F1F;
-    --reddit-bg: #FFF0E8; --reddit-text: #7A2E00;
-    --quora-bg: #EAF0FB; --quora-text: #1A3A7A;
   }
   body { font-family: 'DM Mono', monospace; background: var(--bg); color: var(--text); min-height: 100vh; }
   .page { max-width: 780px; margin: 0 auto; padding: 3rem 2rem 6rem; }
-  header { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+  header { margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
   .wordmark { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 300; letter-spacing: -0.5px; margin-bottom: 6px; }
   .wordmark span { font-style: italic; }
   .subtitle { font-size: 11px; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; }
-  .keys { display: flex; flex-direction: column; gap: 10px; margin-bottom: 2rem; }
-  .key-row { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.25rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-  .key-label { font-size: 11px; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; min-width: 100px; }
-  .key-input { flex: 1; min-width: 180px; font-family: 'DM Mono', monospace; font-size: 12px; border: 1px solid var(--border); border-radius: 4px; padding: 7px 11px; background: var(--bg); color: var(--text); outline: none; transition: border-color 0.15s; }
-  .key-input:focus { border-color: var(--border-strong); }
-  .key-status { font-size: 11px; padding: 3px 9px; border-radius: 99px; white-space: nowrap; }
-  .key-status.set { background: var(--high-bg); color: var(--high-text); }
-  .key-status.unset { background: var(--low-bg); color: var(--low-text); }
+  .api-section { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem 1.5rem; margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .api-label { font-size: 11px; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+  .api-input { flex: 1; min-width: 200px; font-family: 'DM Mono', monospace; font-size: 12px; border: 1px solid var(--border); border-radius: 4px; padding: 8px 12px; background: var(--bg); color: var(--text); outline: none; transition: border-color 0.15s; }
+  .api-input:focus { border-color: var(--border-strong); }
+  .api-status { font-size: 11px; padding: 4px 10px; border-radius: 99px; white-space: nowrap; }
+  .api-status.set { background: var(--high-bg); color: var(--high-text); }
+  .api-status.unset { background: var(--low-bg); color: var(--low-text); }
   .controls { display: flex; align-items: center; gap: 12px; margin-bottom: 2rem; flex-wrap: wrap; }
   .btn { font-family: 'DM Mono', monospace; font-size: 12px; padding: 10px 20px; border-radius: 4px; border: 1px solid var(--border-strong); background: transparent; color: var(--text); cursor: pointer; transition: all 0.15s; letter-spacing: 0.02em; display: inline-flex; align-items: center; gap: 8px; }
   .btn:hover { background: var(--surface); border-color: var(--text); }
@@ -37,16 +34,11 @@
   .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
   .btn.primary { background: var(--text); color: var(--bg); border-color: var(--text); }
   .btn.primary:hover { opacity: 0.85; }
-  .toggle-wrap { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); cursor: pointer; user-select: none; }
-  .toggle { width: 34px; height: 18px; background: var(--border); border-radius: 99px; position: relative; transition: background 0.2s; flex-shrink: 0; cursor: pointer; border: none; padding: 0; }
-  .toggle.on { background: var(--text); }
-  .toggle::after { content: ''; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; background: white; border-radius: 99px; transition: left 0.2s; }
-  .toggle.on::after { left: 18px; }
-  .status-text { font-size: 11px; color: var(--text-muted); }
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 2rem; }
-  .stat { background: var(--surface); padding: 0.875rem 1rem; }
-  .stat-label { font-size: 10px; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
-  .stat-value { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 300; color: var(--text); line-height: 1; }
+  .status-text { font-size: 11px; color: var(--text-muted); letter-spacing: 0.02em; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 2rem; }
+  .stat { background: var(--surface); padding: 1rem 1.25rem; }
+  .stat-label { font-size: 10px; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+  .stat-value { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 300; color: var(--text); line-height: 1; }
   .progress-wrap { display: none; margin-bottom: 2rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem 1.5rem; }
   .progress-label { font-size: 11px; color: var(--text-muted); margin-bottom: 10px; letter-spacing: 0.02em; }
   .progress-track { height: 2px; background: var(--border); border-radius: 99px; overflow: hidden; }
@@ -55,80 +47,62 @@
   .posts { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
   .post { background: var(--surface); padding: 1.25rem 1.5rem; transition: background 0.1s; }
   .post:hover { background: #FDFCFA; }
-  .post-top { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .post-top { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
   .badge { font-size: 10px; font-weight: 500; padding: 3px 8px; border-radius: 3px; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
   .badge-high { background: var(--high-bg); color: var(--high-text); }
   .badge-medium { background: var(--med-bg); color: var(--med-text); }
   .badge-low { background: var(--low-bg); color: var(--low-text); }
-  .source-badge { font-size: 10px; padding: 3px 8px; border-radius: 3px; letter-spacing: 0.04em; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
-  .source-reddit { background: var(--reddit-bg); color: var(--reddit-text); }
-  .source-quora { background: var(--quora-bg); color: var(--quora-text); }
   .post-title { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 300; line-height: 1.4; flex: 1; }
   .post-title a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); transition: border-color 0.15s; }
   .post-title a:hover { border-color: var(--text); }
-  .post-meta { display: flex; gap: 14px; font-size: 11px; color: var(--text-faint); margin-bottom: 10px; flex-wrap: wrap; }
-  .kw-tag { background: var(--bg); border: 1px solid var(--border); border-radius: 3px; padding: 1px 7px; font-size: 10px; color: var(--text-muted); }
+  .post-meta { display: flex; gap: 16px; font-size: 11px; color: var(--text-faint); margin-bottom: 10px; flex-wrap: wrap; letter-spacing: 0.02em; }
+  .kw-tag { background: var(--bg); border: 1px solid var(--border); border-radius: 3px; padding: 1px 7px; font-size: 10px; color: var(--text-muted); letter-spacing: 0.04em; }
   .post-snippet { font-size: 12px; color: var(--text-muted); line-height: 1.6; margin-bottom: 10px; }
-  .post-reason { font-size: 11px; color: var(--text-muted); line-height: 1.6; padding-top: 10px; border-top: 1px solid var(--border); }
+  .post-reason { font-size: 11px; color: var(--text-muted); line-height: 1.6; padding-top: 10px; border-top: 1px solid var(--border); letter-spacing: 0.01em; }
   .post-reason strong { color: var(--text-faint); font-weight: 500; }
-  .empty { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; text-align: center; padding: 4rem 2rem; color: var(--text-muted); font-size: 12px; line-height: 2; }
+  .empty { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; text-align: center; padding: 4rem 2rem; color: var(--text-muted); font-size: 12px; line-height: 2; letter-spacing: 0.02em; }
   .empty .big { font-family: 'Fraunces', serif; font-size: 40px; font-weight: 300; font-style: italic; color: var(--border-strong); display: block; margin-bottom: 8px; }
   .log-wrap { margin-top: 2rem; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
   .log-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: var(--surface); border-bottom: 1px solid var(--border); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); cursor: pointer; user-select: none; }
   .log-header:hover { background: #FDFCFA; }
   .log-body { font-family: 'DM Mono', monospace; font-size: 11px; background: #FAFAF8; padding: 1rem; max-height: 400px; overflow-y: auto; line-height: 1.9; }
-  .ll { color: var(--text-muted); } .lok { color: #3B6D11; } .lwarn { color: #854F0B; } .lerr { color: #A32D2D; }
+  .ll { color: var(--text-muted); }
+  .lok { color: #3B6D11; }
+  .lwarn { color: #854F0B; }
+  .lerr { color: #A32D2D; }
   .lhead { color: var(--text); font-weight: 500; padding-top: 4px; display: block; }
-  @media (max-width: 540px) { .page { padding: 2rem 1rem 4rem; } .stats { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px) { .page { padding: 2rem 1rem 4rem; } .stats { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 <div class="page">
   <header>
     <div class="wordmark">barcode <span>monitor</span></div>
-    <div class="subtitle">Reddit &amp; Quora opportunity scanner &mdash; barcode1.co.uk</div>
+    <div class="subtitle">Reddit opportunity scanner &mdash; barcode1.co.uk</div>
   </header>
-
-  <div class="keys">
-    <div class="key-row">
-      <span class="key-label">Gemini key</span>
-      <input class="key-input" type="password" id="geminiKey" placeholder="AIza..." autocomplete="off" oninput="onGeminiKey()">
-      <span class="key-status unset" id="geminiStatus">Not set</span>
-    </div>
-    <div class="key-row" id="apifyRow">
-      <span class="key-label">Apify key</span>
-      <input class="key-input" type="password" id="apifyKey" placeholder="apify_api_..." autocomplete="off" oninput="onApifyKey()">
-      <span class="key-status unset" id="apifyStatus">Not set</span>
-    </div>
+  <div class="api-section">
+    <span class="api-label">Gemini API key</span>
+    <input class="api-input" type="password" id="apiKey" placeholder="AIza..." autocomplete="off" oninput="onKeyInput()">
+    <span class="api-status unset" id="apiStatus">Not set</span>
   </div>
-
   <div class="controls">
     <button class="btn primary" id="checkBtn" onclick="runCheck()">&#8635; Check for new posts</button>
     <button class="btn" onclick="clearSeen()">&#x2715; Reset seen</button>
-    <label class="toggle-wrap" onclick="toggleQuora()">
-      <button class="toggle" id="quoraToggle" type="button"></button>
-      <span>Include Quora</span>
-    </label>
     <span class="status-text" id="statusMsg">Ready &mdash; last checked: <span id="lastChecked">never</span></span>
   </div>
-
   <div class="stats">
     <div class="stat"><div class="stat-label">Found this run</div><div class="stat-value" id="statFound">—</div></div>
     <div class="stat"><div class="stat-label">High priority</div><div class="stat-value" id="statHigh">—</div></div>
-    <div class="stat"><div class="stat-label">Reddit</div><div class="stat-value" id="statReddit">—</div></div>
-    <div class="stat"><div class="stat-label">Quora</div><div class="stat-value" id="statQuora">—</div></div>
+    <div class="stat"><div class="stat-label">Total seen</div><div class="stat-value" id="statSeen">0</div></div>
   </div>
-
   <div class="progress-wrap" id="progressWrap">
     <div class="progress-label" id="progressLabel">Starting...</div>
     <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
   </div>
   <div class="error-bar" id="errorBar"></div>
-
   <div id="postsContainer">
-    <div class="empty"><span class="big">&#9632;</span>Click "Check for new posts" to scan Reddit (and optionally Quora)</div>
+    <div class="empty"><span class="big">&#9632;</span>Click "Check for new posts" to scan Reddit</div>
   </div>
-
   <div class="log-wrap">
     <div class="log-header" onclick="toggleLog()">
       <span>&#9654; Activity log</span>
@@ -137,399 +111,315 @@
     <div class="log-body" id="logBody" style="display:none"></div>
   </div>
 </div>
-
 <script>
-var WORKER = 'https://still-leaf-77c4.barcodes.workers.dev';
-var KEYWORDS = [
+const KEYWORDS = [
   'EAN-13','UPC-A','UPC-E','GTIN','ISBN barcode',
   'Data Matrix','2D barcode','buy barcode','get barcode',
   'product barcode','retail barcode','Shopify barcode','FNSKU'
 ];
-var SEEN_KEY = 'barcodeMonitor_seen';
-var LAST_KEY = 'barcodeMonitor_last';
-var GEMINI_KEY = 'barcodeMonitor_key';
-var APIFY_KEY = 'barcodeMonitor_apify';
-var QUORA_KEY = 'barcodeMonitor_quora_on';
+const SEEN_KEY = 'barcodeMonitor_seen';
+const LAST_KEY = 'barcodeMonitor_last';
+const KEY_STORE = 'barcodeMonitor_key';
 
-// --- Logging ---
 function toggleLog() {
-  var body = document.getElementById('logBody');
-  var label = document.getElementById('logToggleLabel');
-  var open = body.style.display !== 'none';
+  const body = document.getElementById('logBody');
+  const label = document.getElementById('logToggleLabel');
+  const open = body.style.display !== 'none';
   body.style.display = open ? 'none' : 'block';
   label.textContent = open ? 'show' : 'hide';
 }
 function log(msg, cls) {
-  var body = document.getElementById('logBody');
-  var d = document.createElement('div');
+  const body = document.getElementById('logBody');
+  const d = document.createElement('div');
   d.className = cls || 'll';
   d.textContent = msg;
   body.appendChild(d);
   body.scrollTop = body.scrollHeight;
 }
-function logOk(m) { log(m, 'lok'); }
-function logWarn(m) { log(m, 'lwarn'); }
-function logErr(m) { log(m, 'lerr'); }
-function logHead(m) { log(m, 'lhead'); }
-function clearLog() { document.getElementById('logBody').innerHTML = ''; }
+function logOk(msg)   { log(msg, 'lok'); }
+function logWarn(msg) { log(msg, 'lwarn'); }
+function logErr(msg)  { log(msg, 'lerr'); }
+function logHead(msg) { log(msg, 'lhead'); }
+function clearLog()   { document.getElementById('logBody').innerHTML = ''; }
 
-// --- Keys ---
-function onGeminiKey() {
-  var key = document.getElementById('geminiKey').value.trim();
-  var st = document.getElementById('geminiStatus');
+function getApiKey() { return document.getElementById('apiKey').value.trim(); }
+function onKeyInput() {
+  const key = getApiKey();
+  const status = document.getElementById('apiStatus');
   if (key.startsWith('AIza') && key.length > 20) {
-    st.textContent = 'Set'; st.className = 'key-status set';
-    localStorage.setItem(GEMINI_KEY, key);
+    status.textContent = 'Set';
+    status.className = 'api-status set';
+    localStorage.setItem(KEY_STORE, key);
   } else {
-    st.textContent = 'Not set'; st.className = 'key-status unset';
-  }
-}
-function onApifyKey() {
-  var key = document.getElementById('apifyKey').value.trim();
-  var st = document.getElementById('apifyStatus');
-  if (key.startsWith('apify_api_') && key.length > 20) {
-    st.textContent = 'Set'; st.className = 'key-status set';
-    localStorage.setItem(APIFY_KEY, key);
-  } else {
-    st.textContent = 'Not set'; st.className = 'key-status unset';
+    status.textContent = 'Not set';
+    status.className = 'api-status unset';
   }
 }
 
-// --- Quora toggle ---
-var quoraOn = false;
-function toggleQuora() {
-  quoraOn = !quoraOn;
-  var t = document.getElementById('quoraToggle');
-  t.className = 'toggle' + (quoraOn ? ' on' : '');
-  localStorage.setItem(QUORA_KEY, quoraOn ? '1' : '0');
-}
-
-// --- Seen IDs ---
 function getSeenIds() { try { return JSON.parse(localStorage.getItem(SEEN_KEY) || '[]'); } catch { return []; } }
 function saveSeenIds(ids) { localStorage.setItem(SEEN_KEY, JSON.stringify(ids)); }
 function clearSeen() {
   localStorage.removeItem(SEEN_KEY);
-  document.getElementById('statFound').textContent = '0';
-  clearLog(); log('Seen posts cleared.');
+  document.getElementById('statSeen').textContent = '0';
+  document.getElementById('statusMsg').innerHTML = 'Seen posts cleared';
+  clearLog();
+  log('Seen posts cleared — next run will show all results.');
 }
 
-// --- Progress ---
 function setProgress(label, pct) {
   document.getElementById('progressWrap').style.display = 'block';
   document.getElementById('progressLabel').textContent = label;
   document.getElementById('progressFill').style.width = pct + '%';
 }
 function hideProgress() { document.getElementById('progressWrap').style.display = 'none'; }
-function showError(msg) { var el = document.getElementById('errorBar'); el.textContent = msg; el.style.display = 'block'; }
+function showError(msg) { const el = document.getElementById('errorBar'); el.textContent = msg; el.style.display = 'block'; }
 function hideError() { document.getElementById('errorBar').style.display = 'none'; }
 
-// --- Reddit RSS ---
 function parseRSS(xml) {
-  var parser = new DOMParser();
-  var doc = parser.parseFromString(xml, 'text/xml');
-  if (doc.querySelector('parsererror')) throw new Error('XML parse error');
-  var entries = doc.querySelectorAll('entry');
-  var posts = [];
-  entries.forEach(function(e) {
-    var id = e.querySelector('id') ? e.querySelector('id').textContent.trim() : '';
-    var title = e.querySelector('title') ? e.querySelector('title').textContent.trim() : '';
-    var link = e.querySelector('link') ? e.querySelector('link').getAttribute('href') : '';
-    var content = e.querySelector('content') ? e.querySelector('content').textContent.trim() : '';
-    var author = e.querySelector('author name') ? e.querySelector('author name').textContent.trim() : '';
-    var updated = e.querySelector('updated') ? e.querySelector('updated').textContent.trim() : '';
-    var sub = (link.match(/reddit\.com\/r\/([^/]+)/) || [])[1] || '';
-    var snippet = content.replace(/<[^>]+>/g, '').slice(0, 500).trim();
-    if (id && title) posts.push({ id: id, title: title, link: link, snippet: snippet, author: author, updated: updated, sub: sub, source: 'reddit' });
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(xml, 'text/xml');
+  const parseErr = doc.querySelector('parsererror');
+  if (parseErr) throw new Error('XML parse error: ' + parseErr.textContent.slice(0, 100));
+  const entries = doc.querySelectorAll('entry');
+  const posts = [];
+  entries.forEach(e => {
+    const id = e.querySelector('id')?.textContent?.trim() || '';
+    const title = e.querySelector('title')?.textContent?.trim() || '';
+    const link = e.querySelector('link')?.getAttribute('href') || '';
+    const content = e.querySelector('content')?.textContent?.trim() || '';
+    const author = e.querySelector('author name')?.textContent?.trim() || '';
+    const updated = e.querySelector('updated')?.textContent?.trim() || '';
+    const sub = link.match(/reddit\.com\/r\/([^/]+)/)?.[1] || '';
+    const snippet = content.replace(/<[^>]+>/g, '').slice(0, 500).trim();
+    if (id && title) posts.push({ id, title, link, snippet, author, updated, sub });
   });
   return posts;
 }
 
-async function fetchRedditKeyword(keyword) {
-  var redditUrl = 'https://www.reddit.com/search/.rss?q=' + encodeURIComponent(keyword) + '&sort=new&limit=15';
-  var proxyUrl = WORKER + '/?url=' + encodeURIComponent(redditUrl);
-  var resp = await fetch(proxyUrl);
+async function fetchKeyword(keyword) {
+  const redditUrl = 'https://www.reddit.com/search/.rss?q=' + encodeURIComponent(keyword) + '&sort=new&limit=15';
+  const proxyUrl = 'https://still-leaf-77c4.barcodes.workers.dev/?url=' + encodeURIComponent(redditUrl);
+  log('  Fetching via proxy...');
+  const resp = await fetch(proxyUrl);
+  log('  HTTP ' + resp.status + ' ' + resp.statusText);
   if (!resp.ok) throw new Error('HTTP ' + resp.status);
-  var text = await resp.text();
+  const text = await resp.text();
+  log('  Body length: ' + text.length + ', preview: ' + text.slice(0, 80));
   return parseRSS(text);
 }
 
-// --- Quora via Apify ---
-async function fetchQuoraKeyword(keyword, apifyKey) {
-  var apifyUrl = 'https://api.apify.com/v2/acts/fatihtahta~quora-scraper/run-sync-get-dataset-items?token=' + apifyKey + '&timeout=120&memory=256';
-  var workerUrl = WORKER + '/apify?endpoint=' + encodeURIComponent(apifyUrl);
-  var resp = await fetch(workerUrl, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ queries: [keyword], searchType: 'Question', timeFilter: 'All Time', maxItemsPerQuery: 10 })
-  });
-  var text = await resp.text();
-  if (resp.status !== 200 && resp.status !== 201) throw new Error('Apify HTTP ' + resp.status + ': ' + text.slice(0, 100));
-  var data = JSON.parse(text);
-  var posts = [];
-  data.forEach(function(item) {
-    if (!item.question || !item.question.url || item.question.url === 'https://www.quora.com/answer') return;
-    if (!item.general || !item.general.results) return;
-    var id = 'quora:' + item.question.url;
-    posts.push({
-      id: id,
-      title: item.question.title || '',
-      link: item.question.url,
-      snippet: item.answer && item.answer.text ? item.answer.text.slice(0, 400) : '',
-      author: item.answer && item.answer.authorName ? item.answer.authorName : '',
-      updated: item.question.postedTime || '',
-      sub: 'Quora',
-      answerCount: item.question.answerCount || 0,
-      source: 'quora',
-      keyword: keyword
-    });
-  });
-  return posts;
-}
-
-// --- Gemini filter ---
-async function filterWithGemini(posts, geminiKey) {
+async function filterWithGemini(posts, apiKey) {
   if (!posts.length) return [];
-  var items = posts.map(function(p, i) {
-    return '[' + i + '] TITLE: ' + p.title + '\nSOURCE: ' + (p.source === 'quora' ? 'Quora' : 'r/' + p.sub) + '\nSNIPPET: ' + p.snippet.slice(0, 300);
+  const items = posts.map(function(p, i) {
+    return '[' + i + '] TITLE: ' + p.title + '\nSUBREDDIT: r/' + p.sub + '\nSNIPPET: ' + p.snippet.slice(0, 300);
   }).join('\n\n---\n\n');
 
-  var prompt = 'You are helping a barcode retailer (barcode1.co.uk) find Reddit and Quora posts worth engaging with.\n\n' +
+  const prompt = 'You are helping a barcode retailer (barcode1.co.uk) find Reddit posts worth engaging with.\n\n' +
     'Mark relevant=true if the person:\n' +
     '- Wants to buy or get barcodes for a product\n' +
     '- Is confused about barcode types (EAN, UPC, GTIN, FNSKU, Data Matrix, etc.)\n' +
     '- Is launching a product and likely needs barcodes\n' +
     '- Has a question about barcode standards you could helpfully answer\n\n' +
-    'NOT relevant: barcode scanning apps, barcode printer hardware, QR codes only, purely academic.\n\n' +
-    'Respond ONLY with a JSON array:\n' +
+    'NOT relevant if about: barcode scanning apps, barcode printer hardware, QR codes only, purely academic.\n\n' +
+    'Respond ONLY with a JSON array, one object per post:\n' +
     '[{"index":0,"relevant":true,"priority":"high","reason":"one sentence"}]\n\n' +
-    'priority: high=clear buying intent, medium=good engagement, low=tangential\n\n' +
+    'priority: high=clear buying intent, medium=good engagement opportunity, low=tangential\n\n' +
     'Posts:\n' + items;
 
-  var url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' + geminiKey;
-  var resp = await fetch(url, {
+  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' + apiKey;
+  const resp = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.1 } })
+    body: JSON.stringify({
+      contents: [{ parts: [{ text: prompt }] }],
+      generationConfig: { temperature: 0.1 }
+    })
   });
+
   if (!resp.ok) {
-    var err = await resp.json().catch(function() { return {}; });
-    throw new Error(err.error && err.error.message ? err.error.message : 'Gemini API ' + resp.status);
+    const err = await resp.json().catch(function() { return {}; });
+    throw new Error(err.error && err.error.message ? err.error.message : 'API ' + resp.status);
   }
-  var data = await resp.json();
-  var text = data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0] ? data.candidates[0].content.parts[0].text : '';
-  log('  Gemini: ' + text.slice(0, 150));
-  var match = text.match(/\[[\s\S]*\]/);
-  if (!match) { logWarn('  No JSON in Gemini response'); return []; }
+  const data = await resp.json();
+  const text = data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0] ? data.candidates[0].content.parts[0].text : '';
+  log('  Gemini response: ' + text.slice(0, 200));
+  const match = text.match(/\[[\s\S]*\]/);
+  if (!match) { logWarn('  No JSON array in Gemini response'); return []; }
   try { return JSON.parse(match[0]); } catch(e) { logErr('  JSON parse failed: ' + e.message); return []; }
 }
 
-// --- Render ---
 function timeAgo(iso) {
   if (!iso) return '';
-  var diff = Math.floor((Date.now() - new Date(iso)) / 1000);
+  const diff = Math.floor((Date.now() - new Date(iso)) / 1000);
   if (diff < 60) return diff + 's ago';
-  if (diff < 3600) return Math.floor(diff/60) + 'm ago';
-  if (diff < 86400) return Math.floor(diff/3600) + 'h ago';
-  return Math.floor(diff/86400) + 'd ago';
+  if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
+  if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+  return Math.floor(diff / 86400) + 'd ago';
 }
 
 function renderPosts(posts) {
-  var container = document.getElementById('postsContainer');
+  const container = document.getElementById('postsContainer');
   if (!posts.length) {
     container.innerHTML = '<div class="empty"><span class="big">&mdash;</span>No new relevant posts found this run</div>';
     return;
   }
   container.innerHTML = '<div class="posts">' + posts.map(function(p) {
-    var sourceCls = p.source === 'quora' ? 'source-quora' : 'source-reddit';
-    var sourceLabel = p.source === 'quora' ? 'Quora' : 'Reddit';
-    var meta = p.source === 'quora'
-      ? '<span>Quora</span>' + (p.answerCount ? '<span>' + p.answerCount + ' answers</span>' : '') + (p.updated ? '<span>' + timeAgo(p.updated) + '</span>' : '')
-      : '<span>r/' + p.sub + '</span>' + (p.updated ? '<span>' + timeAgo(p.updated) + '</span>' : '') + (p.author ? '<span>u/' + p.author + '</span>' : '');
     return '<div class="post">' +
       '<div class="post-top">' +
         '<span class="badge badge-' + p.priority + '">' + p.priority + '</span>' +
-        '<span class="source-badge ' + sourceCls + '">' + sourceLabel + '</span>' +
         '<div class="post-title"><a href="' + p.link + '" target="_blank" rel="noopener">' + p.title + '</a></div>' +
       '</div>' +
-      '<div class="post-meta">' + meta + '<span class="kw-tag">' + p.keyword + '</span></div>' +
+      '<div class="post-meta">' +
+        '<span>r/' + p.sub + '</span>' +
+        '<span>' + timeAgo(p.updated) + '</span>' +
+        (p.author ? '<span>u/' + p.author + '</span>' : '') +
+        '<span class="kw-tag">' + p.keyword + '</span>' +
+      '</div>' +
       (p.snippet ? '<div class="post-snippet">' + p.snippet.slice(0, 200) + (p.snippet.length > 200 ? '...' : '') + '</div>' : '') +
       '<div class="post-reason"><strong>AI &rarr;</strong> ' + p.reason + '</div>' +
     '</div>';
   }).join('') + '</div>';
 }
 
-// --- Main ---
 async function runCheck() {
-  var geminiKey = document.getElementById('geminiKey').value.trim();
-  var apifyKey = document.getElementById('apifyKey').value.trim();
-  if (!geminiKey || !geminiKey.startsWith('AIza')) { showError('Please enter your Gemini API key.'); return; }
-  if (quoraOn && (!apifyKey || !apifyKey.startsWith('apify_api_'))) { showError('Quora is enabled — please enter your Apify API key too.'); return; }
-
+  const apiKey = getApiKey();
+  if (!apiKey || !apiKey.startsWith('AIza')) {
+    showError('Please enter your Gemini API key above.');
+    return;
+  }
   hideError();
   clearLog();
   document.getElementById('logBody').style.display = 'block';
   document.getElementById('logToggleLabel').textContent = 'hide';
 
-  var btn = document.getElementById('checkBtn');
+  const btn = document.getElementById('checkBtn');
   btn.disabled = true;
   document.getElementById('statFound').textContent = '—';
   document.getElementById('statHigh').textContent = '—';
-  document.getElementById('statReddit').textContent = '—';
-  document.getElementById('statQuora').textContent = '—';
 
-  var seenIds = getSeenIds();
-  logHead('Starting check — ' + seenIds.length + ' posts previously seen' + (quoraOn ? ' — Quora enabled' : ' — Quora disabled'));
+  const seenIds = getSeenIds();
+  logHead('Starting check — ' + seenIds.length + ' posts previously seen');
+  document.getElementById('statSeen').textContent = seenIds.length;
 
-  var allPosts = [];
-  var errors = [];
+  let allPosts = [];
+  const errors = [];
 
-  // --- Reddit ---
-  logHead('Fetching Reddit (' + KEYWORDS.length + ' keywords)...');
-  for (var i = 0; i < KEYWORDS.length; i++) {
-    var kw = KEYWORDS[i];
-    setProgress('Reddit: "' + kw + '" (' + (i+1) + '/' + KEYWORDS.length + ')', Math.round(((i+1)/KEYWORDS.length) * (quoraOn ? 40 : 60)));
-    log('Fetching Reddit: "' + kw + '"...');
+  for (let i = 0; i < KEYWORDS.length; i++) {
+    const kw = KEYWORDS[i];
+    setProgress('Fetching Reddit: "' + kw + '" (' + (i + 1) + '/' + KEYWORDS.length + ')', Math.round(((i + 1) / KEYWORDS.length) * 60));
+    log('Fetching "' + kw + '"...');
     try {
-      var posts = await fetchRedditKeyword(kw);
-      logOk('  -> ' + posts.length + ' posts');
-      posts.forEach(function(p) { p.keyword = kw; allPosts.push(p); });
+      const posts = await fetchKeyword(kw);
+      logOk('  -> ' + posts.length + ' posts found');
+      posts.forEach(function(p) { log('    . ' + p.title.slice(0, 70) + ' (r/' + p.sub + ')'); });
+      allPosts = allPosts.concat(posts.map(function(p) { return Object.assign({}, p, { keyword: kw }); }));
     } catch(e) {
       logErr('  -> FAILED: ' + e.message);
-      errors.push('Reddit/' + kw + ': ' + e.message);
+      errors.push(kw + ': ' + e.message);
     }
     await new Promise(function(r) { setTimeout(r, 2000); });
   }
 
-  // --- Quora ---
-  if (quoraOn) {
-    logHead('Fetching Quora (' + KEYWORDS.length + ' keywords)...');
-    for (var j = 0; j < KEYWORDS.length; j++) {
-      var qkw = KEYWORDS[j];
-      setProgress('Quora: "' + qkw + '" (' + (j+1) + '/' + KEYWORDS.length + ')', 40 + Math.round(((j+1)/KEYWORDS.length) * 20));
-      log('Fetching Quora: "' + qkw + '"...');
-      try {
-        var qposts = await fetchQuoraKeyword(qkw, apifyKey);
-        logOk('  -> ' + qposts.length + ' questions');
-        qposts.forEach(function(p) { allPosts.push(p); });
-      } catch(e) {
-        logErr('  -> FAILED: ' + e.message);
-        errors.push('Quora/' + qkw + ': ' + e.message);
-      }
-      await new Promise(function(r) { setTimeout(r, 1000); });
-    }
-  }
-
-  // Deduplicate
-  var seenSet = new Set();
+  const seenSet = new Set();
   allPosts = allPosts.filter(function(p) { if (seenSet.has(p.id)) return false; seenSet.add(p.id); return true; });
-  logHead('Total unique posts: ' + allPosts.length);
+  logHead('Total unique posts fetched: ' + allPosts.length);
 
-  var redditCount = allPosts.filter(function(p) { return p.source === 'reddit'; }).length;
-  var quoraCount = allPosts.filter(function(p) { return p.source === 'quora'; }).length;
-  log('Reddit: ' + redditCount + ', Quora: ' + quoraCount);
-
-  // Filter seen
-  var newPosts = allPosts.filter(function(p) { return !seenIds.includes(p.id); });
-  logHead('New posts: ' + newPosts.length);
+  const newPosts = allPosts.filter(function(p) { return !seenIds.includes(p.id); });
+  logHead('New posts (not seen before): ' + newPosts.length);
 
   if (!newPosts.length) {
     hideProgress();
     document.getElementById('statFound').textContent = '0';
     document.getElementById('statHigh').textContent = '0';
-    document.getElementById('statReddit').textContent = '0';
-    document.getElementById('statQuora').textContent = '0';
     document.getElementById('statusMsg').innerHTML = 'Done &mdash; no new posts since last check';
+    log('No new posts to analyse — done.');
     renderPosts([]);
     btn.disabled = false;
     return;
   }
 
-  // Gemini filtering in batches
-  var BATCH = 20;
-  var relevant = [];
-  logHead('Filtering with Gemini (' + newPosts.length + ' posts)...');
+  const BATCH = 20;
+  let relevant = [];
+  logHead('Sending to Gemini for relevance filtering (batches of ' + BATCH + ')...');
 
-  for (var b = 0; b < newPosts.length; b += BATCH) {
-    var batch = newPosts.slice(b, b + BATCH);
-    var batchNum = Math.floor(b/BATCH) + 1;
-    setProgress('Analysing ' + (b+1) + '-' + Math.min(b+BATCH, newPosts.length) + ' of ' + newPosts.length + '...', 60 + Math.round((b/newPosts.length) * 38));
-    log('Batch ' + batchNum + ': ' + batch.length + ' posts...');
+  for (let i = 0; i < newPosts.length; i += BATCH) {
+    const batch = newPosts.slice(i, i + BATCH);
+    const batchNum = Math.floor(i / BATCH) + 1;
+    setProgress('Analysing posts ' + (i + 1) + '-' + Math.min(i + BATCH, newPosts.length) + ' of ' + newPosts.length + '...', 70 + Math.round((i / newPosts.length) * 28));
+    log('Batch ' + batchNum + ': sending ' + batch.length + ' posts to Gemini...');
 
-    var results = null;
-    for (var attempt = 1; attempt <= 3; attempt++) {
+    let results = null;
+    for (let attempt = 1; attempt <= 3; attempt++) {
       try {
-        results = await filterWithGemini(batch, geminiKey);
+        results = await filterWithGemini(batch, apiKey);
         break;
       } catch(e) {
-        var transient = e.message.includes('high demand') || e.message.includes('503') || e.message.includes('429');
-        if (transient && attempt < 3) {
-          logWarn('  Attempt ' + attempt + ' failed — retrying in 5s...');
+        const isTransient = e.message.includes('high demand') || e.message.includes('503') || e.message.includes('429');
+        if (isTransient && attempt < 3) {
+          logWarn('  Attempt ' + attempt + ' failed (' + e.message.slice(0, 60) + ') — retrying in 5s...');
           await new Promise(function(r) { setTimeout(r, 5000); });
         } else {
-          logErr('  Batch ' + batchNum + ' failed: ' + e.message);
-          results = null; break;
+          logErr('  Batch ' + batchNum + ' failed after ' + attempt + ' attempt(s): ' + e.message);
+          results = null;
+          break;
         }
       }
     }
 
     if (results) {
-      logOk('  ' + results.length + ' verdicts');
+      logOk('  Gemini returned ' + results.length + ' verdicts');
       results.forEach(function(r) {
-        var p = batch[r.index];
+        const p = batch[r.index];
         if (!p) return;
         if (r.relevant) {
-          logOk('  RELEVANT [' + r.priority + '] [' + p.source + '] "' + p.title.slice(0,55) + '"');
+          logOk('  RELEVANT [' + r.priority + '] "' + p.title.slice(0, 60) + '" — ' + r.reason);
           relevant.push(Object.assign({}, p, { priority: r.priority, reason: r.reason }));
         } else {
-          log('  skip: "' + p.title.slice(0,55) + '"');
+          log('  skipped: "' + p.title.slice(0, 60) + '"');
         }
       });
     } else {
-      logWarn('  Batch ' + batchNum + ' skipped');
+      logWarn('  Batch ' + batchNum + ' skipped — continuing with remaining batches');
     }
 
-    // Show results so far
-    var sorted = relevant.slice().sort(function(a,b) { return ({'high':0,'medium':1,'low':2}[a.priority]||2) - ({'high':0,'medium':1,'low':2}[b.priority]||2); });
+    const sorted = relevant.slice().sort(function(a, b) {
+      return ({'high':0,'medium':1,'low':2}[a.priority] || 2) - ({'high':0,'medium':1,'low':2}[b.priority] || 2);
+    });
     renderPosts(sorted);
     document.getElementById('statFound').textContent = relevant.length;
     document.getElementById('statHigh').textContent = relevant.filter(function(p) { return p.priority === 'high'; }).length;
-    document.getElementById('statReddit').textContent = relevant.filter(function(p) { return p.source === 'reddit'; }).length;
-    document.getElementById('statQuora').textContent = relevant.filter(function(p) { return p.source === 'quora'; }).length;
   }
 
-  // Final sort and save
-  relevant.sort(function(a,b) { return ({'high':0,'medium':1,'low':2}[a.priority]||2) - ({'high':0,'medium':1,'low':2}[b.priority]||2); });
-  var newSeenIds = Array.from(new Set(seenIds.concat(newPosts.map(function(p) { return p.id; }))));
+  relevant.sort(function(a, b) {
+    return ({'high':0,'medium':1,'low':2}[a.priority] || 2) - ({'high':0,'medium':1,'low':2}[b.priority] || 2);
+  });
+
+  const newSeenIds = Array.from(new Set(seenIds.concat(newPosts.map(function(p) { return p.id; }))));
   saveSeenIds(newSeenIds);
 
   document.getElementById('statFound').textContent = relevant.length;
   document.getElementById('statHigh').textContent = relevant.filter(function(p) { return p.priority === 'high'; }).length;
-  document.getElementById('statReddit').textContent = relevant.filter(function(p) { return p.source === 'reddit'; }).length;
-  document.getElementById('statQuora').textContent = relevant.filter(function(p) { return p.source === 'quora'; }).length;
+  document.getElementById('statSeen').textContent = newSeenIds.length;
 
-  var now = new Date().toLocaleString();
+  const now = new Date().toLocaleString();
   localStorage.setItem(LAST_KEY, now);
   document.getElementById('lastChecked').textContent = now;
   document.getElementById('statusMsg').innerHTML = 'Done &mdash; ' + relevant.length + ' relevant from ' + newPosts.length + ' new posts';
 
   logHead('Done — ' + relevant.length + ' relevant posts found');
-  if (errors.length) logWarn('Errors: ' + errors.join(', '));
+  if (errors.length) { logWarn('Feed errors: ' + errors.join(', ')); showError('Some feeds failed: ' + errors.join(', ')); }
 
   hideProgress();
   renderPosts(relevant);
   btn.disabled = false;
 }
 
-// Load on startup
 window.addEventListener('load', function() {
-  var gk = localStorage.getItem(GEMINI_KEY);
-  if (gk) { document.getElementById('geminiKey').value = gk; onGeminiKey(); }
-  var ak = localStorage.getItem(APIFY_KEY);
-  if (ak) { document.getElementById('apifyKey').value = ak; onApifyKey(); }
-  var qon = localStorage.getItem(QUORA_KEY);
-  if (qon === '1') { quoraOn = true; document.getElementById('quoraToggle').className = 'toggle on'; }
-  var last = localStorage.getItem(LAST_KEY);
+  const saved = localStorage.getItem(KEY_STORE);
+  if (saved) { document.getElementById('apiKey').value = saved; onKeyInput(); }
+  const last = localStorage.getItem(LAST_KEY);
   if (last) document.getElementById('lastChecked').textContent = last;
+  document.getElementById('statSeen').textContent = getSeenIds().length;
 });
 </script>
 </body>
