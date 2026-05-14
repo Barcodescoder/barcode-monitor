@@ -248,7 +248,11 @@ async function fetchRedditKeyword(keyword) {
   var redditUrl = 'https://www.reddit.com/search/.rss?q=' + encodeURIComponent(keyword) + '&sort=new&limit=15';
   var proxyUrl = WORKER + '/?url=' + encodeURIComponent(redditUrl);
   var resp = await fetch(proxyUrl);
-  if (!resp.ok) throw new Error('HTTP ' + resp.status);
+  if (!resp.ok) {
+    var errBody = await resp.text();
+    log('  Error body: ' + errBody.slice(0, 1500));
+    throw new Error('HTTP ' + resp.status);
+  }
   var text = await resp.text();
   return parseRSS(text);
 }
