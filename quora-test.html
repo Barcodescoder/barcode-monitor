@@ -6,21 +6,20 @@
 <title>Quora Apify Test</title>
 <style>
   body { font-family: monospace; padding: 2rem; max-width: 900px; margin: 0 auto; background: #f7f5f0; }
-  h1 { font-size: 18px; margin-bottom: 1.5rem; }
   .row { display: flex; gap: 12px; margin-bottom: 1rem; flex-wrap: wrap; }
   input { font-family: monospace; font-size: 13px; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; flex: 1; min-width: 200px; }
   button { font-family: monospace; font-size: 13px; padding: 8px 16px; background: #1a1814; color: #f7f5f0; border: none; border-radius: 4px; cursor: pointer; }
   button:disabled { opacity: 0.4; cursor: not-allowed; }
   .log { background: #fff; border: 1px solid #ddd; border-radius: 4px; padding: 1rem; font-size: 12px; line-height: 1.8; max-height: 600px; overflow-y: auto; white-space: pre-wrap; word-break: break-all; }
-  .ok { color: #27500a; } .err { color: #791f1f; } .warn { color: #854f0b; } .head { color: #000; font-weight: bold; }
+  .ok { color: #27500a; } .err { color: #791f1f; } .warn { color: #854f0b; } .head { font-weight: bold; }
 </style>
 </head>
 <body>
-<h1>Quora + Apify test</h1>
+<h1 style="font-family:monospace;font-size:18px;margin-bottom:1rem">Quora Apify test <span style="color:#aaa">v4</span></h1>
 <div class="row">
   <input type="password" id="apiKey" placeholder="Apify API key" />
-  <input type="text" id="keyword" value="GTIN barcode" placeholder="keyword" />
-  <button id="btn" onclick="runTest()">Run test</button>
+  <input type="text" id="keyword" value="GTIN barcode" />
+  <button id="btn" onclick="runTest()">Run</button>
 </div>
 <div class="log" id="log">Ready</div>
 <script>
@@ -33,11 +32,7 @@ async function callApify(actorId, input, apiKey) {
   var apifyUrl = 'https://api.apify.com/v2/acts/' + actorId + '/run-sync-get-dataset-items?token=' + apiKey + '&timeout=120&memory=256';
   var workerUrl = WORKER + '/apify?endpoint=' + encodeURIComponent(apifyUrl);
   w('  Input: ' + JSON.stringify(input));
-  var resp = await fetch(workerUrl, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(input)
-  });
+  var resp = await fetch(workerUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(input) });
   var text = await resp.text();
   w('  Status: ' + resp.status);
   w('  Body: ' + text.slice(0, 800));
@@ -53,24 +48,24 @@ async function runTest() {
 
   var tests = [
     {
-      name: 'fatihtahta~quora-scraper (correct schema)',
+      name: 'fatihtahta~quora-scraper (min 10)',
       actor: 'fatihtahta~quora-scraper',
-      input: { queries: [keyword], searchType: 'Question', timeFilter: 'Past Month', maxItemsPerQuery: 5 }
+      input: { queries: [keyword], searchType: 'Question', timeFilter: 'Past Month', maxItemsPerQuery: 10 }
     },
     {
-      name: 'crawlerbros~quora-scraper (startUrls)',
+      name: 'fatihtahta~quora-scraper (All Time)',
+      actor: 'fatihtahta~quora-scraper',
+      input: { queries: [keyword], searchType: 'Question', timeFilter: 'All Time', maxItemsPerQuery: 10 }
+    },
+    {
+      name: 'memo23~Quora-Scraper-with-optional-login',
+      actor: 'memo23~Quora-Scraper-with-optional-login',
+      input: { queries: [keyword], searchType: 'Question', maxItems: 10 }
+    },
+    {
+      name: 'crawlerbros~quora-scraper (queries array)',
       actor: 'crawlerbros~quora-scraper',
-      input: { startUrls: ['https://www.quora.com/search?q=' + encodeURIComponent(keyword) + '&type=question'], maxItems: 5 }
-    },
-    {
-      name: 'crawlerbros~quora-scraper (query)',
-      actor: 'crawlerbros~quora-scraper',
-      input: { query: keyword, type: 'questions', maxItems: 5 }
-    },
-    {
-      name: 'jupri~quora-scraper (startUrls)',
-      actor: 'jupri~quora-scraper',
-      input: { startUrls: [{ url: 'https://www.quora.com/search?q=' + encodeURIComponent(keyword) + '&type=question' }], maxItems: 5 }
+      input: { queries: [keyword], searchType: 'Question', maxItems: 10 }
     }
   ];
 
@@ -88,14 +83,12 @@ async function runTest() {
             w('Keys: ' + Object.keys(data[0]).join(', '), 'ok');
             w('First result: ' + JSON.stringify(data[0]).slice(0, 600), 'ok');
             break;
-          } else if (Array.isArray(data) && data.length === 0) {
-            w('Actor worked but 0 results — actor may be under maintenance or keyword too niche', 'warn');
+          } else if (Array.isArray(data)) {
+            w('Returned empty array — under maintenance or no results', 'warn');
           }
         } catch(e) { w('JSON parse failed: ' + e.message, 'err'); }
       }
-    } catch(e) {
-      w('fetch error: ' + e.message, 'err');
-    }
+    } catch(e) { w('fetch error: ' + e.message, 'err'); }
   }
 
   w('');
