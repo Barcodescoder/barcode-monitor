@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quora Apify Test</title>
+<style>
+  body { font-family: monospace; padding: 2rem; max-width: 900px; margin: 0 auto; background: #f7f5f0; }
+  h1 { font-size: 18px; margin-bottom: 1.5rem; }
+  .row { display: flex; gap: 12px; margin-bottom: 1rem; flex-wrap: wrap; }
+  input { font-family: monospace; font-size: 13px; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; flex: 1; min-width: 200px; }
+  button { font-family: monospace; font-size: 13px; padding: 8px 16px; background: #1a1814; color: #f7f5f0; border: none; border-radius: 4px; cursor: pointer; }
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
+  .log { background: #fff; border: 1px solid #ddd; border-radius: 4px; padding: 1rem; font-size: 12px; line-height: 1.8; max-height: 600px; overflow-y: auto; white-space: pre-wrap; word-break: break-all; }
+  .ok { color: #27500a; }
+  .err { color: #791f1f; }
+  .warn { color: #854f0b; }
+  .head { color: #000; font-weight: bold; }
+</style>
+</head>
+<body>
+<h1>Quora + Apify test (via Cloudflare worker)</h1>
+<div class="row">
+  <input type="password" id="apiKey" placeholder="Apify API key (apify_api_...)" />
+  <input type="text" id="keyword" value="GTIN barcode" placeholder="keyword" />
+  <button id="btn" onclick="runTest()">Run test</button>
+</div>
+<div class="log" id="log">Ready — enter your Apify key and hit Run test</div>
+<script>
+var WORKER = 'https://still-leaf-77c4.barcodes.workers.dev';
+var logEl = document.getElementById('log');
+function w(msg, cls) {
+  var d = document.createElement('div');
+  d.className = cls || '';
+  d.textContent = msg;
+  logEl.appendChild(d);
+  logEl.scrollTop = logEl.scrollHeight;
+}
+function clearLog() { logEl.innerHTML = ''; }
+
+async function runTest() {
+  clearLog();
+  var apiKey = document.getElementById('apiKey').value.trim();
+  var keyword = document.getElementById('keyword').value.trim();
+  if (!apiKey || !keyword) { w('Enter API key and keyword first', 'err'); return; }
+  document.getElementById('btn').disabled = true;
+
+  // Step 1: test worker is reachable at all
+  w('=== Step 1: Test worker is reachable ===', 'head');
+  try {
+    var pingUrl = WORKER + '/?url=https://www.reddit.com/search/.rss?q=GTIN&sort=new&limit=1';
+    w('Fetching: ' + pingUrl);
+    var pingResp = await fetch(pingUrl);
+    w('Worker ping status: ' + pingResp.status, pingResp.ok ? 'ok' : 'warn');
+  } catch(e) {
+    w('Worker not reachable: ' + e.name + ' — ' + e.message, 'err');
+    w('Stack: ' + (e.stack || 'none'));
+    document.getElementById('btn').disabled = false;
+    return;
+  }
+
+  // Step 2: test /apify route on worker with a simple Apify endpoint
+  w('');
+  w('=== Step 2: Test /apify route on worker ===', 'head');
+  var apifyUrl = 'https://api.apify.com/v2/acts/botflowtech~quora-scraper-pro/run-sync-get-dataset-items?token=' + apiKey + '&timeout=60&memory=256';
+  var workerUrl = WORKER + '/apify?endpoint=' + encodeURIComponent(apifyUrl);
+  w('Worker URL: ' + workerUrl);
+  try {
+    var resp = await fetch(workerUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query: keyword, contentType: 'questions', maxResults: 3 })
+    });
+    w('HTTP status: ' + resp.status, resp.ok ? 'ok' : 'warn');
+    var headers = [];
+    resp.headers.forEach(function(v, k) { headers.push(k + ': ' + v); });
+    w('Response headers: ' + headers.join(' | '));
+    var deny = resp.headers.get('x-deny-reason');
+    if (deny) w('x-deny-reason: ' + deny, 'err');
+    var text = await resp.text();
+    w('Body length: ' + text.length);
+    w('Body preview: ' + text.slice(0, 500), resp.ok ? 'ok' : 'err');
+  } catch(e) {
+    w('fetch() threw: ' + e.name + ' — ' + e.message, 'err');
+    w('Stack: ' + (e.stack || 'none'));
+    w('');
+    w('This likely means the /apify route on the worker is returning a non-CORS response', 'warn');
+    w('Check that the worker was deployed correctly with the /apify route', 'warn');
+  }
+
+  // Step 3: test Apify account directly via worker to confirm token works
+  w('');
+  w('=== Step 3: Test Apify token validity ===', 'head');
+  var meUrl = 'https://api.apify.com/v2/users/me?token=' + apiKey;
+  var meWorkerUrl = WORKER + '/apify?endpoint=' + encodeURIComponent(meUrl);
+  w('Checking: ' + meWorkerUrl);
+  try {
+    var meResp = await fetch(meWorkerUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: '{}'
+    });
+    w('Status: ' + meResp.status);
+    var meText = await meResp.text();
+    w('Response: ' + meText.slice(0, 400), meResp.ok ? 'ok' : 'err');
+  } catch(e) {
+    w('Failed: ' + e.name + ' — ' + e.message, 'err');
+  }
+
+  w('');
+  w('=== Done ===', 'head');
+  document.getElementById('btn').disabled = false;
+}
+</script>
+</body>
+</html>
