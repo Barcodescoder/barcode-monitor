@@ -12,99 +12,90 @@
   button { font-family: monospace; font-size: 13px; padding: 8px 16px; background: #1a1814; color: #f7f5f0; border: none; border-radius: 4px; cursor: pointer; }
   button:disabled { opacity: 0.4; cursor: not-allowed; }
   .log { background: #fff; border: 1px solid #ddd; border-radius: 4px; padding: 1rem; font-size: 12px; line-height: 1.8; max-height: 600px; overflow-y: auto; white-space: pre-wrap; word-break: break-all; }
-  .ok { color: #27500a; }
-  .err { color: #791f1f; }
-  .warn { color: #854f0b; }
-  .head { color: #000; font-weight: bold; }
+  .ok { color: #27500a; } .err { color: #791f1f; } .warn { color: #854f0b; } .head { color: #000; font-weight: bold; }
 </style>
 </head>
 <body>
-<h1>Quora + Apify test (via Cloudflare worker)</h1>
+<h1>Quora + Apify test</h1>
 <div class="row">
-  <input type="password" id="apiKey" placeholder="Apify API key (apify_api_...)" />
+  <input type="password" id="apiKey" placeholder="Apify API key" />
   <input type="text" id="keyword" value="GTIN barcode" placeholder="keyword" />
   <button id="btn" onclick="runTest()">Run test</button>
 </div>
-<div class="log" id="log">Ready — enter your Apify key and hit Run test</div>
+<div class="log" id="log">Ready</div>
 <script>
 var WORKER = 'https://still-leaf-77c4.barcodes.workers.dev';
 var logEl = document.getElementById('log');
-function w(msg, cls) {
-  var d = document.createElement('div');
-  d.className = cls || '';
-  d.textContent = msg;
-  logEl.appendChild(d);
-  logEl.scrollTop = logEl.scrollHeight;
-}
+function w(msg, cls) { var d = document.createElement('div'); d.className = cls||''; d.textContent = msg; logEl.appendChild(d); logEl.scrollTop = logEl.scrollHeight; }
 function clearLog() { logEl.innerHTML = ''; }
+
+async function callApify(actorId, input, apiKey) {
+  var apifyUrl = 'https://api.apify.com/v2/acts/' + actorId + '/run-sync-get-dataset-items?token=' + apiKey + '&timeout=120&memory=256';
+  var workerUrl = WORKER + '/apify?endpoint=' + encodeURIComponent(apifyUrl);
+  w('  Input: ' + JSON.stringify(input));
+  var resp = await fetch(workerUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(input)
+  });
+  var text = await resp.text();
+  w('  Status: ' + resp.status);
+  w('  Body: ' + text.slice(0, 800));
+  return { status: resp.status, text: text };
+}
 
 async function runTest() {
   clearLog();
   var apiKey = document.getElementById('apiKey').value.trim();
   var keyword = document.getElementById('keyword').value.trim();
-  if (!apiKey || !keyword) { w('Enter API key and keyword first', 'err'); return; }
+  if (!apiKey || !keyword) { w('Enter key and keyword', 'err'); return; }
   document.getElementById('btn').disabled = true;
 
-  // Step 1: test worker is reachable at all
-  w('=== Step 1: Test worker is reachable ===', 'head');
-  try {
-    var pingUrl = WORKER + '/?url=https://www.reddit.com/search/.rss?q=GTIN&sort=new&limit=1';
-    w('Fetching: ' + pingUrl);
-    var pingResp = await fetch(pingUrl);
-    w('Worker ping status: ' + pingResp.status, pingResp.ok ? 'ok' : 'warn');
-  } catch(e) {
-    w('Worker not reachable: ' + e.name + ' — ' + e.message, 'err');
-    w('Stack: ' + (e.stack || 'none'));
-    document.getElementById('btn').disabled = false;
-    return;
-  }
+  var tests = [
+    {
+      name: 'fatihtahta~quora-scraper (correct schema)',
+      actor: 'fatihtahta~quora-scraper',
+      input: { queries: [keyword], searchType: 'Question', timeFilter: 'Past Month', maxItemsPerQuery: 5 }
+    },
+    {
+      name: 'crawlerbros~quora-scraper (startUrls)',
+      actor: 'crawlerbros~quora-scraper',
+      input: { startUrls: ['https://www.quora.com/search?q=' + encodeURIComponent(keyword) + '&type=question'], maxItems: 5 }
+    },
+    {
+      name: 'crawlerbros~quora-scraper (query)',
+      actor: 'crawlerbros~quora-scraper',
+      input: { query: keyword, type: 'questions', maxItems: 5 }
+    },
+    {
+      name: 'jupri~quora-scraper (startUrls)',
+      actor: 'jupri~quora-scraper',
+      input: { startUrls: [{ url: 'https://www.quora.com/search?q=' + encodeURIComponent(keyword) + '&type=question' }], maxItems: 5 }
+    }
+  ];
 
-  // Step 2: test /apify route on worker with a simple Apify endpoint
-  w('');
-  w('=== Step 2: Test /apify route on worker ===', 'head');
-  var apifyUrl = 'https://api.apify.com/v2/acts/botflowtech~quora-scraper-pro/run-sync-get-dataset-items?token=' + apiKey + '&timeout=60&memory=256';
-  var workerUrl = WORKER + '/apify?endpoint=' + encodeURIComponent(apifyUrl);
-  w('Worker URL: ' + workerUrl);
-  try {
-    var resp = await fetch(workerUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ query: keyword, contentType: 'questions', maxResults: 3 })
-    });
-    w('HTTP status: ' + resp.status, resp.ok ? 'ok' : 'warn');
-    var headers = [];
-    resp.headers.forEach(function(v, k) { headers.push(k + ': ' + v); });
-    w('Response headers: ' + headers.join(' | '));
-    var deny = resp.headers.get('x-deny-reason');
-    if (deny) w('x-deny-reason: ' + deny, 'err');
-    var text = await resp.text();
-    w('Body length: ' + text.length);
-    w('Body preview: ' + text.slice(0, 500), resp.ok ? 'ok' : 'err');
-  } catch(e) {
-    w('fetch() threw: ' + e.name + ' — ' + e.message, 'err');
-    w('Stack: ' + (e.stack || 'none'));
+  for (var i = 0; i < tests.length; i++) {
+    var t = tests[i];
     w('');
-    w('This likely means the /apify route on the worker is returning a non-CORS response', 'warn');
-    w('Check that the worker was deployed correctly with the /apify route', 'warn');
-  }
-
-  // Step 3: test Apify account directly via worker to confirm token works
-  w('');
-  w('=== Step 3: Test Apify token validity ===', 'head');
-  var meUrl = 'https://api.apify.com/v2/users/me?token=' + apiKey;
-  var meWorkerUrl = WORKER + '/apify?endpoint=' + encodeURIComponent(meUrl);
-  w('Checking: ' + meWorkerUrl);
-  try {
-    var meResp = await fetch(meWorkerUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: '{}'
-    });
-    w('Status: ' + meResp.status);
-    var meText = await meResp.text();
-    w('Response: ' + meText.slice(0, 400), meResp.ok ? 'ok' : 'err');
-  } catch(e) {
-    w('Failed: ' + e.name + ' — ' + e.message, 'err');
+    w('=== ' + t.name + ' ===', 'head');
+    try {
+      var r = await callApify(t.actor, t.input, apiKey);
+      if (r.status === 200) {
+        try {
+          var data = JSON.parse(r.text);
+          if (Array.isArray(data) && data.length > 0) {
+            w('SUCCESS! Got ' + data.length + ' results', 'ok');
+            w('Keys: ' + Object.keys(data[0]).join(', '), 'ok');
+            w('First result: ' + JSON.stringify(data[0]).slice(0, 600), 'ok');
+            break;
+          } else if (Array.isArray(data) && data.length === 0) {
+            w('Actor worked but 0 results — actor may be under maintenance or keyword too niche', 'warn');
+          }
+        } catch(e) { w('JSON parse failed: ' + e.message, 'err'); }
+      }
+    } catch(e) {
+      w('fetch error: ' + e.message, 'err');
+    }
   }
 
   w('');
