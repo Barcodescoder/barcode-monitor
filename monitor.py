@@ -206,6 +206,16 @@ def send_email_digest(matches, stats):
         print("No matches to email.")
         return
 
+    if not SMTP_USER or not SMTP_PASS or not MAIL_TO:
+        print("\n--- TEST RUN: SMTP credentials missing ---")
+        print("Would have emailed the following matches:")
+        for m in matches:
+            print(f" - {m['title']} (r/{m['sub']})")
+            print(f"   Reason: {m['reason']}")
+            print(f"   Link: {m['link']}")
+        print("------------------------------------------\n")
+        return
+
     subject = f"Barcode leads — {len(matches)} new ({datetime.now().strftime('%d %b')})"
     
     body = "<h2>New Reddit Leads Found</h2><ul>"
