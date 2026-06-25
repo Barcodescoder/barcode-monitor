@@ -4,7 +4,6 @@ import json
 import time
 import smtplib
 import urllib.parse
-from email.message import EmailMessage
 from datetime import datetime, timezone, timedelta
 from html import unescape
 import re
@@ -30,9 +29,7 @@ TRUNCATE_LEN = 1500
 
 # Secrets from environment
 GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', '')
-SMTP_USER = os.environ.get('SMTP_USER', '')
-SMTP_PASS = os.environ.get('SMTP_PASS', '')
-MAIL_TO = os.environ.get('MAIL_TO', '')
+SLACK_WEBHOOK_URL = os.environ.get('SLACK_WEBHOOK_URL', '')
 
 # --- MODELS ---
 class RelevanceVerdict(BaseModel):
@@ -200,58 +197,68 @@ Content: {post['snippet']}
     # Fallback if both attempts fail
     return True, "AI check failed — manual review"
 
-# --- EMAIL NOTIFICATION ---
-def send_email_digest(matches, stats):
+# --- SLACK NOTIFICATION ---
+def send_slack_digest(matches, stats):
     if not matches:
-        print("No matches to email.")
-        return
+        print("No matches to send.")
+        return True
 
-    if not SMTP_USER or not SMTP_PASS or not MAIL_TO:
-        print("\n--- TEST RUN: SMTP credentials missing ---")
-        print("Would have emailed the following matches:")
+    if not SLACK_WEBHOOK_URL:
+        print("\n--- TEST RUN: SLACK_WEBHOOK_URL missing ---")
+        print("Would have sent the following matches to Slack:")
         for m in matches:
             print(f" - {m['title']} (r/{m['sub']})")
             print(f"   Reason: {m['reason']}")
             print(f"   Link: {m['link']}")
         print("------------------------------------------\n")
-        return
+        # In test mode without a webhook, we pretend it succeeded so they get marked as seen
+        return True
 
-    subject = f"Barcode leads — {len(matches)} new ({datetime.now().strftime('%d %b')})"
-    
-    body = "<h2>New Reddit Leads Found</h2><ul>"
+    blocks = [
+        {
+            "type": "header",
+            "text": {
+                "type": "plain_text",
+                "text": f"🚨 Barcode Leads — {len(matches)} new ({datetime.now().strftime('%d %b')})"
+            }
+        },
+        {"type": "divider"}
+    ]
+
     for m in matches:
-        body += f"""
-        <li style="margin-bottom: 15px;">
-            <strong><a href="{m['link']}">{m['title']}</a></strong><br>
-            <span style="color: #666;">r/{m['sub']} | by {m['author']} | {m['published']}</span><br>
-            <span style="color: #2e7d32;"><strong>AI Reason:</strong> {m['reason']}</span>
-        </li>
-        """
-    body += "</ul>"
-    
-    body += "<hr><p style='font-size: 0.9em; color: #555;'>"
-    body += f"<strong>Run Stats:</strong><br>"
-    body += f"Keywords Checked: {stats['keywords_checked']}<br>"
-    body += f"Total Posts Fetched: {stats['total_fetched']}<br>"
-    body += f"Matches Found: {len(matches)}<br>"
-    if stats['failed_keywords']:
-        body += f"<span style='color: red;'>Failed Keywords: {len(stats['failed_keywords'])} of {stats['keywords_checked']}</span>"
-    body += "</p>"
+        blocks.append({
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": f"*{m['title']}*\nr/{m['sub']} | by {m['author']} | {m['published']}\n> *AI Reason:* {m['reason']}\n<{m['link']}|View Post>"
+            }
+        })
+        blocks.append({"type": "divider"})
 
-    msg = EmailMessage()
-    msg['Subject'] = subject
-    msg['From'] = SMTP_USER
-    msg['To'] = MAIL_TO
-    msg.set_content("Please enable HTML to view this email.")
-    msg.add_alternative(body, subtype='html')
+    failed_text = f" | *Failed Keywords:* {len(stats['failed_keywords'])}" if stats['failed_keywords'] else ""
+    blocks.append({
+        "type": "context",
+        "elements": [
+            {
+                "type": "mrkdwn",
+                "text": f"Run Stats: *{stats['keywords_checked']}* keywords checked | *{stats['total_fetched']}* posts fetched | *{len(matches)}* matches{failed_text}"
+            }
+        ]
+    })
+
+    payload = {"blocks": blocks}
 
     try:
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
-            server.login(SMTP_USER, SMTP_PASS)
-            server.send_message(msg)
-        print("Email sent successfully.")
+        resp = requests.post(SLACK_WEBHOOK_URL, json=payload, timeout=10)
+        if resp.status_code == 200 or resp.status_code == 201:
+            print("Slack message sent successfully.")
+            return True
+        else:
+            print(f"Failed to send Slack message. HTTP {resp.status_code}: {resp.text}")
+            return False
     except Exception as e:
-        print(f"Failed to send email: {e}")
+        print(f"Error sending to Slack: {e}")
+        return False
 
 # --- MAIN RUNNER ---
 def main():
@@ -292,19 +299,25 @@ def main():
             
             if relevant:
                 matches.append(post)
+            else:
+                # Mark irrelevant posts as seen immediately
+                seen[post['id']] = datetime.now(timezone.utc).timestamp()
                 
-            # Mark as seen regardless of relevance so we don't process it again
-            seen[post['id']] = datetime.now(timezone.utc).timestamp()
-            
         # Polite throttle
         time.sleep(3)
         
-    save_seen(seen)
-    
     if matches:
-        send_email_digest(matches, stats)
+        if send_slack_digest(matches, stats):
+            # Only mark relevant posts as seen if Slack succeeded
+            for m in matches:
+                seen[m['id']] = datetime.now(timezone.utc).timestamp()
+        else:
+            print("Slack delivery failed. Relevant posts not marked as seen.")
     else:
         print("No new relevant posts found today.")
+        
+    # Always save seen (which now includes all irrelevant posts from today + successful matches)
+    save_seen(seen)
         
     print("Run complete.")
 
