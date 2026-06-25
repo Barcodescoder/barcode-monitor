@@ -86,7 +86,7 @@
 <div class="page">
   <header>
     <div class="wordmark">barcode <span>monitor</span></div>
-    <div class="subtitle">Reddit &amp; Quora opportunity scanner &mdash; barcode1.co.uk &middot; v1.0.6</div>
+    <div class="subtitle">Reddit &amp; Quora opportunity scanner &mdash; barcode1.co.uk &middot; v1.0.7</div>
   </header>
 
   <div class="keys">
@@ -144,9 +144,9 @@
 <script>
 var WORKER = 'https://still-leaf-77c4.barcodes.workers.dev';
 var KEYWORDS = [
-  'EAN-13','UPC-A','UPC-E','GTIN','ISBN barcode',
-  'Data Matrix','2D barcode','buy barcode','get barcode',
-  'product barcode','retail barcode','Shopify barcode','FNSKU','gs1'
+  'EAN-13','UPC-A','UPC-E','GTIN',
+  'buy barcode','get barcode',
+  'product barcode','retail barcode','Shopify barcode','gs1'
 ];
 var SEEN_KEY = 'barcodeMonitor_seen';
 var LAST_KEY = 'barcodeMonitor_last';
@@ -242,7 +242,7 @@ function hideError() { document.getElementById('errorBar').style.display = 'none
 
 // --- Reddit RSS ---
 async function fetchRedditKeyword(keyword) {
-  var redditUrl = 'https://www.reddit.com/search/.rss?q=' + encodeURIComponent(keyword) + '&sort=new&limit=15';
+  var redditUrl = 'https://www.reddit.com/search/.rss?q=' + encodeURIComponent(keyword) + '&sort=new&limit=30';
   var apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(redditUrl);
   var resp = await fetch(apiUrl);
   if (!resp.ok) {
@@ -261,6 +261,7 @@ async function fetchRedditKeyword(keyword) {
       var id = item.guid || '';
       var title = item.title || '';
       var link = item.link || '';
+      if (!link.includes('/comments/')) return;
       var content = item.content || item.description || '';
       var author = item.author ? item.author.replace('/u/', '') : '';
       var updated = item.pubDate || '';
@@ -312,13 +313,17 @@ async function filterWithGemini(posts, geminiKey) {
     return '[' + i + '] TITLE: ' + p.title + '\nSOURCE: ' + (p.source === 'quora' ? 'Quora' : 'r/' + p.sub) + '\nSNIPPET: ' + p.snippet.slice(0, 300);
   }).join('\n\n---\n\n');
 
-  var prompt = 'You are helping a barcode retailer (barcode1.co.uk) find Reddit and Quora posts worth engaging with.\n\n' +
-    'Mark relevant=true if the person:\n' +
-    '- Wants to buy or get barcodes for a product\n' +
-    '- Is confused about barcode types (EAN, UPC, GTIN, FNSKU, Data Matrix, etc.)\n' +
-    '- Is launching a product and likely needs barcodes\n' +
-    '- Has a question about barcode standards you could helpfully answer\n\n' +
-    'NOT relevant: barcode scanning apps, barcode printer hardware, QR codes only, purely academic.\n\n' +
+  var prompt = 'You are helping a barcode retailer (barcode1.co.uk) find Reddit and Quora posts worth engaging with. You sell retail barcodes (EAN-13 and UPC).\n\n' +
+    'Mark relevant=true ONLY if the person:\n' +
+    '- Wants to buy/get a barcode for a new retail product (Amazon, Shopify, physical stores)\n' +
+    '- Is confused about the difference between GS1, EAN, and UPC\n' +
+    '- Is complaining about GS1 being too expensive or complicated\n\n' +
+    'NOT relevant (mark false): \n' +
+    '- Questions about FNSKU, ISBN, Data Matrix, or QR codes\n' +
+    '- Hardware/Software (barcode scanners, label printers, inventory management)\n' +
+    '- Labeling Services (Amazon Prep Centers, sticking labels on boxes)\n' +
+    '- GTIN/UPC Exemptions (they are trying not to buy a barcode)\n' +
+    '- General e-commerce/logistics discussions without explicit mention of needing barcodes\n\n' +
     'Respond ONLY with a JSON array:\n' +
     '[{"index":0,"relevant":true,"priority":"high","reason":"one sentence"}]\n\n' +
     'priority: high=clear buying intent, medium=good engagement, low=tangential\n\n' +
