@@ -86,7 +86,7 @@
 <div class="page">
   <header>
     <div class="wordmark">barcode <span>monitor</span></div>
-    <div class="subtitle">Reddit &amp; Quora opportunity scanner &mdash; barcode1.co.uk &middot; v1.0.6</div>
+    <div class="subtitle">Reddit &amp; Quora opportunity scanner &mdash; barcode1.co.uk &middot; v1.0.5</div>
   </header>
 
   <div class="keys">
@@ -242,7 +242,7 @@ function hideError() { document.getElementById('errorBar').style.display = 'none
 
 // --- Reddit RSS ---
 async function fetchRedditKeyword(keyword) {
-  var redditUrl = 'https://www.reddit.com/search/.rss?q=' + encodeURIComponent(keyword) + '&sort=new&limit=100';
+  var redditUrl = 'https://www.reddit.com/search/.rss?q=' + encodeURIComponent(keyword) + '&sort=new&limit=15';
   var apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(redditUrl);
   var resp = await fetch(apiUrl);
   if (!resp.ok) {
@@ -504,21 +504,14 @@ async function runCheck() {
 
     if (results) {
       logOk('  ' + results.length + ' verdicts');
-      var evalSet = new Set();
       results.forEach(function(r) {
         var p = batch[r.index];
         if (!p) return;
-        evalSet.add(r.index);
         if (r.relevant) {
           logOk('  RELEVANT [' + r.priority + '] [' + p.source + '] "' + p.title.slice(0,55) + '"');
           relevant.push(Object.assign({}, p, { priority: r.priority, reason: r.reason }));
         } else {
           log('  skip: "' + p.title.slice(0,55) + '"');
-        }
-      });
-      batch.forEach(function(p, i) {
-        if (!evalSet.has(i)) {
-          log('  skip (omitted by AI): "' + p.title.slice(0,55) + '"');
         }
       });
     } else {
