@@ -1,0 +1,53 @@
+name: Daily Barcode Lead Monitor
+
+on:
+  schedule:
+    # 20:00 UTC = 8:00 AM NZST (or 9:00 AM NZDT)
+    - cron: '0 20 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: monitor-run
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run-monitor:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Monitor Script
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+        run: python monitor.py
+
+      - name: Commit and push updated seen.json
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add seen.json
+          
+          # Only commit and push if there are changes
+          if ! git diff-index --quiet HEAD; then
+            git commit -m "Update seen.json [skip ci]"
+            git push
+          else
+            echo "No new posts seen, seen.json is unchanged."
+          fi
