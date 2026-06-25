@@ -247,7 +247,7 @@ async function fetchRedditKeyword(keyword) {
       var content = item.content || item.description || '';
       var author = item.author ? item.author.replace('/u/', '') : '';
       var updated = item.pubDate || '';
-      var sub = (link.match(/reddit\\.com\\/r\\/([^/]+)/) || [])[1] || '';
+      var sub = (link.match(/reddit\.com\/r\/([^/]+)/) || [])[1] || '';
       var snippet = content.replace(/<[^>]+>/g, '').slice(0, 500).trim();
       if (id && title) posts.push({ id: id, title: title, link: link, snippet: snippet, author: author, updated: updated, sub: sub, source: 'reddit' });
     });
