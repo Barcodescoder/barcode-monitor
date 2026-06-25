@@ -20,7 +20,7 @@ KEYWORDS = [
     'retail barcode', 'barcode for Amazon', 'barcode for Shopify'
 ]
 FETCH_LIMIT = 30
-MAX_RETRIES = 3
+MAX_RETRIES = 5
 PRUNE_DAYS = 30
 USER_AGENT = 'barcode-lead-monitor/1.0 (daily RSS reader; contact: support@barcode1.co.uk)'
 SEEN_FILE = 'seen.json'
@@ -91,8 +91,8 @@ def fetch_posts_for_keyword(keyword):
                 print(f"  Error fetching {endpoint}: {e}")
                 
         # If all endpoints fail in this attempt, backoff
-        backoff = [3, 8, 20]
-        sleep_time = backoff[attempt] if attempt < len(backoff) else 20
+        backoff = [5, 15, 30, 60, 120]
+        sleep_time = backoff[attempt] if attempt < len(backoff) else 120
         print(f"All endpoints failed for '{keyword}', sleeping {sleep_time}s...")
         time.sleep(sleep_time)
         
@@ -287,6 +287,10 @@ def main():
             
         stats['total_fetched'] += len(posts)
         
+        print(f"  Fetched {len(posts)} posts. Breakdown:")
+        for p in posts:
+            print(f"    - ID: {p['id']} | r/{p['sub']} | {p['title'][:60]}")
+            
         for post in posts:
             if post['id'] in seen or any(m['id'] == post['id'] for m in matches):
                 continue
@@ -304,7 +308,7 @@ def main():
                 seen[post['id']] = datetime.now(timezone.utc).timestamp()
                 
         # Polite throttle
-        time.sleep(3)
+        time.sleep(10)
         
     if matches:
         if send_slack_digest(matches, stats):
