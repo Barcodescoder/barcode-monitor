@@ -86,7 +86,7 @@
 <div class="page">
   <header>
     <div class="wordmark">barcode <span>monitor</span></div>
-    <div class="subtitle">Reddit &amp; Quora opportunity scanner &mdash; barcode1.co.uk &middot; v1.0.5</div>
+    <div class="subtitle">Reddit &amp; Quora opportunity scanner &mdash; barcode1.co.uk &middot; v1.0.6</div>
   </header>
 
   <div class="keys">
@@ -425,7 +425,11 @@ async function runCheck() {
     }
     if (posts) {
       logOk('  -> ' + posts.length + ' posts');
-      posts.forEach(function(p) { p.keyword = kw; allPosts.push(p); });
+      posts.forEach(function(p) {
+        log('    + ' + p.title.slice(0, 55));
+        p.keyword = kw;
+        allPosts.push(p);
+      });
     }
     await new Promise(function(r) { setTimeout(r, 3000); });
   }
@@ -440,7 +444,10 @@ async function runCheck() {
       try {
         var qposts = await fetchQuoraKeyword(qkw, apifyKey);
         logOk('  -> ' + qposts.length + ' questions');
-        qposts.forEach(function(p) { allPosts.push(p); });
+        qposts.forEach(function(p) {
+          log('    + ' + p.title.slice(0, 55));
+          allPosts.push(p);
+        });
       } catch(e) {
         logErr('  -> FAILED: ' + e.message);
         errors.push('Quora/' + qkw + ': ' + e.message);
