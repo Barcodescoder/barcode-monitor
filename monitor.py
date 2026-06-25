@@ -288,7 +288,7 @@ def main():
         stats['total_fetched'] += len(posts)
         
         for post in posts:
-            if post['id'] in seen:
+            if post['id'] in seen or any(m['id'] == post['id'] for m in matches):
                 continue
                 
             # Filter
