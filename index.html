@@ -86,7 +86,7 @@
 <div class="page">
   <header>
     <div class="wordmark">barcode <span>monitor</span></div>
-    <div class="subtitle">Reddit &amp; Quora opportunity scanner &mdash; barcode1.co.uk &middot; v1.0.4</div>
+    <div class="subtitle">Reddit &amp; Quora opportunity scanner &mdash; barcode1.co.uk &middot; v1.0.5</div>
   </header>
 
   <div class="keys">
@@ -130,9 +130,12 @@
   </div>
 
   <div class="log-wrap">
-    <div class="log-header" onclick="toggleLog()">
-      <span>&#9654; Activity log</span>
-      <span id="logToggleLabel">show</span>
+    <div class="log-header">
+      <span onclick="toggleLog()" style="cursor:pointer; flex:1;">&#9654; Activity log</span>
+      <div style="display:flex; gap: 12px;">
+        <span onclick="copyLogs(event)" style="cursor:pointer; color: var(--text); border-bottom: 1px solid var(--text);">copy logs</span>
+        <span id="logToggleLabel" onclick="toggleLog()" style="cursor:pointer;">show</span>
+      </div>
     </div>
     <div class="log-body" id="logBody" style="display:none"></div>
   </div>
@@ -172,6 +175,20 @@ function logWarn(m) { log(m, 'lwarn'); }
 function logErr(m) { log(m, 'lerr'); }
 function logHead(m) { log(m, 'lhead'); }
 function clearLog() { document.getElementById('logBody').innerHTML = ''; }
+function copyLogs(e) {
+  if(e) e.stopPropagation();
+  var logs = document.getElementById('logBody').innerText;
+  navigator.clipboard.writeText(logs).then(function() {
+    var btn = e ? e.target : null;
+    if(btn) {
+      var old = btn.textContent;
+      btn.textContent = 'copied!';
+      setTimeout(function() { btn.textContent = old; }, 2000);
+    }
+  }).catch(function() {
+    alert('Failed to copy logs to clipboard.');
+  });
+}
 
 // --- Keys ---
 function onGeminiKey() {
