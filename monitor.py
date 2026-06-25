@@ -19,6 +19,21 @@ KEYWORDS = [
     'buy barcode', 'buy barcodes', 'get barcodes', 'product barcode',
     'retail barcode', 'barcode for Amazon', 'barcode for Shopify'
 ]
+EXCLUDED_SUBREDDITS = {
+    'vedic_astrology_free', 'vedicastrologyexperts', 'vedicastromedia', 'jyotisha_astro', 
+    'free_vedic_astro', 'jyotishh', 'vedicastrologyreal', 'jeeadv27dailyupdates', 
+    'medicoretards', 'easportsfc', 'footballmanagergames', 'wiiu', 'victoria3', 
+    'mapporn', 'comicbookspeculation', '80s90scomics', 'comicbooks', 'cgccomics', 
+    'hotwheels', 'pokeinvesting', 'pkmntcgtrades', 'pokemonraffles', 
+    'onepiecetcgfinance', 'vintagetoys', 'lawnmowers', 'smallenginerepair', 
+    'ar15', 'fnherstal', 'upsc', 'upscprelims2026', 'upsc_forum', 'mpscprep', 
+    'indianacademia', 'neetard', 'sixthgrade', 'splatoon', 'goldensun', 
+    'rimworld', 'eu4mods', 'market76', 'flightsim', 'gravelcycling', 
+    'ultracycling', 'doordashdrivers', 'amazonflexdrivers', 'amazondspdrivers', 
+    'cvs', 'michaelsemployees', 'staples', 'lowes', 'kroger', 'walmart', 
+    'awesomefreebies', 'beermoneyuk', 'beermoneyideas', 'sidehustlegold', 
+    'frozendinners', 'nosleep', 'suicidewatch', 'cathlablounge', 'askelectricians'
+}
 FETCH_LIMIT = 30
 MAX_RETRIES = 5
 PRUNE_DAYS = 30
@@ -284,6 +299,8 @@ def main():
         if posts is None:
             stats['failed_keywords'].append(keyword)
             continue
+            
+        posts = [p for p in posts if p['sub'].lower() not in EXCLUDED_SUBREDDITS]
             
         stats['total_fetched'] += len(posts)
         
