@@ -224,37 +224,35 @@ function showError(msg) { var el = document.getElementById('errorBar'); el.textC
 function hideError() { document.getElementById('errorBar').style.display = 'none'; }
 
 // --- Reddit RSS ---
-function parseRSS(xml) {
-  var parser = new DOMParser();
-  var doc = parser.parseFromString(xml, 'text/xml');
-  if (doc.querySelector('parsererror')) throw new Error('XML parse error');
-  var entries = doc.querySelectorAll('entry');
-  var posts = [];
-  entries.forEach(function(e) {
-    var id = e.querySelector('id') ? e.querySelector('id').textContent.trim() : '';
-    var title = e.querySelector('title') ? e.querySelector('title').textContent.trim() : '';
-    var link = e.querySelector('link') ? e.querySelector('link').getAttribute('href') : '';
-    var content = e.querySelector('content') ? e.querySelector('content').textContent.trim() : '';
-    var author = e.querySelector('author name') ? e.querySelector('author name').textContent.trim() : '';
-    var updated = e.querySelector('updated') ? e.querySelector('updated').textContent.trim() : '';
-    var sub = (link.match(/reddit\.com\/r\/([^/]+)/) || [])[1] || '';
-    var snippet = content.replace(/<[^>]+>/g, '').slice(0, 500).trim();
-    if (id && title) posts.push({ id: id, title: title, link: link, snippet: snippet, author: author, updated: updated, sub: sub, source: 'reddit' });
-  });
-  return posts;
-}
-
 async function fetchRedditKeyword(keyword) {
   var redditUrl = 'https://www.reddit.com/search/.rss?q=' + encodeURIComponent(keyword) + '&sort=new&limit=15';
-  var proxyUrl = WORKER + '/?url=' + encodeURIComponent(redditUrl);
-  var resp = await fetch(proxyUrl);
+  var apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(redditUrl);
+  var resp = await fetch(apiUrl);
   if (!resp.ok) {
     var errBody = await resp.text();
     log('  Error body: ' + errBody.slice(0, 1500));
     throw new Error('HTTP ' + resp.status);
   }
-  var text = await resp.text();
-  return parseRSS(text);
+  var data = await resp.json();
+  if (data.status !== 'ok') {
+    throw new Error('RSS2JSON error: ' + (data.message || 'unknown'));
+  }
+  
+  var posts = [];
+  if (data.items) {
+    data.items.forEach(function(item) {
+      var id = item.guid || '';
+      var title = item.title || '';
+      var link = item.link || '';
+      var content = item.content || item.description || '';
+      var author = item.author ? item.author.replace('/u/', '') : '';
+      var updated = item.pubDate || '';
+      var sub = (link.match(/reddit\\.com\\/r\\/([^/]+)/) || [])[1] || '';
+      var snippet = content.replace(/<[^>]+>/g, '').slice(0, 500).trim();
+      if (id && title) posts.push({ id: id, title: title, link: link, snippet: snippet, author: author, updated: updated, sub: sub, source: 'reddit' });
+    });
+  }
+  return posts;
 }
 
 // --- Quora via Apify ---
