@@ -255,7 +255,30 @@ Body: {post.get('selftext', post['snippet'])}
     return "Failed to draft reply."
 
 # --- SLACK NOTIFICATION ---
+def send_slack_message(blocks):
+    if not SLACK_WEBHOOK_URL:
+        print("\n--- TEST RUN: SLACK_WEBHOOK_URL missing ---")
+        import json
+        print(json.dumps(blocks, indent=2))
+        return True
+
+    payload = {"blocks": blocks}
+    try:
+        resp = requests.post(SLACK_WEBHOOK_URL, json=payload, timeout=10)
+        if resp.status_code in [200, 201]:
+            print("Slack message sent successfully.")
+            return True
+        else:
+            print(f"Failed to send Slack message. HTTP {resp.status_code}: {resp.text}")
+            return False
+    except Exception as e:
+        print(f"Error sending to Slack: {e}")
+        return False
+
 def send_slack_digest(matches, stats):
+    failed_text = f" | *Failed Keywords:* {len(stats['failed_keywords'])}" if stats['failed_keywords'] else ""
+    stats_text = f"Run Stats: *{stats['keywords_checked']}* keywords checked | *{stats['total_fetched']}* posts fetched | *{len(matches)}* matches{failed_text}"
+
     if not matches:
         blocks = [
             {
@@ -271,71 +294,58 @@ def send_slack_digest(matches, stats):
                     "type": "mrkdwn",
                     "text": "No new relevant posts found today."
                 }
+            },
+            {
+                "type": "context",
+                "elements": [{"type": "mrkdwn", "text": stats_text}]
             }
         ]
-    else:
-        blocks = [
+        return send_slack_message(blocks)
+    
+    # Matches exist. Send Header first.
+    header_blocks = [
+        {
+            "type": "header",
+            "text": {
+                "type": "plain_text",
+                "text": f"🚨 Barcode Leads — {len(matches)} new ({datetime.now().strftime('%d %b')})"
+            }
+        },
+        {
+            "type": "context",
+            "elements": [{"type": "mrkdwn", "text": stats_text}]
+        }
+    ]
+    if not send_slack_message(header_blocks):
+        return False
+        
+    time.sleep(1) # Prevent Slack webhook rate limits
+    
+    success = True
+    for m in matches:
+        lead_blocks = [
             {
-                "type": "header",
-                "text": {
-                    "type": "plain_text",
-                    "text": f"🚨 Barcode Leads — {len(matches)} new ({datetime.now().strftime('%d %b')})"
-                }
-            },
-            {"type": "divider"}
-        ]
-
-        for m in matches:
-            blocks.append({
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
                     "text": f"*{m['title']}*\nr/{m['sub']} | by {m['author']} | {m['published']}\n> *AI Reason:* {m['reason']}\n<{m['link']}|View Post>"
                 }
-            })
-            if 'drafted_reply' in m and m['drafted_reply']:
-                blocks.append({
-                    "type": "section",
-                    "text": {
-                        "type": "mrkdwn",
-                        "text": f"🤖 *Drafted Reply:*\n>{m['drafted_reply'].replace(chr(10), chr(10) + '>')}"
-                    }
-                })
-            blocks.append({"type": "divider"})
-
-    failed_text = f" | *Failed Keywords:* {len(stats['failed_keywords'])}" if stats['failed_keywords'] else ""
-    blocks.append({
-        "type": "context",
-        "elements": [
-            {
-                "type": "mrkdwn",
-                "text": f"Run Stats: *{stats['keywords_checked']}* keywords checked | *{stats['total_fetched']}* posts fetched | *{len(matches)}* matches{failed_text}"
             }
         ]
-    })
-
-    if not SLACK_WEBHOOK_URL:
-        print("\n--- TEST RUN: SLACK_WEBHOOK_URL missing ---")
-        print("Would have sent the following blocks to Slack:")
-        import json
-        print(json.dumps(blocks, indent=2))
-        print("------------------------------------------\n")
-        # In test mode without a webhook, we pretend it succeeded so they get marked as seen
-        return True
-
-    payload = {"blocks": blocks}
-
-    try:
-        resp = requests.post(SLACK_WEBHOOK_URL, json=payload, timeout=10)
-        if resp.status_code == 200 or resp.status_code == 201:
-            print("Slack message sent successfully.")
-            return True
-        else:
-            print(f"Failed to send Slack message. HTTP {resp.status_code}: {resp.text}")
-            return False
-    except Exception as e:
-        print(f"Error sending to Slack: {e}")
-        return False
+        if 'drafted_reply' in m and m['drafted_reply']:
+            lead_blocks.append({
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": f"🤖 *Drafted Reply:*\n>{m['drafted_reply'].replace(chr(10), chr(10) + '>')}"
+                }
+            })
+        
+        if not send_slack_message(lead_blocks):
+            success = False
+        time.sleep(1) # Prevent Slack webhook rate limits
+        
+    return success
 
 # --- MAIN RUNNER ---
 def main():
