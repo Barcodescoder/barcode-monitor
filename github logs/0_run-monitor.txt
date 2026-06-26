@@ -1,0 +1,890 @@
+﻿2026-06-25T22:54:41.0062074Z Current runner version: '2.335.1'
+2026-06-25T22:54:41.0088887Z ##[group]Runner Image Provisioner
+2026-06-25T22:54:41.0089839Z Hosted Compute Agent
+2026-06-25T22:54:41.0090550Z Version: 20260611.554
+2026-06-25T22:54:41.0091215Z Commit: 5e0782fdc9014723d3be820dd114dd31555c2bd1
+2026-06-25T22:54:41.0091953Z Build Date: 2026-06-11T21:40:46Z
+2026-06-25T22:54:41.0092828Z Worker ID: {d9da9253-fdaa-48bb-9b6f-c4c7f9a1ff74}
+2026-06-25T22:54:41.0093594Z Azure Region: eastus
+2026-06-25T22:54:41.0094246Z ##[endgroup]
+2026-06-25T22:54:41.0096029Z ##[group]Operating System
+2026-06-25T22:54:41.0096688Z Ubuntu
+2026-06-25T22:54:41.0097446Z 24.04.4
+2026-06-25T22:54:41.0098013Z LTS
+2026-06-25T22:54:41.0098622Z ##[endgroup]
+2026-06-25T22:54:41.0099243Z ##[group]Runner Image
+2026-06-25T22:54:41.0099998Z Image: ubuntu-24.04
+2026-06-25T22:54:41.0100662Z Version: 20260622.220.1
+2026-06-25T22:54:41.0102036Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260622.220/images/ubuntu/Ubuntu2404-Readme.md
+2026-06-25T22:54:41.0103644Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260622.220
+2026-06-25T22:54:41.0104704Z ##[endgroup]
+2026-06-25T22:54:41.0106443Z ##[group]GITHUB_TOKEN Permissions
+2026-06-25T22:54:41.0109116Z Contents: write
+2026-06-25T22:54:41.0109833Z Metadata: read
+2026-06-25T22:54:41.0110533Z ##[endgroup]
+2026-06-25T22:54:41.0113231Z Secret source: Actions
+2026-06-25T22:54:41.0114217Z Prepare workflow directory
+2026-06-25T22:54:41.0451941Z Prepare all required actions
+2026-06-25T22:54:41.0490477Z Getting action download info
+2026-06-25T22:54:41.2652350Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2026-06-25T22:54:41.3507182Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-06-25T22:54:41.5366460Z Complete job name: run-monitor
+2026-06-25T22:54:41.6132996Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-06-25T22:54:41.6142186Z ##[group]Run actions/checkout@v4
+2026-06-25T22:54:41.6142966Z with:
+2026-06-25T22:54:41.6143460Z   repository: Barcodescoder/barcode-monitor
+2026-06-25T22:54:41.6148156Z   token: ***
+2026-06-25T22:54:41.6148623Z   ssh-strict: true
+2026-06-25T22:54:41.6149092Z   ssh-user: git
+2026-06-25T22:54:41.6149566Z   persist-credentials: true
+2026-06-25T22:54:41.6150080Z   clean: true
+2026-06-25T22:54:41.6150546Z   sparse-checkout-cone-mode: true
+2026-06-25T22:54:41.6151087Z   fetch-depth: 1
+2026-06-25T22:54:41.6151535Z   fetch-tags: false
+2026-06-25T22:54:41.6152008Z   show-progress: true
+2026-06-25T22:54:41.6152471Z   lfs: false
+2026-06-25T22:54:41.6152948Z   submodules: false
+2026-06-25T22:54:41.6153415Z   set-safe-directory: true
+2026-06-25T22:54:41.6154218Z ##[endgroup]
+2026-06-25T22:54:41.7123283Z Syncing repository: Barcodescoder/barcode-monitor
+2026-06-25T22:54:41.7125417Z ##[group]Getting Git version info
+2026-06-25T22:54:41.7126273Z Working directory is '/home/runner/work/barcode-monitor/barcode-monitor'
+2026-06-25T22:54:41.7127405Z [command]/usr/bin/git version
+2026-06-25T22:54:41.7210366Z git version 2.54.0
+2026-06-25T22:54:41.7231133Z ##[endgroup]
+2026-06-25T22:54:41.7244843Z Temporarily overriding HOME='/home/runner/work/_temp/e4f9d9d0-b7c9-4c83-8feb-5869aaaf7642' before making global git config changes
+2026-06-25T22:54:41.7247059Z Adding repository directory to the temporary git global config as a safe directory
+2026-06-25T22:54:41.7255494Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/barcode-monitor/barcode-monitor
+2026-06-25T22:54:41.7306053Z Deleting the contents of '/home/runner/work/barcode-monitor/barcode-monitor'
+2026-06-25T22:54:41.7309909Z ##[group]Initializing the repository
+2026-06-25T22:54:41.7314610Z [command]/usr/bin/git init /home/runner/work/barcode-monitor/barcode-monitor
+2026-06-25T22:54:41.7447892Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-06-25T22:54:41.7449696Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-06-25T22:54:41.7451403Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-06-25T22:54:41.7452361Z hint: call:
+2026-06-25T22:54:41.7452957Z hint:
+2026-06-25T22:54:41.7453992Z hint: 	git config --global init.defaultBranch <name>
+2026-06-25T22:54:41.7455132Z hint:
+2026-06-25T22:54:41.7456293Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-06-25T22:54:41.7458086Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-06-25T22:54:41.7459534Z hint:
+2026-06-25T22:54:41.7460381Z hint: 	git branch -m <name>
+2026-06-25T22:54:41.7461300Z hint:
+2026-06-25T22:54:41.7462420Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-06-25T22:54:41.7464420Z Initialized empty Git repository in /home/runner/work/barcode-monitor/barcode-monitor/.git/
+2026-06-25T22:54:41.7468002Z [command]/usr/bin/git remote add origin https://github.com/Barcodescoder/barcode-monitor
+2026-06-25T22:54:41.7543940Z ##[endgroup]
+2026-06-25T22:54:41.7545983Z ##[group]Disabling automatic garbage collection
+2026-06-25T22:54:41.7547817Z [command]/usr/bin/git config --local gc.auto 0
+2026-06-25T22:54:41.7576129Z ##[endgroup]
+2026-06-25T22:54:41.7576901Z ##[group]Setting up auth
+2026-06-25T22:54:41.7582216Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-06-25T22:54:41.7615342Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-06-25T22:54:41.8004200Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-06-25T22:54:41.8034126Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-06-25T22:54:41.8251401Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-06-25T22:54:41.8281316Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-06-25T22:54:41.8495859Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-06-25T22:54:41.8529499Z ##[endgroup]
+2026-06-25T22:54:41.8530600Z ##[group]Fetching the repository
+2026-06-25T22:54:41.8539754Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +cc894f8793d2164d88b7be71c996109e263aa822:refs/remotes/origin/main
+2026-06-25T22:54:42.0372460Z From https://github.com/Barcodescoder/barcode-monitor
+2026-06-25T22:54:42.0374339Z  * [new ref]         cc894f8793d2164d88b7be71c996109e263aa822 -> origin/main
+2026-06-25T22:54:42.0448679Z ##[endgroup]
+2026-06-25T22:54:42.0450383Z ##[group]Determining the checkout info
+2026-06-25T22:54:42.0452263Z ##[endgroup]
+2026-06-25T22:54:42.0457055Z [command]/usr/bin/git sparse-checkout disable
+2026-06-25T22:54:42.0502326Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-06-25T22:54:42.0530091Z ##[group]Checking out the ref
+2026-06-25T22:54:42.0533610Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-06-25T22:54:42.0585932Z Switched to a new branch 'main'
+2026-06-25T22:54:42.0591807Z branch 'main' set up to track 'origin/main'.
+2026-06-25T22:54:42.0598131Z ##[endgroup]
+2026-06-25T22:54:42.0646800Z [command]/usr/bin/git log -1 --format=%H
+2026-06-25T22:54:42.0670470Z cc894f8793d2164d88b7be71c996109e263aa822
+2026-06-25T22:54:42.0951849Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-06-25T22:54:42.0955182Z ##[group]Run actions/setup-python@v5
+2026-06-25T22:54:42.0955778Z with:
+2026-06-25T22:54:42.0956232Z   python-version: 3.11
+2026-06-25T22:54:42.0956715Z   cache: pip
+2026-06-25T22:54:42.0957154Z   check-latest: false
+2026-06-25T22:54:42.0961569Z   token: ***
+2026-06-25T22:54:42.0962059Z   update-environment: true
+2026-06-25T22:54:42.0962596Z   allow-prereleases: false
+2026-06-25T22:54:42.0963144Z   freethreaded: false
+2026-06-25T22:54:42.0963614Z ##[endgroup]
+2026-06-25T22:54:42.2358658Z ##[group]Installed versions
+2026-06-25T22:54:42.2471837Z (node:2176) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-06-25T22:54:42.2474233Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-06-25T22:54:42.2476001Z Successfully set up CPython (3.11.15)
+2026-06-25T22:54:42.2477614Z ##[endgroup]
+2026-06-25T22:54:42.2901483Z [command]/opt/hostedtoolcache/Python/3.11.15/x64/bin/pip cache dir
+2026-06-25T22:54:43.7239206Z /home/runner/.cache/pip
+2026-06-25T22:54:43.8613699Z Cache hit for: setup-python-Linux-x64-24.04-Ubuntu-python-3.11.15-pip-1501a9871023a1c3f6449a62e166c8afe1e625c105f2123c923ccb47e8fca355
+2026-06-25T22:54:43.8728160Z (node:2176) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-06-25T22:54:44.1267371Z Received 14570881 of 14570881 (100.0%), 66.2 MBs/sec
+2026-06-25T22:54:44.1268769Z Cache Size: ~14 MB (14570881 B)
+2026-06-25T22:54:44.1301943Z [command]/usr/bin/tar -xf /home/runner/work/_temp/60175101-3e15-4116-a45b-ed3f06f220f3/cache.tzst -P -C /home/runner/work/barcode-monitor/barcode-monitor --use-compress-program unzstd
+2026-06-25T22:54:44.1784534Z Cache restored successfully
+2026-06-25T22:54:44.1796667Z Cache restored from key: setup-python-Linux-x64-24.04-Ubuntu-python-3.11.15-pip-1501a9871023a1c3f6449a62e166c8afe1e625c105f2123c923ccb47e8fca355
+2026-06-25T22:54:44.2090445Z ##[group]Run pip install -r requirements.txt
+2026-06-25T22:54:44.2090999Z [36;1mpip install -r requirements.txt[0m
+2026-06-25T22:54:44.2280422Z shell: /usr/bin/bash -e {0}
+2026-06-25T22:54:44.2280788Z env:
+2026-06-25T22:54:44.2281132Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+2026-06-25T22:54:44.2281667Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+2026-06-25T22:54:44.2282184Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+2026-06-25T22:54:44.2282649Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+2026-06-25T22:54:44.2283098Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+2026-06-25T22:54:44.2283559Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+2026-06-25T22:54:44.2283982Z ##[endgroup]
+2026-06-25T22:54:45.2624030Z Collecting requests (from -r requirements.txt (line 1))
+2026-06-25T22:54:45.2640992Z   Using cached requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+2026-06-25T22:54:45.2787528Z Collecting feedparser (from -r requirements.txt (line 2))
+2026-06-25T22:54:45.2803854Z   Using cached feedparser-6.0.12-py3-none-any.whl.metadata (2.7 kB)
+2026-06-25T22:54:45.3012485Z Collecting google-genai (from -r requirements.txt (line 3))
+2026-06-25T22:54:45.3029177Z   Using cached google_genai-2.10.0-py3-none-any.whl.metadata (53 kB)
+2026-06-25T22:54:45.4146549Z Collecting pydantic (from -r requirements.txt (line 4))
+2026-06-25T22:54:45.4162567Z   Using cached pydantic-2.13.4-py3-none-any.whl.metadata (109 kB)
+2026-06-25T22:54:45.5038188Z Collecting charset_normalizer<4,>=2 (from requests->-r requirements.txt (line 1))
+2026-06-25T22:54:45.5054583Z   Using cached charset_normalizer-3.4.7-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (40 kB)
+2026-06-25T22:54:45.5189508Z Collecting idna<4,>=2.5 (from requests->-r requirements.txt (line 1))
+2026-06-25T22:54:45.5202905Z   Using cached idna-3.18-py3-none-any.whl.metadata (6.1 kB)
+2026-06-25T22:54:45.5375319Z Collecting urllib3<3,>=1.26 (from requests->-r requirements.txt (line 1))
+2026-06-25T22:54:45.5389186Z   Using cached urllib3-2.7.0-py3-none-any.whl.metadata (6.9 kB)
+2026-06-25T22:54:45.5552305Z Collecting certifi>=2023.5.7 (from requests->-r requirements.txt (line 1))
+2026-06-25T22:54:45.5566980Z   Using cached certifi-2026.6.17-py3-none-any.whl.metadata (2.5 kB)
+2026-06-25T22:54:45.5656685Z Collecting sgmllib3k (from feedparser->-r requirements.txt (line 2))
+2026-06-25T22:54:45.5657867Z   Using cached sgmllib3k-1.0.0-py3-none-any.whl
+2026-06-25T22:54:45.5876487Z Collecting anyio<5.0.0,>=4.8.0 (from google-genai->-r requirements.txt (line 3))
+2026-06-25T22:54:45.5889882Z   Using cached anyio-4.14.1-py3-none-any.whl.metadata (4.6 kB)
+2026-06-25T22:54:45.6189415Z Collecting google-auth<3.0.0,>=2.48.1 (from google-auth[requests]<3.0.0,>=2.48.1->google-genai->-r requirements.txt (line 3))
+2026-06-25T22:54:45.6204074Z   Using cached google_auth-2.55.0-py3-none-any.whl.metadata (5.1 kB)
+2026-06-25T22:54:45.6373499Z Collecting httpx<1.0.0,>=0.28.1 (from google-genai->-r requirements.txt (line 3))
+2026-06-25T22:54:45.6388731Z   Using cached httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+2026-06-25T22:54:45.6560235Z Collecting tenacity<9.2.0,>=8.2.3 (from google-genai->-r requirements.txt (line 3))
+2026-06-25T22:54:45.6573804Z   Using cached tenacity-9.1.4-py3-none-any.whl.metadata (1.2 kB)
+2026-06-25T22:54:45.7294231Z Collecting websockets<17.0,>=13.0.0 (from google-genai->-r requirements.txt (line 3))
+2026-06-25T22:54:45.7312779Z   Using cached websockets-16.0-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (6.8 kB)
+2026-06-25T22:54:45.7459550Z Collecting typing-extensions<5.0.0,>=4.14.0 (from google-genai->-r requirements.txt (line 3))
+2026-06-25T22:54:45.7476473Z   Using cached typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+2026-06-25T22:54:45.7565986Z Collecting distro<2,>=1.7.0 (from google-genai->-r requirements.txt (line 3))
+2026-06-25T22:54:45.7586511Z   Using cached distro-1.9.0-py3-none-any.whl.metadata (6.8 kB)
+2026-06-25T22:54:45.7667294Z Collecting sniffio (from google-genai->-r requirements.txt (line 3))
+2026-06-25T22:54:45.7682948Z   Using cached sniffio-1.3.1-py3-none-any.whl.metadata (3.9 kB)
+2026-06-25T22:54:45.7770870Z Collecting annotated-types>=0.6.0 (from pydantic->-r requirements.txt (line 4))
+2026-06-25T22:54:45.7784837Z   Using cached annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+2026-06-25T22:54:46.3864051Z Collecting pydantic-core==2.46.4 (from pydantic->-r requirements.txt (line 4))
+2026-06-25T22:54:46.3881723Z   Using cached pydantic_core-2.46.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+2026-06-25T22:54:46.3983488Z Collecting typing-inspection>=0.4.2 (from pydantic->-r requirements.txt (line 4))
+2026-06-25T22:54:46.3998780Z   Using cached typing_inspection-0.4.2-py3-none-any.whl.metadata (2.6 kB)
+2026-06-25T22:54:46.4183445Z Collecting pyasn1-modules>=0.2.1 (from google-auth<3.0.0,>=2.48.1->google-auth[requests]<3.0.0,>=2.48.1->google-genai->-r requirements.txt (line 3))
+2026-06-25T22:54:46.4198149Z   Using cached pyasn1_modules-0.4.2-py3-none-any.whl.metadata (3.5 kB)
+2026-06-25T22:54:46.5786459Z Collecting cryptography>=38.0.3 (from google-auth<3.0.0,>=2.48.1->google-auth[requests]<3.0.0,>=2.48.1->google-genai->-r requirements.txt (line 3))
+2026-06-25T22:54:46.5804205Z   Using cached cryptography-49.0.0-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (4.3 kB)
+2026-06-25T22:54:46.5957475Z Collecting httpcore==1.* (from httpx<1.0.0,>=0.28.1->google-genai->-r requirements.txt (line 3))
+2026-06-25T22:54:46.5970781Z   Using cached httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+2026-06-25T22:54:46.6073845Z Collecting h11>=0.16 (from httpcore==1.*->httpx<1.0.0,>=0.28.1->google-genai->-r requirements.txt (line 3))
+2026-06-25T22:54:46.6088239Z   Using cached h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+2026-06-25T22:54:46.6939563Z Collecting cffi>=2.0.0 (from cryptography>=38.0.3->google-auth<3.0.0,>=2.48.1->google-auth[requests]<3.0.0,>=2.48.1->google-genai->-r requirements.txt (line 3))
+2026-06-25T22:54:46.6955623Z   Using cached cffi-2.0.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.6 kB)
+2026-06-25T22:54:46.7054262Z Collecting pycparser (from cffi>=2.0.0->cryptography>=38.0.3->google-auth<3.0.0,>=2.48.1->google-auth[requests]<3.0.0,>=2.48.1->google-genai->-r requirements.txt (line 3))
+2026-06-25T22:54:46.7070918Z   Using cached pycparser-3.0-py3-none-any.whl.metadata (8.2 kB)
+2026-06-25T22:54:46.7254678Z Collecting pyasn1<0.7.0,>=0.6.1 (from pyasn1-modules>=0.2.1->google-auth<3.0.0,>=2.48.1->google-auth[requests]<3.0.0,>=2.48.1->google-genai->-r requirements.txt (line 3))
+2026-06-25T22:54:46.7270435Z   Using cached pyasn1-0.6.3-py3-none-any.whl.metadata (8.4 kB)
+2026-06-25T22:54:46.7329915Z Using cached requests-2.34.2-py3-none-any.whl (73 kB)
+2026-06-25T22:54:46.7345271Z Using cached charset_normalizer-3.4.7-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (214 kB)
+2026-06-25T22:54:46.7362017Z Using cached idna-3.18-py3-none-any.whl (65 kB)
+2026-06-25T22:54:46.7376211Z Using cached urllib3-2.7.0-py3-none-any.whl (131 kB)
+2026-06-25T22:54:46.7390192Z Using cached feedparser-6.0.12-py3-none-any.whl (81 kB)
+2026-06-25T22:54:46.7404315Z Using cached google_genai-2.10.0-py3-none-any.whl (957 kB)
+2026-06-25T22:54:46.7422211Z Using cached pydantic-2.13.4-py3-none-any.whl (472 kB)
+2026-06-25T22:54:46.7437976Z Using cached pydantic_core-2.46.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+2026-06-25T22:54:46.7459943Z Using cached anyio-4.14.1-py3-none-any.whl (124 kB)
+2026-06-25T22:54:46.7473832Z Using cached distro-1.9.0-py3-none-any.whl (20 kB)
+2026-06-25T22:54:46.7487675Z Using cached google_auth-2.55.0-py3-none-any.whl (252 kB)
+2026-06-25T22:54:46.7502031Z Using cached httpx-0.28.1-py3-none-any.whl (73 kB)
+2026-06-25T22:54:46.7515793Z Using cached httpcore-1.0.9-py3-none-any.whl (78 kB)
+2026-06-25T22:54:46.7530079Z Using cached tenacity-9.1.4-py3-none-any.whl (28 kB)
+2026-06-25T22:54:46.7543909Z Using cached typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+2026-06-25T22:54:46.7558748Z Using cached websockets-16.0-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (184 kB)
+2026-06-25T22:54:46.7573154Z Using cached annotated_types-0.7.0-py3-none-any.whl (13 kB)
+2026-06-25T22:54:46.7586897Z Using cached certifi-2026.6.17-py3-none-any.whl (133 kB)
+2026-06-25T22:54:46.7601287Z Using cached cryptography-49.0.0-cp311-abi3-manylinux_2_34_x86_64.whl (4.7 MB)
+2026-06-25T22:54:46.7636434Z Using cached cffi-2.0.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (215 kB)
+2026-06-25T22:54:46.7650416Z Using cached h11-0.16.0-py3-none-any.whl (37 kB)
+2026-06-25T22:54:46.7664200Z Using cached pyasn1_modules-0.4.2-py3-none-any.whl (181 kB)
+2026-06-25T22:54:46.7678175Z Using cached pyasn1-0.6.3-py3-none-any.whl (83 kB)
+2026-06-25T22:54:46.7691984Z Using cached typing_inspection-0.4.2-py3-none-any.whl (14 kB)
+2026-06-25T22:54:46.7705473Z Using cached pycparser-3.0-py3-none-any.whl (48 kB)
+2026-06-25T22:54:46.7719894Z Using cached sniffio-1.3.1-py3-none-any.whl (10 kB)
+2026-06-25T22:54:46.9104009Z Installing collected packages: sgmllib3k, websockets, urllib3, typing-extensions, tenacity, sniffio, pycparser, pyasn1, idna, h11, feedparser, distro, charset_normalizer, certifi, annotated-types, typing-inspection, requests, pydantic-core, pyasn1-modules, httpcore, cffi, anyio, pydantic, httpx, cryptography, google-auth, google-genai
+2026-06-25T22:54:49.1724077Z 
+2026-06-25T22:54:49.1747674Z Successfully installed annotated-types-0.7.0 anyio-4.14.1 certifi-2026.6.17 cffi-2.0.0 charset_normalizer-3.4.7 cryptography-49.0.0 distro-1.9.0 feedparser-6.0.12 google-auth-2.55.0 google-genai-2.10.0 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.18 pyasn1-0.6.3 pyasn1-modules-0.4.2 pycparser-3.0 pydantic-2.13.4 pydantic-core-2.46.4 requests-2.34.2 sgmllib3k-1.0.0 sniffio-1.3.1 tenacity-9.1.4 typing-extensions-4.15.0 typing-inspection-0.4.2 urllib3-2.7.0 websockets-16.0
+2026-06-25T22:54:49.2833727Z ##[group]Run python monitor.py
+2026-06-25T22:54:49.2834051Z [36;1mpython monitor.py[0m
+2026-06-25T22:54:49.2867638Z shell: /usr/bin/bash -e {0}
+2026-06-25T22:54:49.2867900Z env:
+2026-06-25T22:54:49.2868182Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+2026-06-25T22:54:49.2868637Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+2026-06-25T22:54:49.2869080Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+2026-06-25T22:54:49.2869496Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+2026-06-25T22:54:49.2869897Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+2026-06-25T22:54:49.2870306Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+2026-06-25T22:54:49.2871013Z   GEMINI_API_KEY: ***
+2026-06-25T22:54:49.2871509Z   SLACK_WEBHOOK_URL: ***
+2026-06-25T22:54:49.2871742Z ##[endgroup]
+2026-06-25T22:56:07.5450814Z Starting daily Reddit Barcode Monitor...
+2026-06-25T22:56:07.5456830Z [1/13] Processing 'EAN-13'...
+2026-06-25T22:56:07.5457383Z Fetching https://www.reddit.com/search/.rss?q=EAN-13&sort=new&limit=30 (Attempt 1)
+2026-06-25T22:56:07.5457925Z   Fetched 27 posts. Breakdown:
+2026-06-25T22:56:07.5458281Z     - ID: 1ufnw6g | r/lrcast | GW Heroes Trophy
+2026-06-25T22:56:07.5458901Z     - ID: 1ufm0la | r/footballmanagergames | How do you lose your job twice in the same season and get fi
+2026-06-25T22:56:07.5459670Z     - ID: 1uff0dl | r/UK_GraphicNovel_Deals | Indie Collected Edition Deals [June 25 2026]
+2026-06-25T22:56:07.5460264Z     - ID: 1ufdpam | r/MapPorn | Time Zones w/o political borders
+2026-06-25T22:56:07.5460749Z     - ID: 1ufb8tz | r/Options_Beginners | AOUT Earnings Breakdown
+2026-06-25T22:56:07.5461324Z     - ID: 1ufb8dj | r/CarAV | Blew out back right tray speaker on 2013 C300. Should I buy 
+2026-06-25T22:56:07.5461877Z     - ID: 1uf6s1n | r/EASportsFC | WL || 20-23 JUN
+2026-06-25T22:56:07.5462489Z     - ID: 1uf56fy | r/JEEAdv27dailyupdates | Hey guys, 26tard here, i'm trying to make revision resources
+2026-06-25T22:56:07.5463186Z     - ID: 1ueojr1 | r/SevenDeadlySinsOrigin | Need people to play with
+2026-06-25T22:56:07.5463674Z     - ID: 1uenjnk | r/adidas | FedEx Man Has Arrived
+2026-06-25T22:56:07.5464383Z     - ID: 1uelb2z | r/monopolygo_fairtrade | 3 star 🌟 trades
+2026-06-25T22:56:07.5465278Z     - ID: 1ueh6l2 | r/Vedic_Astrology_free | can you tell about my past from my chart? it will be interes
+2026-06-25T22:56:07.5466037Z     - ID: 1ueh3xp | r/vedicastrologyexperts | When will my financial problems be solved.
+2026-06-25T22:56:07.5466680Z     - ID: 1uef7v6 | r/vedicastromedia | Any predictions about my finances
+2026-06-25T22:56:07.5467278Z     - ID: 1ue82qt | r/Jyotisha_Astro | Why is nothing happening in my life? Am I cursed?
+2026-06-25T22:56:07.5467953Z     - ID: 1ue7mz5 | r/Free_Vedic_Astro | Why is nothing happening in my life? Am I cursed?
+2026-06-25T22:56:07.5468483Z     - ID: 1ue6ysf | r/LucidProp | Consistency
+2026-06-25T22:56:07.5469157Z     - ID: 1ue0o7j | r/injectioncels | I’m tired boss. 4mg EV
+2026-06-25T22:56:07.5469779Z     - ID: 1udsz72 | r/PTCGPocketTrading | LF: Lisia
+2026-06-25T22:56:07.5470338Z     - ID: 1udor0x | r/victoria3 | Why am I Losing Land After Winning a War against Separatists
+2026-06-25T22:56:07.5471138Z     - ID: 1udnjof | r/HWSEVERLERTR | Satılık hot wheels premium
+2026-06-25T22:56:07.5471666Z     - ID: 1udktc6 | r/MEDICOreTARDS | The collection is absolutely goated. The only thing I had to
+2026-06-25T22:56:07.5472579Z     - ID: 1udh3mv | r/johnwayne | John Wayne Biographies?
+2026-06-25T22:56:07.5473407Z     - ID: 1uddro4 | r/jyotishh | 29M, can I be successful, wealthy? Other details are welcome
+2026-06-25T22:56:07.5474353Z     - ID: 1ud97op | r/wiiu | wii u minute menu restore seeprom shows this HELP
+2026-06-25T22:56:07.5475965Z     - ID: 1ud1r18 | r/vedicastrologyreal | Can someone please tell me my life destiny from this chart p
+2026-06-25T22:56:07.5476818Z     - ID: 1uct82o | r/Bhopal | Mod Femboy aur M2F wale post remove nhi karta but Jaha Zamza
+2026-06-25T22:56:07.5477776Z   -> 1ufnw6g | Verdict: FAIL | The post is about a game interaction, not related to buying retail barcodes or GS1 frustration.
+2026-06-25T22:56:07.5478624Z   -> 1ufm0la | Verdict: FAIL | This post is about a video game, Football Manager, and has no relevance to retail barcodes or GS1.
+2026-06-25T22:56:07.5479182Z [2/13] Processing 'EAN barcode'...
+2026-06-25T22:56:07.5479624Z Fetching https://www.reddit.com/search/.rss?q=EAN%20barcode&sort=new&limit=30 (Attempt 1)
+2026-06-25T22:56:07.5480074Z   Fetched 27 posts. Breakdown:
+2026-06-25T22:56:07.5480473Z     - ID: 1ufeuev | r/GooglePixel | Just received my "brand new" Pixel 10 Pro from Amazon
+2026-06-25T22:56:07.5481064Z     - ID: 1uav7ks | r/todayilearned | TIL about Bookland, a fictitious country that exists solely 
+2026-06-25T22:56:07.5481601Z     - ID: 1u9j7kn | r/elasticStage | Is it possible to recover my UPC?
+2026-06-25T22:56:07.5482095Z     - ID: 1u8ercg | r/DungeonCrawlerCarl | ACE international edition is kind of a scam
+2026-06-25T22:56:07.5482672Z     - ID: 1u7f4rv | r/AmazonSeller | Private label - manufacturer's EAN stays on the product tag,
+2026-06-25T22:56:07.5483269Z     - ID: 1u4gu5o | r/elasticStage | Is the Elastic Stage provided barcode on my artwork if I pro
+2026-06-25T22:56:07.5483872Z     - ID: 1u4a1ie | r/homeautomation | I got tired of pricey Shopify plugins, so I built a free bro
+2026-06-25T22:56:07.5484455Z     - ID: 1u42wnn | r/additemto | 2.8.0 is out: barcode tracking, Tap to Open NFC tags, and QR
+2026-06-25T22:56:07.5485404Z     - ID: 1u3ggxp | r/colognecheck | Legit check please: Versace Pour Homme EDT 100 ml — box desi
+2026-06-25T22:56:07.5486020Z     - ID: 1u21bj9 | r/AmazonFBATips | Stationery Inspection China: Quality Control Guide for Volum
+2026-06-25T22:56:07.5486668Z     - ID: 1u1etzv | r/AndroidClosedTesting | [Test for Test] Need testers for my app "BezRyzyka" (Consume
+2026-06-25T22:56:07.5487291Z     - ID: 1u0llnd | r/ClaudeCode | I built a self-hosted web app that scans DigiKey/Mouser barc
+2026-06-25T22:56:07.5487778Z     - ID: 1u0aatt | r/Netsuite | Item Matrix - Add components
+2026-06-25T22:56:07.5488296Z     - ID: 1tz7clr | r/WarriorsOfNeoTokyo | Welcome to r/WarriorsOfNeoTokyo; Every barcode is a weapon
+2026-06-25T22:56:07.5488884Z     - ID: 1tz4fe0 | r/u_mindeon | Barcode Generator Unlimited is finally on Google Play.
+2026-06-25T22:56:07.5489341Z     - ID: 1tym8wy | r/shedditors | What type of foundation?
+2026-06-25T22:56:07.5489949Z     - ID: 1tw9gaf | r/XTIOTBarcodeScanner | Price Checker Kiosk – Custom Hardware for Your Retail Soluti
+2026-06-25T22:56:07.5490544Z     - ID: 1tuis38 | r/IMadeThis | bulk bar code generator (free and no sign up required)
+2026-06-25T22:56:07.5491006Z     - ID: 1tufi6e | r/AppBuilding | Barcode Lookup API & App
+2026-06-25T22:56:07.5491979Z     - ID: 1trvfq8 | r/qrcode | I built a native QR/barcode scanner for React Native — New A
+2026-06-25T22:56:07.5492626Z     - ID: 1trvaig | r/reactnative | I built a native QR/barcode scanner for React Native — New A
+2026-06-25T22:56:07.5493348Z     - ID: 1trufod | r/googleplayconsole | Just launched my QR & Barcode Scanner app on Google Play! 🚀 
+2026-06-25T22:56:07.5494012Z     - ID: 1tqdctw | r/FulfillmentByAmazon | Has anyone dealt with incorrect UPC/EAN on a live Amazon ASI
+2026-06-25T22:56:07.5494616Z     - ID: 1tna7c0 | r/LabVIEW | Need help combining Labview and GX works 2. For my thesis pr
+2026-06-25T22:56:07.5495422Z     - ID: 1tlxemf | r/HiTMAN | Entered his barcode tattoo into a random website.
+2026-06-25T22:56:07.5496054Z     - ID: 1tksmk5 | r/odoocommunity | Built my first odoo app (label builder, Odoo 19) – free for 
+2026-06-25T22:56:07.5496630Z     - ID: 1tkfwja | r/AmazonFBA | Need Amazon FBA advice about a shipment plz Brand Reg
+2026-06-25T22:56:07.5497046Z [3/13] Processing 'UPC-A'...
+2026-06-25T22:56:07.5497607Z Fetching https://www.reddit.com/search/.rss?q=UPC-A&sort=new&limit=30 (Attempt 1)
+2026-06-25T22:56:07.5498029Z   HTTP 429
+2026-06-25T22:56:07.5498562Z Fetching https://old.reddit.com/search/.rss?q=UPC-A&sort=new&limit=30 (Attempt 1)
+2026-06-25T22:56:07.5498968Z   HTTP 429
+2026-06-25T22:56:07.5499287Z Fetching https://www.reddit.com/search.json?q=UPC-A&sort=new&limit=30 (Attempt 1)
+2026-06-25T22:56:07.5499673Z   HTTP 403
+2026-06-25T22:56:07.5499910Z All endpoints failed for 'UPC-A', sleeping 5s...
+2026-06-25T22:56:07.5500336Z Fetching https://www.reddit.com/search/.rss?q=UPC-A&sort=new&limit=30 (Attempt 2)
+2026-06-25T22:56:07.5500723Z   HTTP 429
+2026-06-25T22:56:07.5501046Z Fetching https://old.reddit.com/search/.rss?q=UPC-A&sort=new&limit=30 (Attempt 2)
+2026-06-25T22:56:07.5501428Z   HTTP 429
+2026-06-25T22:56:07.5501752Z Fetching https://www.reddit.com/search.json?q=UPC-A&sort=new&limit=30 (Attempt 2)
+2026-06-25T22:56:07.5502137Z   HTTP 403
+2026-06-25T22:56:07.5502370Z All endpoints failed for 'UPC-A', sleeping 15s...
+2026-06-25T22:56:07.5503434Z Fetching https://www.reddit.com/search/.rss?q=UPC-A&sort=new&limit=30 (Attempt 3)
+2026-06-25T22:56:07.5504140Z   HTTP 429
+2026-06-25T22:56:07.5504700Z Fetching https://old.reddit.com/search/.rss?q=UPC-A&sort=new&limit=30 (Attempt 3)
+2026-06-25T22:56:07.5505632Z   HTTP 429
+2026-06-25T22:56:07.5506181Z Fetching https://www.reddit.com/search.json?q=UPC-A&sort=new&limit=30 (Attempt 3)
+2026-06-25T22:56:07.5506754Z   HTTP 403
+2026-06-25T22:56:07.5506991Z All endpoints failed for 'UPC-A', sleeping 30s...
+2026-06-25T22:56:07.5507429Z Fetching https://www.reddit.com/search/.rss?q=UPC-A&sort=new&limit=30 (Attempt 4)
+2026-06-25T22:56:07.5507843Z   Fetched 27 posts. Breakdown:
+2026-06-25T22:56:07.5508278Z     - ID: 1ufoyqo | r/thedealsguy | TARGET POKÉMON RESTOCK 🎯
+2026-06-25T22:56:07.5508711Z     - ID: 1ufoaxu | r/ar15 | Tell me why I should or shouldn't get this BCG?
+2026-06-25T22:56:07.5509140Z     - ID: 1ufmfx0 | r/composting | Balcony Compost Bin Advice
+2026-06-25T22:56:07.5509686Z     - ID: 1ufjuhv | r/PERU | Buscamos entrevistados: Investigación sobre IA y trayectoria
+2026-06-25T22:56:07.5510273Z     - ID: 1ufh4s3 | r/tamilyapping | Rombha nal Kanavu Niraiveriyadh! 🥹♥️
+2026-06-25T22:56:07.5510770Z     - ID: 1ufgsmo | r/MechanicAdvice | Renault Master van won't start, only click
+2026-06-25T22:56:07.5511245Z     - ID: 1ufg8ae | r/AppleIndia | Rushed to Croma and got this for 1.35L.
+2026-06-25T22:56:07.5511888Z     - ID: 1uffzvu | r/ComicBookSpeculation | Question about UPC/barcode stickers on early ’90s Marvel dir
+2026-06-25T22:56:07.5512519Z     - ID: 1uffy4m | r/HotWheels | Have you ever tried to return really old unopened cars to Wa
+2026-06-25T22:56:07.5513180Z     - ID: 1uffv90 | r/80s90sComics | Question about UPC/barcode stickers on early ’90s Marvel dir
+2026-06-25T22:56:07.5513842Z     - ID: 1uffr5t | r/comicbooks | Question about UPC/barcode stickers on early ’90s Marvel dir
+2026-06-25T22:56:07.5514365Z     - ID: 1ufcp3y | r/Scream | THEYRE MAKING A SCARY MOVIE KILLER MASK SPOOF
+2026-06-25T22:56:07.5515104Z     - ID: 1ufaw09 | r/ChatGPT | Consolidate ecommerce exports into actionable reorder alerts
+2026-06-25T22:56:07.5515768Z     - ID: 1uf9t6v | r/u_palletliquidationus | How to Source Amazon Return Pallets Safely & Avoid Getting S
+2026-06-25T22:56:07.5516294Z     - ID: 1uf9am9 | r/RealLegitCheck | Legit check please
+2026-06-25T22:56:07.5516764Z     - ID: 1uf5v0l | r/catalunya | Contingut i formacions d'IA en català?
+2026-06-25T22:56:07.5517228Z     - ID: 1uf2x6r | r/ShopeePH | Does the AirPods Pro 3 box have a Class A label?
+2026-06-25T22:56:07.5517763Z     - ID: 1uezdek | r/confession | I worked in the mail room of a record label and sold promo C
+2026-06-25T22:56:07.5518333Z     - ID: 1uez5fl | r/jualbeliindonesia | WTS Seagate Firecuda Star Wars Grogu Drive 2 TB
+2026-06-25T22:56:07.5518922Z     - ID: 1uexgkd | r/PokeInvesting | Pre-emptive move before 30th anniversary set and Delta Reign
+2026-06-25T22:56:07.5519425Z     - ID: 1uew6bg | r/lawnmowers | Mower Sound Help Update!
+2026-06-25T22:56:07.5519989Z     - ID: 1uew45k | r/smallenginerepair | Lawn Mower Sound UPDATE
+2026-06-25T22:58:30.7944196Z     - ID: 1uev6c5 | r/pkmntcgtrades | [US,US] [W] To buy slabs between 80-85%, sealed at 80-85% [H
+2026-06-25T22:58:30.7946439Z     - ID: 1ueup3r | r/FNHerstal | FN Reflex XL silver/black availability
+2026-06-25T22:58:30.7948127Z     - ID: 1ueu36e | r/catalunya | Enginyeria Química UAB o UPC (Terrassa/Besòs)? Quina opció e
+2026-06-25T22:58:30.7949400Z     - ID: 1uetcxh | r/PokemonRaffles | Sword & Shield Ultra-Premium Collection: Charizard
+2026-06-25T22:58:30.7950418Z     - ID: 1ueiqvo | r/ToxicMoldExposure | Mold in back of toilet?
+2026-06-25T22:58:30.7951686Z   -> 1ufoyqo | Verdict: FAIL | This post is about a consumer product restock, not about buying retail barcodes or GS1 frustration.
+2026-06-25T22:58:30.7953428Z   -> 1ufoaxu | Verdict: FAIL | Post is about firearm components (BCG for AR-15), not retail barcodes or GS1 issues. It is irrelevant.
+2026-06-25T22:58:30.7954590Z   -> 1ufmfx0 | Verdict: FAIL | The post is about composting advice, not retail barcodes, buying barcodes, or GS1 frustration.
+2026-06-25T22:58:30.7955690Z [4/13] Processing 'UPC barcode'...
+2026-06-25T22:58:30.7956510Z Fetching https://www.reddit.com/search/.rss?q=UPC%20barcode&sort=new&limit=30 (Attempt 1)
+2026-06-25T22:58:30.7957258Z   HTTP 429
+2026-06-25T22:58:30.7957667Z Fetching https://old.reddit.com/search/.rss?q=UPC%20barcode&sort=new&limit=30 (Attempt 1)
+2026-06-25T22:58:30.7958157Z   HTTP 429
+2026-06-25T22:58:30.7958552Z Fetching https://www.reddit.com/search.json?q=UPC%20barcode&sort=new&limit=30 (Attempt 1)
+2026-06-25T22:58:30.7959053Z   HTTP 403
+2026-06-25T22:58:30.7959421Z All endpoints failed for 'UPC barcode', sleeping 5s...
+2026-06-25T22:58:30.7960233Z Fetching https://www.reddit.com/search/.rss?q=UPC%20barcode&sort=new&limit=30 (Attempt 2)
+2026-06-25T22:58:30.7961031Z   HTTP 429
+2026-06-25T22:58:30.7961592Z Fetching https://old.reddit.com/search/.rss?q=UPC%20barcode&sort=new&limit=30 (Attempt 2)
+2026-06-25T22:58:30.7962095Z   HTTP 429
+2026-06-25T22:58:30.7962483Z Fetching https://www.reddit.com/search.json?q=UPC%20barcode&sort=new&limit=30 (Attempt 2)
+2026-06-25T22:58:30.7962966Z   HTTP 403
+2026-06-25T22:58:30.7963248Z All endpoints failed for 'UPC barcode', sleeping 15s...
+2026-06-25T22:58:30.7963783Z Fetching https://www.reddit.com/search/.rss?q=UPC%20barcode&sort=new&limit=30 (Attempt 3)
+2026-06-25T22:58:30.7964261Z   HTTP 429
+2026-06-25T22:58:30.7964649Z Fetching https://old.reddit.com/search/.rss?q=UPC%20barcode&sort=new&limit=30 (Attempt 3)
+2026-06-25T22:58:30.7965428Z   HTTP 429
+2026-06-25T22:58:30.7965837Z Fetching https://www.reddit.com/search.json?q=UPC%20barcode&sort=new&limit=30 (Attempt 3)
+2026-06-25T22:58:30.7966319Z   HTTP 403
+2026-06-25T22:58:30.7966576Z All endpoints failed for 'UPC barcode', sleeping 30s...
+2026-06-25T22:58:30.7967046Z Fetching https://www.reddit.com/search/.rss?q=UPC%20barcode&sort=new&limit=30 (Attempt 4)
+2026-06-25T22:58:30.7967494Z   Fetched 27 posts. Breakdown:
+2026-06-25T22:58:30.7968134Z     - ID: 1uffzvu | r/ComicBookSpeculation | Question about UPC/barcode stickers on early ’90s Marvel dir
+2026-06-25T22:58:30.7968915Z     - ID: 1uffv90 | r/80s90sComics | Question about UPC/barcode stickers on early ’90s Marvel dir
+2026-06-25T22:58:30.7969607Z     - ID: 1uffr5t | r/comicbooks | Question about UPC/barcode stickers on early ’90s Marvel dir
+2026-06-25T22:58:30.7970191Z     - ID: 1ufaw09 | r/ChatGPT | Consolidate ecommerce exports into actionable reorder alerts
+2026-06-25T22:58:30.7970800Z     - ID: 1ueedoh | r/AgenticWorkers | Consolidate ecommerce exports into actionable reorder alerts
+2026-06-25T22:58:30.7971582Z     - ID: 1udvbm5 | r/VintageToys | Can anyone identify this rare “Groovy Teens” fashion doll by
+2026-06-25T22:58:30.7972554Z     - ID: 1udvb79 | r/HelpMeFind | Can anyone identify this rare “Groovy Teens” fashion doll by
+2026-06-25T22:58:30.7973441Z     - ID: 1udpt0o | r/olivertree | Does anyone else have one of these?
+2026-06-25T22:58:30.7974624Z     - ID: 1udfgqx | r/AmazonFBATips | [Guide] Sourcing Bicycles or Cycling Accessories?
+2026-06-25T22:58:30.7975959Z     - ID: 1ubacmj | r/theholotaco | My wife's a polish collector and could never find a tracker 
+2026-06-25T22:58:30.7977116Z     - ID: 1u8xv2x | r/walmart | Bring your own barcode scanner?
+2026-06-25T22:58:30.7977975Z     - ID: 1u8t00t | r/CGCComics | Is the number above the barcode the UPC number?
+2026-06-25T22:58:30.7978938Z     - ID: 1u7whyp | r/kroger | Every location in the bagged salad wall is "bay 999". My co-
+2026-06-25T22:58:30.7979991Z     - ID: 1u7hvu0 | r/u_unclejackma | A cashier on Reddit just admitted what many shoppers have al
+2026-06-25T22:58:30.7981096Z     - ID: 1u6f8ze | r/AmazonFBATips | Why standard AQL inspections fail for footwear: The specific
+2026-06-25T22:58:30.7982193Z     - ID: 1u69ffk | r/OnePieceTCGFinance | Does this OP01 Booster Box look legit or is it a fake?
+2026-06-25T22:58:30.7983307Z     - ID: 1u4a1ie | r/homeautomation | I got tired of pricey Shopify plugins, so I built a free bro
+2026-06-25T22:58:30.7984462Z     - ID: 1u2z0k8 | r/AmazonFBATips | Promotional Products Inspection China: Quality Control for C
+2026-06-25T22:58:30.7985908Z     - ID: 1u2w74e | r/Intellivision_Amico | I don't know if anyone mentioned this before, but Intellivis
+2026-06-25T22:58:30.7987143Z     - ID: 1u21bj9 | r/AmazonFBATips | Stationery Inspection China: Quality Control Guide for Volum
+2026-06-25T22:58:30.7988382Z     - ID: 1u20y2x | r/FBAQualityInspections | Stationery Inspection China: Quality Control for Pens, Noteb
+2026-06-25T22:58:30.7989067Z     - ID: 1u1sh32 | r/AmazonFBA | Amazon FC Applying FNSKU Stickers Over Manufacturer Barcode 
+2026-06-25T22:58:30.7989713Z     - ID: 1u1a3u1 | r/FulfillmentByAmazon | Labeling Required on 1 unit per box product after 4+ years?
+2026-06-25T22:58:30.7990273Z     - ID: 1tzutxp | r/FulfillmentByAmazon | Shrink wrap crease on barcode
+2026-06-25T22:58:30.7990773Z     - ID: 1tzuq18 | r/kroger | New to Produce. Is the location and item data always this fu
+2026-06-25T22:58:30.7991254Z     - ID: 1tzk421 | r/AmazonFBA | GTIN exemption vs UPC code
+2026-06-25T22:58:30.7991765Z     - ID: 1tz7clr | r/WarriorsOfNeoTokyo | Welcome to r/WarriorsOfNeoTokyo; Every barcode is a weapon
+2026-06-25T22:58:30.7992240Z [5/13] Processing 'GTIN'...
+2026-06-25T22:58:30.7992619Z Fetching https://www.reddit.com/search/.rss?q=GTIN&sort=new&limit=30 (Attempt 1)
+2026-06-25T22:58:30.7993016Z   HTTP 429
+2026-06-25T22:58:30.7993347Z Fetching https://old.reddit.com/search/.rss?q=GTIN&sort=new&limit=30 (Attempt 1)
+2026-06-25T22:58:30.7993741Z   HTTP 429
+2026-06-25T22:58:30.7994057Z Fetching https://www.reddit.com/search.json?q=GTIN&sort=new&limit=30 (Attempt 1)
+2026-06-25T22:58:30.7994451Z   HTTP 403
+2026-06-25T22:58:30.7994672Z All endpoints failed for 'GTIN', sleeping 5s...
+2026-06-25T22:58:30.7995358Z Fetching https://www.reddit.com/search/.rss?q=GTIN&sort=new&limit=30 (Attempt 2)
+2026-06-25T22:58:30.7995754Z   HTTP 429
+2026-06-25T22:58:30.7996281Z Fetching https://old.reddit.com/search/.rss?q=GTIN&sort=new&limit=30 (Attempt 2)
+2026-06-25T22:58:30.7996976Z   HTTP 429
+2026-06-25T22:58:30.7997570Z Fetching https://www.reddit.com/search.json?q=GTIN&sort=new&limit=30 (Attempt 2)
+2026-06-25T22:58:30.7997996Z   HTTP 403
+2026-06-25T22:58:30.7998223Z All endpoints failed for 'GTIN', sleeping 15s...
+2026-06-25T22:58:30.7998640Z Fetching https://www.reddit.com/search/.rss?q=GTIN&sort=new&limit=30 (Attempt 3)
+2026-06-25T22:58:30.7999025Z   HTTP 429
+2026-06-25T22:58:30.7999342Z Fetching https://old.reddit.com/search/.rss?q=GTIN&sort=new&limit=30 (Attempt 3)
+2026-06-25T22:58:30.7999723Z   HTTP 429
+2026-06-25T22:58:30.8000029Z Fetching https://www.reddit.com/search.json?q=GTIN&sort=new&limit=30 (Attempt 3)
+2026-06-25T22:58:30.8000415Z   HTTP 403
+2026-06-25T22:58:30.8000638Z All endpoints failed for 'GTIN', sleeping 30s...
+2026-06-25T22:58:30.8001048Z Fetching https://www.reddit.com/search/.rss?q=GTIN&sort=new&limit=30 (Attempt 4)
+2026-06-25T22:58:30.8001681Z   Fetched 27 posts. Breakdown:
+2026-06-25T22:58:30.8002040Z     - ID: 1uflifx | r/AskSerbia | Kakvo je vase iskustvo sa ovim pilingom?
+2026-06-25T22:58:30.8002529Z     - ID: 1uf78wv | r/conservativecartoons | Creature from the Reflecting Pool
+2026-06-25T22:58:30.8003091Z     - ID: 1uexz3x | r/FridgeDetective | What can you tell about me
+2026-06-25T22:58:30.8003516Z     - ID: 1uevgbn | r/CatsAllDay | 9 months of loving periwinkle lint
+2026-06-25T22:58:30.8004178Z     - ID: 1udvej1 | r/ausbusiness | AU ecommerce back end — bookkeeping, payments, banking & sto
+2026-06-25T22:58:30.8004781Z     - ID: 1udh1h8 | r/AdwordsCaseStudy | Google Ads for Online Supplement Store - Case Study
+2026-06-25T22:58:30.8005608Z     - ID: 1ud72pk | r/WalmartSellers | Walmart GTIN exemption system error
+2026-06-25T22:58:30.8006092Z     - ID: 1ucx7wh | r/SavageGarden | Even at work….
+2026-06-25T22:58:30.8006551Z     - ID: 1ucu7dg | r/RimWorld | Fort Justice have achieved complete underground isolation ca
+2026-06-25T22:58:30.8007106Z     - ID: 1ucikg1 | r/VeganDE | Neues Tofu bei Aldi 😍
+2026-06-25T22:58:30.8007519Z     - ID: 1ubvg9t | r/TwentiesIndia | Is neet exam rough space used correctly?
+2026-06-25T22:58:30.8008024Z     - ID: 1ubumy0 | r/IndianAcademia | Is my neet exam work space used correctly?
+2026-06-25T22:58:30.8008490Z     - ID: 1ubu4vb | r/TeenIndia | Is neet rough space used correctly?
+2026-06-25T22:58:30.8008893Z     - ID: 1ubtfjq | r/NEETard | Is rough space used correctly?
+2026-06-25T22:58:30.8009266Z     - ID: 1ubpccc | r/WalmartSellers | WFS Inventory Report
+2026-06-25T22:58:30.8009775Z     - ID: 1uae3gs | r/u_elogic__commerce | AI Search and Ecommerce Content Architecture: Why Product Pa
+2026-06-25T22:58:30.8010417Z     - ID: 1uae38n | r/u_elogic_commerce | AI Search and Ecommerce Content Architecture: Why Product Pa
+2026-06-25T22:58:30.8011041Z     - ID: 1u9cono | r/digitsoftware | How barcode scanning works inside Digit across receiving, pr
+2026-06-25T22:58:30.8011511Z     - ID: 1u9ahl6 | r/Kaninchen | Hitze Hilfe Tipp
+2026-06-25T22:58:30.8011926Z     - ID: 1u8hfp1 | r/EU4mods | Aevum Lupi Bicipitis: Burundi Starter Tree showcase
+2026-06-25T22:58:30.8012520Z     - ID: 1u7jyxf | r/FulfillmentByAmazon | Can Someone Explain This Amazon Logic? My Brand Exists and D
+2026-06-25T22:58:30.8013047Z     - ID: 1u7apzu | r/FUNNYTHINGHAPPENED | FLEE FORNICATION
+2026-06-25T22:58:30.8013433Z     - ID: 1u78rxn | r/scheissaufnbilla | Der 0. ist Ablaufdatum
+2026-06-25T22:58:30.8013964Z     - ID: 1u6f0qn | r/AmazonFBAOnlineRetail | Using the same registered brand for a product outside my tra
+2026-06-25T22:58:30.8014588Z     - ID: 1u6exng | r/AmazonFBA | Using the same registered brand for a product outside my tra
+2026-06-25T22:58:30.8015526Z     - ID: 1u6eb95 | r/SellingOnAmazonFBA | Brand Registry / GTIN exemption — does it apply across all c
+2026-06-25T22:58:30.8016125Z     - ID: 1u5ti9h | r/Market76 | H: Epr mods, 4* and food items W: 5 active mods and 1 conduc
+2026-06-25T22:58:30.8016940Z   -> 1uflifx | Verdict: FAIL | The post discusses personal experiences with skincare products and asks for recommendations, unrelated to retail barcodes or GS1.
+2026-06-25T22:58:30.8017887Z   -> 1uf78wv | Verdict: FAIL | This post is a political cartoon, completely unrelated to buying retail barcodes or GS1 issues.
+2026-06-25T22:58:30.8018430Z [6/13] Processing 'GS1'...
+2026-06-25T22:58:30.8018805Z Fetching https://www.reddit.com/search/.rss?q=GS1&sort=new&limit=30 (Attempt 1)
+2026-06-25T22:58:30.8019202Z   HTTP 429
+2026-06-25T23:01:13.3656257Z Fetching https://old.reddit.com/search/.rss?q=GS1&sort=new&limit=30 (Attempt 1)
+2026-06-25T23:01:13.3658338Z   HTTP 429
+2026-06-25T23:01:13.3659100Z Fetching https://www.reddit.com/search.json?q=GS1&sort=new&limit=30 (Attempt 1)
+2026-06-25T23:01:13.3659929Z   HTTP 403
+2026-06-25T23:01:13.3660371Z All endpoints failed for 'GS1', sleeping 5s...
+2026-06-25T23:01:13.3661362Z Fetching https://www.reddit.com/search/.rss?q=GS1&sort=new&limit=30 (Attempt 2)
+2026-06-25T23:01:13.3662356Z   HTTP 429
+2026-06-25T23:01:13.3663605Z Fetching https://old.reddit.com/search/.rss?q=GS1&sort=new&limit=30 (Attempt 2)
+2026-06-25T23:01:13.3664570Z   HTTP 429
+2026-06-25T23:01:13.3665640Z Fetching https://www.reddit.com/search.json?q=GS1&sort=new&limit=30 (Attempt 2)
+2026-06-25T23:01:13.3666901Z   HTTP 403
+2026-06-25T23:01:13.3667463Z All endpoints failed for 'GS1', sleeping 15s...
+2026-06-25T23:01:13.3668409Z Fetching https://www.reddit.com/search/.rss?q=GS1&sort=new&limit=30 (Attempt 3)
+2026-06-25T23:01:13.3669132Z   HTTP 429
+2026-06-25T23:01:13.3669696Z Fetching https://old.reddit.com/search/.rss?q=GS1&sort=new&limit=30 (Attempt 3)
+2026-06-25T23:01:13.3670382Z   HTTP 429
+2026-06-25T23:01:13.3670959Z Fetching https://www.reddit.com/search.json?q=GS1&sort=new&limit=30 (Attempt 3)
+2026-06-25T23:01:13.3671612Z   HTTP 403
+2026-06-25T23:01:13.3671988Z All endpoints failed for 'GS1', sleeping 30s...
+2026-06-25T23:01:13.3672672Z Fetching https://www.reddit.com/search/.rss?q=GS1&sort=new&limit=30 (Attempt 4)
+2026-06-25T23:01:13.3691408Z   Fetched 27 posts. Breakdown:
+2026-06-25T23:01:13.3692256Z     - ID: 1uflp8l | r/zwajforsaudis | الزواج معجزة
+2026-06-25T23:01:13.3692890Z     - ID: 1ufid46 | r/ultracycling | Flat bar grip recommendations
+2026-06-25T23:01:13.3693583Z     - ID: 1uf2bup | r/UPSC | Am in trouble or can this be sorted
+2026-06-25T23:01:13.3694282Z     - ID: 1ueotu7 | r/splatoon | Shiver fan art I’ve been working on for the past few days
+2026-06-25T23:01:13.3695167Z     - ID: 1ueho0i | r/flightsim | MD-82 charter operations for the last few weeks. The more I 
+2026-06-25T23:01:13.3695832Z     - ID: 1uegqgc | r/SaudiForSaudis | الله يوفقها دنيا واخره🙏🙏🙏🙏
+2026-06-25T23:01:13.3696308Z     - ID: 1uecr4z | r/MLS | Minutes By Club/League In The World Cup Through Matchday 2
+2026-06-25T23:01:13.3696972Z     - ID: 1udwfsc | r/Nostalgiefrance | "L'enfant dans le placard"... un roman que j'ai lu étant gos
+2026-06-25T23:01:13.3697675Z     - ID: 1udvej1 | r/ausbusiness | AU ecommerce back end — bookkeeping, payments, banking & sto
+2026-06-25T23:01:13.3698339Z     - ID: 1udltho | r/Sixthgrade | أكدر اعتد علئ مراجعه شامله مال رياضيات مال حيدر عبدالائمه؟
+2026-06-25T23:01:13.3698792Z     - ID: 1udlqh9 | r/GoldenSun | Best mods for GS1 & GS2?
+2026-06-25T23:01:13.3699157Z     - ID: 1udlkc8 | r/EastBricktonRoblox | RP EMOTES
+2026-06-25T23:01:13.3699536Z     - ID: 1udfsyg | r/MiserableiraqiforTeen | متت
+2026-06-25T23:01:13.3700007Z     - ID: 1udev7b | r/UPSCPrelims2026 | Total number of bare minimum pages to be read from static bo
+2026-06-25T23:01:13.3700569Z     - ID: 1uddfal | r/UPSCPrelims2026 | How to improve hand strength for Mains
+2026-06-25T23:01:13.3700988Z     - ID: 1uddeee | r/UPSC | On improving hand strength
+2026-06-25T23:01:13.3701367Z     - ID: 1udd2fs | r/gravelcycling | Ventum GS1 2020 - worth it?
+2026-06-25T23:01:13.3701847Z     - ID: 1ucx2o3 | r/UPSCPrelims2026 | Mains 2026 , 1st attempt, feedback requested , pls
+2026-06-25T23:01:13.3702308Z     - ID: 1ucx0px | r/UPSC | Feedback for time allotment
+2026-06-25T23:01:13.3702761Z     - ID: 1ucwbx3 | r/indianstartups | TIL that a barcode costs atleast 48k rupees in India
+2026-06-25T23:01:13.3703273Z     - ID: 1ucu3mx | r/india | TIL that a barcode costs atleast 48k rupees
+2026-06-25T23:01:13.3703757Z     - ID: 1ucspnu | r/UPSC | [Tool] Scanned Answer File Tagger - make your Mains Answer U
+2026-06-25T23:01:13.3704346Z     - ID: 1ucrlkb | r/MfgOperations | Best inventory and lot tracking software for food manufactur
+2026-06-25T23:01:13.3705092Z     - ID: 1ucjs0p | r/MPSCPrep | Request to those who cleared prelims
+2026-06-25T23:01:13.3705775Z     - ID: 1uch7wg | r/u_sistemieconsulenze | 🏅🥩 Rinnovo certificazione IFS per Poggino Salumi S.r.l.
+2026-06-25T23:01:13.3706381Z     - ID: 1ucggj6 | r/InformatikKarriere | Habe ich noch eine Chance auf dem Arbeitsmarkt?
+2026-06-25T23:01:13.3706856Z     - ID: 1ucbliq | r/UPSC_Forum | Anyone wanna prep with me?
+2026-06-25T23:01:13.3707447Z   -> 1uflp8l | Verdict: FAIL | The post is about marriage, not retail barcodes, buying/obtaining barcodes, or GS1 frustration.
+2026-06-25T23:01:13.3708573Z   -> 1ufid46 | Verdict: FAIL | The post discusses bicycle grips, specifically "GS1 Evos" as a product model, not the GS1 barcode organization or buying barcodes.
+2026-06-25T23:01:13.3709711Z   -> 1uf2bup | Verdict: FAIL | The post discusses "GS1" in the context of an academic examination (UPSC General Studies Paper 1), not the barcode organization.
+2026-06-25T23:01:13.3710369Z [7/13] Processing 'buy barcode'...
+2026-06-25T23:01:13.3710804Z Fetching https://www.reddit.com/search/.rss?q=buy%20barcode&sort=new&limit=30 (Attempt 1)
+2026-06-25T23:01:13.3711244Z   HTTP 429
+2026-06-25T23:01:13.3711593Z Fetching https://old.reddit.com/search/.rss?q=buy%20barcode&sort=new&limit=30 (Attempt 1)
+2026-06-25T23:01:13.3712008Z   HTTP 429
+2026-06-25T23:01:13.3712350Z Fetching https://www.reddit.com/search.json?q=buy%20barcode&sort=new&limit=30 (Attempt 1)
+2026-06-25T23:01:13.3712767Z   HTTP 403
+2026-06-25T23:01:13.3713012Z All endpoints failed for 'buy barcode', sleeping 5s...
+2026-06-25T23:01:13.3713613Z Fetching https://www.reddit.com/search/.rss?q=buy%20barcode&sort=new&limit=30 (Attempt 2)
+2026-06-25T23:01:13.3714408Z   HTTP 429
+2026-06-25T23:01:13.3715273Z Fetching https://old.reddit.com/search/.rss?q=buy%20barcode&sort=new&limit=30 (Attempt 2)
+2026-06-25T23:01:13.3715761Z   HTTP 429
+2026-06-25T23:01:13.3716112Z Fetching https://www.reddit.com/search.json?q=buy%20barcode&sort=new&limit=30 (Attempt 2)
+2026-06-25T23:01:13.3716535Z   HTTP 403
+2026-06-25T23:01:13.3716778Z All endpoints failed for 'buy barcode', sleeping 15s...
+2026-06-25T23:01:13.3717241Z Fetching https://www.reddit.com/search/.rss?q=buy%20barcode&sort=new&limit=30 (Attempt 3)
+2026-06-25T23:01:13.3717688Z   Fetched 27 posts. Breakdown:
+2026-06-25T23:01:13.3718022Z     - ID: 1ufkavy | r/frozendinners | Tapatio salsa roja chicken bowl
+2026-06-25T23:01:13.3718587Z     - ID: 1ufjmuu | r/WorldCup2026Tickets | Looking for 2 tickets to the Bosnia & Herzegovina vs. USA ma
+2026-06-25T23:01:13.3719286Z     - ID: 1ufg72c | r/CPSwarranty | CPS Warranty FAQ – General, Repairs & Claims
+2026-06-25T23:01:13.3719804Z     - ID: 1ufch6z | r/NeobancCanada | Website does not show properly on windows laptop
+2026-06-25T23:01:13.3720461Z     - ID: 1uf9efd | r/beermoneyuk | Shopmium - £1 free when you join plus chashback on everyday 
+2026-06-25T23:01:13.3721046Z     - ID: 1uf8q30 | r/EzyCarto | Before buying a POS, test the inventory handoffs, not just t
+2026-06-25T23:01:13.3721667Z     - ID: 1uf7lto | r/InventoryManagement | How do multi-brand Shopify retailers handle vendor SKUs vs u
+2026-06-25T23:01:13.3722304Z     - ID: 1uf4qtj | r/NoSpoil | What do you actually get with NoSpoil Pro? 💎
+2026-06-25T23:01:13.3722685Z     - ID: 1uf42xh | r/nosleep | The Loop
+2026-06-25T23:01:13.3723120Z     - ID: 1uesng6 | r/CathLabLounge | The ongoing travesty of the Burlington Medical Lead Recall.
+2026-06-25T23:01:13.3723614Z     - ID: 1uepkxk | r/pencils | Colleen 2001 Pencil Sharpener
+2026-06-25T23:01:13.3724066Z     - ID: 1uen4vg | r/labrats | FS: TubeWriter 400 Phoseon X1Jet Automated Tube Labeling Sys
+2026-06-25T23:01:13.3724662Z     - ID: 1uehf6n | r/u_watercressidee | Buying $1 books at thrift stores and flipping them on Amazon
+2026-06-25T23:01:13.3725469Z     - ID: 1ue9b1r | r/mbta | Did the MBTA ever actually release a blackberry app ? (Photo
+2026-06-25T23:01:13.3726036Z     - ID: 1ue50cp | r/BeautyGear | I spent years thinking I was just physically incapable of ap
+2026-06-25T23:01:13.3726628Z     - ID: 1ue2vmf | r/beermoneyideas | Buying $1 books at thrift stores and flipping them on Amazon
+2026-06-25T23:01:13.3727215Z     - ID: 1ue0eit | r/bugoutbags | How do you keep your inventory straight? I built an app for 
+2026-06-25T23:01:13.3727797Z     - ID: 1udxwpu | r/SuicideWatch | My life is completely and utterly fucked at 25 and I truly h
+2026-06-25T23:01:13.3728325Z     - ID: 1udrzri | r/LipBalm | Revlon SL + Nyx BGB: not as dark as promised
+2026-06-25T23:01:13.3728804Z     - ID: 1udrs94 | r/VinylCollectors | [Wanted] Jadu Heart Deep Red and JADUWL0
+2026-06-25T23:01:13.3729473Z     - ID: 1udpt0o | r/olivertree | Does anyone else have one of these?
+2026-06-25T23:01:13.3730023Z     - ID: 1ud5v2b | r/DistributedCommerce | Best inventory management software for Shopify in 2026 - my 
+2026-06-25T23:01:13.3730865Z     - ID: 1ud04rl | r/RepsOnBudget | €13 FIFA World Cup 2026 Panini Sticker Packs - Top For Resel
+2026-06-25T23:01:13.3731462Z     - ID: 1ucyx81 | r/HireaWriter | [HIRING] YouTube Scriptwriter (Scams / Financial Disasters /
+2026-06-25T23:01:13.3732039Z     - ID: 1ucwbx3 | r/indianstartups | TIL that a barcode costs atleast 48k rupees in India
+2026-06-25T23:01:13.3732549Z     - ID: 1ucu3mx | r/india | TIL that a barcode costs atleast 48k rupees
+2026-06-25T23:01:13.3733075Z     - ID: 1uctun3 | r/mildlyinfuriating | My sales tax wasn't refunded when I made a return to TJ Maxx
+2026-06-25T23:01:13.3733547Z [8/13] Processing 'buy barcodes'...
+2026-06-25T23:01:13.3733974Z Fetching https://www.reddit.com/search/.rss?q=buy%20barcodes&sort=new&limit=30 (Attempt 1)
+2026-06-25T23:01:13.3734412Z   HTTP 429
+2026-06-25T23:01:13.3734765Z Fetching https://old.reddit.com/search/.rss?q=buy%20barcodes&sort=new&limit=30 (Attempt 1)
+2026-06-25T23:01:13.3735429Z   HTTP 429
+2026-06-25T23:01:13.3735789Z Fetching https://www.reddit.com/search.json?q=buy%20barcodes&sort=new&limit=30 (Attempt 1)
+2026-06-25T23:01:13.3736213Z   HTTP 403
+2026-06-25T23:01:13.3736455Z All endpoints failed for 'buy barcodes', sleeping 5s...
+2026-06-25T23:01:13.3736926Z Fetching https://www.reddit.com/search/.rss?q=buy%20barcodes&sort=new&limit=30 (Attempt 2)
+2026-06-25T23:01:13.3737350Z   HTTP 429
+2026-06-25T23:01:13.3737683Z Fetching https://old.reddit.com/search/.rss?q=buy%20barcodes&sort=new&limit=30 (Attempt 2)
+2026-06-25T23:01:13.3738100Z   HTTP 429
+2026-06-25T23:01:13.3738439Z Fetching https://www.reddit.com/search.json?q=buy%20barcodes&sort=new&limit=30 (Attempt 2)
+2026-06-25T23:01:13.3738858Z   HTTP 403
+2026-06-25T23:01:13.3739108Z All endpoints failed for 'buy barcodes', sleeping 15s...
+2026-06-25T23:01:13.3739583Z Fetching https://www.reddit.com/search/.rss?q=buy%20barcodes&sort=new&limit=30 (Attempt 3)
+2026-06-25T23:01:13.3739994Z   HTTP 429
+2026-06-25T23:01:13.3740333Z Fetching https://old.reddit.com/search/.rss?q=buy%20barcodes&sort=new&limit=30 (Attempt 3)
+2026-06-25T23:01:13.3740752Z   HTTP 429
+2026-06-25T23:01:13.3741090Z Fetching https://www.reddit.com/search.json?q=buy%20barcodes&sort=new&limit=30 (Attempt 3)
+2026-06-25T23:01:13.3741513Z   HTTP 403
+2026-06-25T23:01:13.3741749Z All endpoints failed for 'buy barcodes', sleeping 30s...
+2026-06-25T23:01:13.3742216Z Fetching https://www.reddit.com/search/.rss?q=buy%20barcodes&sort=new&limit=30 (Attempt 4)
+2026-06-25T23:01:13.3742657Z   Fetched 0 posts. Breakdown:
+2026-06-25T23:01:13.3742912Z [9/13] Processing 'get barcodes'...
+2026-06-25T23:03:31.8749377Z Fetching https://www.reddit.com/search/.rss?q=get%20barcodes&sort=new&limit=30 (Attempt 1)
+2026-06-25T23:03:31.8750392Z   HTTP 429
+2026-06-25T23:03:31.8751141Z Fetching https://old.reddit.com/search/.rss?q=get%20barcodes&sort=new&limit=30 (Attempt 1)
+2026-06-25T23:03:31.8752142Z   HTTP 429
+2026-06-25T23:03:31.8753043Z Fetching https://www.reddit.com/search.json?q=get%20barcodes&sort=new&limit=30 (Attempt 1)
+2026-06-25T23:03:31.8754131Z   HTTP 403
+2026-06-25T23:03:31.8754757Z All endpoints failed for 'get barcodes', sleeping 5s...
+2026-06-25T23:03:31.8756335Z Fetching https://www.reddit.com/search/.rss?q=get%20barcodes&sort=new&limit=30 (Attempt 2)
+2026-06-25T23:03:31.8757206Z   HTTP 429
+2026-06-25T23:03:31.8757881Z Fetching https://old.reddit.com/search/.rss?q=get%20barcodes&sort=new&limit=30 (Attempt 2)
+2026-06-25T23:03:31.8758669Z   HTTP 429
+2026-06-25T23:03:31.8759320Z Fetching https://www.reddit.com/search.json?q=get%20barcodes&sort=new&limit=30 (Attempt 2)
+2026-06-25T23:03:31.8760076Z   HTTP 403
+2026-06-25T23:03:31.8760536Z All endpoints failed for 'get barcodes', sleeping 15s...
+2026-06-25T23:03:31.8761425Z Fetching https://www.reddit.com/search/.rss?q=get%20barcodes&sort=new&limit=30 (Attempt 3)
+2026-06-25T23:03:31.8762662Z   HTTP 429
+2026-06-25T23:03:31.8763264Z Fetching https://old.reddit.com/search/.rss?q=get%20barcodes&sort=new&limit=30 (Attempt 3)
+2026-06-25T23:03:31.8763991Z   HTTP 429
+2026-06-25T23:03:31.8765176Z Fetching https://www.reddit.com/search.json?q=get%20barcodes&sort=new&limit=30 (Attempt 3)
+2026-06-25T23:03:31.8765986Z   HTTP 403
+2026-06-25T23:03:31.8766447Z All endpoints failed for 'get barcodes', sleeping 30s...
+2026-06-25T23:03:31.8767281Z Fetching https://www.reddit.com/search/.rss?q=get%20barcodes&sort=new&limit=30 (Attempt 4)
+2026-06-25T23:03:31.8767971Z   Fetched 27 posts. Breakdown:
+2026-06-25T23:03:31.8768422Z     - ID: 1ufp27t | r/fuckamazon | Resellers on Amazon unloading unsold items under different p
+2026-06-25T23:03:31.8769257Z     - ID: 1ufp1pk | r/PersonalFinanceCanada | Am I eligible for EI and should I apply for it right away?
+2026-06-25T23:03:31.8769864Z     - ID: 1ufnxkk | r/ParisTravelGuide | VAT Refund - GlobalBlue barcode and Wise
+2026-06-25T23:03:31.8770542Z     - ID: 1uflswx | r/DoorDashDrivers | Petsmart delivery from Hell!
+2026-06-25T23:03:31.8770982Z     - ID: 1uflkyt | r/CVS | The era of credentials is over
+2026-06-25T23:03:31.8771441Z     - ID: 1ufkvi9 | r/iphone | Camera settings for scanning ID barcodes? Iphone 16 Pro Max
+2026-06-25T23:03:31.8771951Z     - ID: 1ufkvdb | r/Amazonreturnhelp | Where can I return my package?
+2026-06-25T23:03:31.8772463Z     - ID: 1ufjtij | r/MichaelsEmployees | So apparently rules are just suggestions I guess?
+2026-06-25T23:03:31.8772933Z     - ID: 1ufimky | r/Etsy | Flat vs letter vs package
+2026-06-25T23:03:31.8775674Z     - ID: 1uffj6d | r/AwesomeFreebies | Free bag of Weston’s Potato chips - Pavilion’s (CA)
+2026-06-25T23:03:31.8776386Z     - ID: 1ufenju | r/Tech_Philippines | One of the few times mas sulit PowerMac vs direct from Apple
+2026-06-25T23:03:31.8776985Z     - ID: 1ufch6z | r/NeobancCanada | Website does not show properly on windows laptop
+2026-06-25T23:03:31.8777473Z     - ID: 1ufcf7k | r/GoogleWallet | Scanning State Ids
+2026-06-25T23:03:31.8777940Z     - ID: 1ufc60q | r/Lowes | Daytime Stockers: Please, what even is my job? (Splitting ca
+2026-06-25T23:03:31.8778515Z     - ID: 1ufauwx | r/u_Attenditai | After years watching nonprofits, camps, and schools track at
+2026-06-25T23:03:31.8779288Z     - ID: 1uf9efd | r/beermoneyuk | Shopmium - £1 free when you join plus chashback on everyday 
+2026-06-25T23:03:31.8779889Z     - ID: 1uf992u | r/forhire | [FOR HIRE] Niche Offer - I'm The Backend Bane Banisher - Par
+2026-06-25T23:03:31.8780479Z     - ID: 1uf9738 | r/DoneDirtCheap | [OFFER] Niche Offer - I'm The Backend Bane Banisher - Parsin
+2026-06-25T23:03:31.8780990Z     - ID: 1uf7iic | r/iosdev | My First App! Lume: Voice Health Log
+2026-06-25T23:03:31.8781489Z     - ID: 1uf7cf0 | r/fossdroid | Curium: A modern, feature-rich, and ad-free QR customizer, g
+2026-06-25T23:03:31.8781985Z     - ID: 1uf756m | r/GenAiApps | Lume: Voice Health Log
+2026-06-25T23:03:31.8782453Z     - ID: 1uf6uxt | r/GutHealth | I made a fiber-tracking app that turns gut health into a dai
+2026-06-25T23:03:31.8783007Z     - ID: 1uf42x7 | r/BrisbaneBroncos | Broncos tickets on the ticketek app
+2026-06-25T23:03:31.8783559Z     - ID: 1uf2n8i | r/AppBusiness | I built a social fiber-tracking app where you compete with f
+2026-06-25T23:03:31.8784171Z     - ID: 1uesng6 | r/CathLabLounge | The ongoing travesty of the Burlington Medical Lead Recall.
+2026-06-25T23:03:31.8784763Z     - ID: 1uerqbr | r/DesiVegans | Found this Open-source "Vegan Inspector" app on F-Droid
+2026-06-25T23:03:31.8785638Z     - ID: 1ueqwe0 | r/ArielAtom | Ariel Atom SB-100 exemptions denied
+2026-06-25T23:03:31.8786410Z   -> 1ufp27t | Verdict: FAIL | The post describes an Amazon seller's deceptive practice regarding product fulfillment, not a need for barcodes or GS1 frustration.
+2026-06-25T23:03:31.8787677Z Gemini API error (Attempt 1): 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+2026-06-25T23:03:31.8789163Z   -> 1ufp1pk | Verdict: FAIL | The post is about employment insurance eligibility after being terminated for barcode misuse at a store, not buying barcodes or GS1 issues.
+2026-06-25T23:03:31.8790325Z   -> 1ufnxkk | Verdict: FAIL | The post discusses a "profile barcode" for a VAT refund app, not retail product barcodes for selling goods. It's irrelevant.
+2026-06-25T23:03:31.8790972Z [10/13] Processing 'product barcode'...
+2026-06-25T23:03:31.8791443Z Fetching https://www.reddit.com/search/.rss?q=product%20barcode&sort=new&limit=30 (Attempt 1)
+2026-06-25T23:03:31.8791893Z   HTTP 429
+2026-06-25T23:03:31.8792259Z Fetching https://old.reddit.com/search/.rss?q=product%20barcode&sort=new&limit=30 (Attempt 1)
+2026-06-25T23:03:31.8792701Z   HTTP 429
+2026-06-25T23:03:31.8793056Z Fetching https://www.reddit.com/search.json?q=product%20barcode&sort=new&limit=30 (Attempt 1)
+2026-06-25T23:03:31.8793505Z   HTTP 403
+2026-06-25T23:03:31.8793792Z All endpoints failed for 'product barcode', sleeping 5s...
+2026-06-25T23:03:31.8794305Z Fetching https://www.reddit.com/search/.rss?q=product%20barcode&sort=new&limit=30 (Attempt 2)
+2026-06-25T23:03:31.8794742Z   HTTP 429
+2026-06-25T23:03:31.8795409Z Fetching https://old.reddit.com/search/.rss?q=product%20barcode&sort=new&limit=30 (Attempt 2)
+2026-06-25T23:03:31.8795849Z   HTTP 429
+2026-06-25T23:03:31.8796204Z Fetching https://www.reddit.com/search.json?q=product%20barcode&sort=new&limit=30 (Attempt 2)
+2026-06-25T23:03:31.8796633Z   HTTP 403
+2026-06-25T23:03:31.8796892Z All endpoints failed for 'product barcode', sleeping 15s...
+2026-06-25T23:03:31.8797391Z Fetching https://www.reddit.com/search/.rss?q=product%20barcode&sort=new&limit=30 (Attempt 3)
+2026-06-25T23:03:31.8797815Z   HTTP 429
+2026-06-25T23:03:31.8798163Z Fetching https://old.reddit.com/search/.rss?q=product%20barcode&sort=new&limit=30 (Attempt 3)
+2026-06-25T23:03:31.8798596Z   HTTP 429
+2026-06-25T23:03:31.8798943Z Fetching https://www.reddit.com/search.json?q=product%20barcode&sort=new&limit=30 (Attempt 3)
+2026-06-25T23:03:31.8799387Z   HTTP 403
+2026-06-25T23:03:31.8799634Z All endpoints failed for 'product barcode', sleeping 30s...
+2026-06-25T23:03:31.8800124Z Fetching https://www.reddit.com/search/.rss?q=product%20barcode&sort=new&limit=30 (Attempt 4)
+2026-06-25T23:03:31.8800580Z   Fetched 27 posts. Breakdown:
+2026-06-25T23:03:31.8801046Z     - ID: 1ufg72c | r/CPSwarranty | CPS Warranty FAQ – General, Repairs & Claims
+2026-06-25T23:03:31.8801612Z     - ID: 1uffvkc | r/UAEjobseekers | Looking for a new opportunity as a Lead Android / Mobile App
+2026-06-25T23:03:31.8802289Z     - ID: 1uffj6d | r/AwesomeFreebies | Free bag of Weston’s Potato chips - Pavilion’s (CA)
+2026-06-25T23:03:31.8802871Z     - ID: 1ufaw09 | r/ChatGPT | Consolidate ecommerce exports into actionable reorder alerts
+2026-06-25T23:03:31.8803454Z     - ID: 1ufahr0 | r/AskElectricians | How to know how much my breaker and outlets can handle
+2026-06-25T23:03:31.8804012Z     - ID: 1uf992u | r/forhire | [FOR HIRE] Niche Offer - I'm The Backend Bane Banisher - Par
+2026-06-25T23:03:31.8804596Z     - ID: 1uf9738 | r/DoneDirtCheap | [OFFER] Niche Offer - I'm The Backend Bane Banisher - Parsin
+2026-06-25T23:03:31.8805417Z     - ID: 1uf8q30 | r/EzyCarto | Before buying a POS, test the inventory handoffs, not just t
+2026-06-25T23:03:31.8806040Z     - ID: 1uf7lto | r/InventoryManagement | How do multi-brand Shopify retailers handle vendor SKUs vs u
+2026-06-25T23:03:31.8806661Z     - ID: 1uf7l87 | r/shopifyDev | Which Shopify catalog cleanup actions would you never automa
+2026-06-25T23:03:31.8807102Z     - ID: 1uf42xh | r/nosleep | The Loop
+2026-06-25T23:03:31.8807528Z     - ID: 1uf3akj | r/Franchises | After failing to find a good POS for a bakery franchise, we 
+2026-06-25T23:03:31.8808094Z     - ID: 1uf1f7n | r/Adulting | Maybe I should not have been an adult in this situation. WTF
+2026-06-25T23:03:31.8808735Z     - ID: 1uey2ls | r/Elotesoft | Welcome to r/Elotesoft — Kookla is now available on Google P
+2026-06-25T23:03:31.8809541Z     - ID: 1uesng6 | r/CathLabLounge | The ongoing travesty of the Burlington Medical Lead Recall.
+2026-06-25T23:03:31.8810122Z     - ID: 1uerqbr | r/DesiVegans | Found this Open-source "Vegan Inspector" app on F-Droid
+2026-06-25T23:03:31.8810705Z     - ID: 1uepkxk | r/pencils | Colleen 2001 Pencil Sharpener
+2026-06-25T23:03:31.8811110Z     - ID: 1ueoxem | r/AwesomeFreebies | Possibly free Fanta with Ibotta
+2026-06-25T23:03:31.8811620Z     - ID: 1uelpl2 | r/u_Farhanamili | What Should You Know About oldironsidesfake and the Risks of
+2026-06-25T23:03:31.8812267Z     - ID: 1uejgmm | r/PharmaManfacturing_AI | 5 Software for Batch Traceability and their useful features
+2026-06-25T23:03:31.8812910Z     - ID: 1ueedoh | r/AgenticWorkers | Consolidate ecommerce exports into actionable reorder alerts
+2026-06-25T23:03:31.8813486Z     - ID: 1uedcut | r/droidappshowcase | eat it! - Stop wasting food and money!
+2026-06-25T23:03:31.8814018Z     - ID: 1uecyp4 | r/u_ezycarto | A practical stock-control checklist for small retailers befo
+2026-06-25T23:03:31.8814554Z     - ID: 1ueckaw | r/InventoryManagement | Receiving mistakes are underrated
+2026-06-25T23:03:31.8815165Z     - ID: 1ue7o5a | r/cabinetry | Spent the Day Touring a Cabinet Factory
+2026-06-25T23:03:31.8815646Z     - ID: 1ue6f5g | r/u_thelabelton | Can barcode labels improve inventory accuracy?
+2026-06-25T23:03:31.8816276Z     - ID: 1udvej1 | r/ausbusiness | AU ecommerce back end — bookkeeping, payments, banking & sto
+2026-06-25T23:03:31.8817080Z   -> 1ue6f5g | Verdict: FAIL | Post discusses using barcode labels for inventory accuracy and management, not buying retail barcodes or GS1 frustration.
+2026-06-25T23:03:31.8817724Z [11/13] Processing 'retail barcode'...
+2026-06-25T23:03:31.8818171Z Fetching https://www.reddit.com/search/.rss?q=retail%20barcode&sort=new&limit=30 (Attempt 1)
+2026-06-25T23:03:31.8818612Z   HTTP 429
+2026-06-25T23:05:41.5988792Z Fetching https://old.reddit.com/search/.rss?q=retail%20barcode&sort=new&limit=30 (Attempt 1)
+2026-06-25T23:05:41.5989368Z   HTTP 429
+2026-06-25T23:05:41.5989806Z Fetching https://www.reddit.com/search.json?q=retail%20barcode&sort=new&limit=30 (Attempt 1)
+2026-06-25T23:05:41.5990532Z   HTTP 403
+2026-06-25T23:05:41.5991007Z All endpoints failed for 'retail barcode', sleeping 5s...
+2026-06-25T23:05:41.5992132Z Fetching https://www.reddit.com/search/.rss?q=retail%20barcode&sort=new&limit=30 (Attempt 2)
+2026-06-25T23:05:41.5992853Z   HTTP 429
+2026-06-25T23:05:41.5993279Z Fetching https://old.reddit.com/search/.rss?q=retail%20barcode&sort=new&limit=30 (Attempt 2)
+2026-06-25T23:05:41.5993777Z   HTTP 429
+2026-06-25T23:05:41.5994212Z Fetching https://www.reddit.com/search.json?q=retail%20barcode&sort=new&limit=30 (Attempt 2)
+2026-06-25T23:05:41.5994712Z   HTTP 403
+2026-06-25T23:05:41.5995289Z All endpoints failed for 'retail barcode', sleeping 15s...
+2026-06-25T23:05:41.5995889Z Fetching https://www.reddit.com/search/.rss?q=retail%20barcode&sort=new&limit=30 (Attempt 3)
+2026-06-25T23:05:41.5996424Z   HTTP 429
+2026-06-25T23:05:41.5996852Z Fetching https://old.reddit.com/search/.rss?q=retail%20barcode&sort=new&limit=30 (Attempt 3)
+2026-06-25T23:05:41.5997351Z   HTTP 429
+2026-06-25T23:05:41.5997760Z Fetching https://www.reddit.com/search.json?q=retail%20barcode&sort=new&limit=30 (Attempt 3)
+2026-06-25T23:05:41.5998259Z   HTTP 403
+2026-06-25T23:05:41.5998516Z All endpoints failed for 'retail barcode', sleeping 30s...
+2026-06-25T23:05:41.5999031Z Fetching https://www.reddit.com/search/.rss?q=retail%20barcode&sort=new&limit=30 (Attempt 4)
+2026-06-25T23:05:41.5999502Z   Fetched 27 posts. Breakdown:
+2026-06-25T23:05:41.5999844Z     - ID: 1ufn8vt | r/sportsbetting | Rate my picks - good or bad?
+2026-06-25T23:05:41.6000572Z     - ID: 1ufg72c | r/CPSwarranty | CPS Warranty FAQ – General, Repairs & Claims
+2026-06-25T23:05:41.6001259Z     - ID: 1uffzvu | r/ComicBookSpeculation | Question about UPC/barcode stickers on early ’90s Marvel dir
+2026-06-25T23:05:41.6001990Z     - ID: 1uffv90 | r/80s90sComics | Question about UPC/barcode stickers on early ’90s Marvel dir
+2026-06-25T23:05:41.6002959Z     - ID: 1uffr5t | r/comicbooks | Question about UPC/barcode stickers on early ’90s Marvel dir
+2026-06-25T23:05:41.6003722Z     - ID: 1ufahr0 | r/AskElectricians | How to know how much my breaker and outlets can handle
+2026-06-25T23:05:41.6004313Z     - ID: 1uf8q30 | r/EzyCarto | Before buying a POS, test the inventory handoffs, not just t
+2026-06-25T23:05:41.6005168Z     - ID: 1uf7lto | r/InventoryManagement | How do multi-brand Shopify retailers handle vendor SKUs vs u
+2026-06-25T23:05:41.6005719Z     - ID: 1uepkxk | r/pencils | Colleen 2001 Pencil Sharpener
+2026-06-25T23:05:41.6006126Z     - ID: 1ueiig2 | r/EschatonComics | Please Complete the Transaction
+2026-06-25T23:05:41.6006631Z     - ID: 1uecyp4 | r/u_ezycarto | A practical stock-control checklist for small retailers befo
+2026-06-25T23:05:41.6007322Z     - ID: 1udvej1 | r/ausbusiness | AU ecommerce back end — bookkeeping, payments, banking & sto
+2026-06-25T23:05:41.6007800Z     - ID: 1udndxz | r/u_Old_Industry8131 | Full stack
+2026-06-25T23:05:41.6008250Z     - ID: 1udmz15 | r/SkladApp | How do you manage inventory across multiple warehouses witho
+2026-06-25T23:05:41.6008812Z     - ID: 1udfy37 | r/AukiLabs | AUKI | Retail Veteran Calls CactusXR 'Biggest Thing Since Ba
+2026-06-25T23:05:41.6009358Z     - ID: 1udfgqx | r/AmazonFBATips | [Guide] Sourcing Bicycles or Cycling Accessories?
+2026-06-25T23:05:41.6009963Z     - ID: 1ud6hu4 | r/DistributedCommerce | Best inventory management software for Magento in 2026 - aft
+2026-06-25T23:05:41.6010622Z     - ID: 1ud5v2b | r/DistributedCommerce | Best inventory management software for Shopify in 2026 - my 
+2026-06-25T23:05:41.6011365Z     - ID: 1ud1l29 | r/PLNewsGroup | 🔴 SOMEWHERE IN EUROPE RIGHT NOW THERE IS A TRUCK CARRYING 12
+2026-06-25T23:05:41.6012086Z     - ID: 1ud04rl | r/RepsOnBudget | €13 FIFA World Cup 2026 Panini Sticker Packs - Top For Resel
+2026-06-25T23:05:41.6012716Z     - ID: 1ucs142 | r/PaymentProcessing | Rate-slashing to fight merchant churn is a losing game. Here
+2026-06-25T23:05:41.6013339Z     - ID: 1uclciq | r/Accounting | Built a POS & Billing Software for Grocery and Retail Shops 
+2026-06-25T23:05:41.6013986Z     - ID: 1ubofyy | r/TheWorldOfRepsneakers | Please, I would appreciate your opinion of TMF Sneaker Suppl
+2026-06-25T23:05:41.6014617Z     - ID: 1ubof1j | r/beermoneyideas | 30 beermoney ideas you can start with zero experience
+2026-06-25T23:05:41.6015345Z     - ID: 1uba7k6 | r/vintageperfume | Some of my more recent acquisitions!
+2026-06-25T23:05:41.6015868Z     - ID: 1ub68fc | r/Banking | Question for Bank Employees: How Are Barcodes and Labels Use
+2026-06-25T23:05:41.6016331Z     - ID: 1ub3odd | r/EschatonComics | The Sacred Market
+2026-06-25T23:05:41.6016934Z   -> 1ufn8vt | Verdict: FAIL | The post is about sports betting, not retail barcodes or GS1 frustration. It does not fit the criteria.
+2026-06-25T23:05:41.6017523Z [12/13] Processing 'barcode for Amazon'...
+2026-06-25T23:05:41.6018006Z Fetching https://www.reddit.com/search/.rss?q=barcode%20for%20Amazon&sort=new&limit=30 (Attempt 1)
+2026-06-25T23:05:41.6018487Z   HTTP 429
+2026-06-25T23:05:41.6018863Z Fetching https://old.reddit.com/search/.rss?q=barcode%20for%20Amazon&sort=new&limit=30 (Attempt 1)
+2026-06-25T23:05:41.6019317Z   HTTP 429
+2026-06-25T23:05:41.6019683Z Fetching https://www.reddit.com/search.json?q=barcode%20for%20Amazon&sort=new&limit=30 (Attempt 1)
+2026-06-25T23:05:41.6020124Z   HTTP 403
+2026-06-25T23:05:41.6020395Z All endpoints failed for 'barcode for Amazon', sleeping 5s...
+2026-06-25T23:05:41.6020910Z Fetching https://www.reddit.com/search/.rss?q=barcode%20for%20Amazon&sort=new&limit=30 (Attempt 2)
+2026-06-25T23:05:41.6021349Z   HTTP 429
+2026-06-25T23:05:41.6021714Z Fetching https://old.reddit.com/search/.rss?q=barcode%20for%20Amazon&sort=new&limit=30 (Attempt 2)
+2026-06-25T23:05:41.6022152Z   HTTP 429
+2026-06-25T23:05:41.6022519Z Fetching https://www.reddit.com/search.json?q=barcode%20for%20Amazon&sort=new&limit=30 (Attempt 2)
+2026-06-25T23:05:41.6022967Z   HTTP 403
+2026-06-25T23:05:41.6023377Z All endpoints failed for 'barcode for Amazon', sleeping 15s...
+2026-06-25T23:05:41.6023898Z Fetching https://www.reddit.com/search/.rss?q=barcode%20for%20Amazon&sort=new&limit=30 (Attempt 3)
+2026-06-25T23:05:41.6024443Z   HTTP 429
+2026-06-25T23:05:41.6024807Z Fetching https://old.reddit.com/search/.rss?q=barcode%20for%20Amazon&sort=new&limit=30 (Attempt 3)
+2026-06-25T23:05:41.6025455Z   HTTP 429
+2026-06-25T23:05:41.6025820Z Fetching https://www.reddit.com/search.json?q=barcode%20for%20Amazon&sort=new&limit=30 (Attempt 3)
+2026-06-25T23:05:41.6026263Z   HTTP 403
+2026-06-25T23:05:41.6026531Z All endpoints failed for 'barcode for Amazon', sleeping 30s...
+2026-06-25T23:05:41.6027042Z Fetching https://www.reddit.com/search/.rss?q=barcode%20for%20Amazon&sort=new&limit=30 (Attempt 4)
+2026-06-25T23:05:41.6027504Z   Fetched 27 posts. Breakdown:
+2026-06-25T23:05:41.6027925Z     - ID: 1ufp27t | r/fuckamazon | Resellers on Amazon unloading unsold items under different p
+2026-06-25T23:05:41.6028510Z     - ID: 1ufeuev | r/GooglePixel | Just received my "brand new" Pixel 10 Pro from Amazon
+2026-06-25T23:05:41.6029083Z     - ID: 1ufahr0 | r/AskElectricians | How to know how much my breaker and outlets can handle
+2026-06-25T23:05:41.6029645Z     - ID: 1uelm4j | r/drones | [US] Wing drone delivery - identify this new infrastructure?
+2026-06-25T23:05:41.6030236Z     - ID: 1uehf6n | r/u_watercressidee | Buying $1 books at thrift stores and flipping them on Amazon
+2026-06-25T23:05:41.6030942Z     - ID: 1uedfba | r/HowToMen | [App] Assetrack — Android app to track everything you own (L
+2026-06-25T23:05:41.6031529Z     - ID: 1ue2vmf | r/beermoneyideas | Buying $1 books at thrift stores and flipping them on Amazon
+2026-06-25T23:05:41.6032221Z     - ID: 1udvej1 | r/ausbusiness | AU ecommerce back end — bookkeeping, payments, banking & sto
+2026-06-25T23:05:41.6032784Z     - ID: 1udfgqx | r/AmazonFBATips | [Guide] Sourcing Bicycles or Cycling Accessories?
+2026-06-25T23:05:41.6033396Z     - ID: 1udfc1q | r/FBAQualityInspections | Bicycle & Cycling Accessories Inspection China: QC for Amazo
+2026-06-25T23:05:41.6034080Z     - ID: 1ud6hu4 | r/DistributedCommerce | Best inventory management software for Magento in 2026 - aft
+2026-06-25T23:05:41.6034735Z     - ID: 1ud2qw4 | r/AmazonFlexDrivers | Driver Support said to return my cart and go home. How do I 
+2026-06-25T23:05:41.6035621Z     - ID: 1ucwbx3 | r/indianstartups | TIL that a barcode costs atleast 48k rupees in India
+2026-06-25T23:05:41.6036137Z     - ID: 1ucu3mx | r/india | TIL that a barcode costs atleast 48k rupees
+2026-06-25T23:05:41.6036611Z     - ID: 1uc2q81 | r/AmazonSeller | First ever product listing - packaging? (UK)
+2026-06-25T23:05:41.6037103Z     - ID: 1ubvih9 | r/ColoredPencils | Are those polychromos real or fake?
+2026-06-25T23:05:41.6037633Z     - ID: 1ubq8w3 | r/SideHustleGold | 30 fully remote side hustles you can start with literally ze
+2026-06-25T23:05:41.6038217Z     - ID: 1ubof1j | r/beermoneyideas | 30 beermoney ideas you can start with zero experience
+2026-06-25T23:05:41.6038856Z     - ID: 1ubnnrx | r/FBAQualityInspections | Bathroom Accessories Inspection China: Quality Control for T
+2026-06-25T23:05:41.6039432Z     - ID: 1uba7k6 | r/vintageperfume | Some of my more recent acquisitions!
+2026-06-25T23:05:41.6039943Z     - ID: 1ua9l6r | r/UKBooks | I wanted a single hub to find new books, track my library, a
+2026-06-25T23:05:41.6040467Z     - ID: 1ua21i1 | r/Skincare_Addiction | Counterfeit LRP Cicaplast from Amazon
+2026-06-25T23:05:41.6041013Z     - ID: 1ua07q7 | r/beermoneyideas | 100 ideas to make extra beermoney that you can start with ri
+2026-06-25T23:05:41.6041497Z     - ID: 1u9hcqa | r/usps_complaints | USPS complaint
+2026-06-25T23:05:41.6041850Z     - ID: 1u9aexo | r/Staples | Amazon Returns New Process
+2026-06-25T23:05:41.6042302Z     - ID: 1u946pn | r/TLRY | Hi*Ball Energy Arrives in the UK, Leading a New Wave of Clea
+2026-06-25T23:05:41.6042754Z     - ID: 1u8s1kp | r/AmazonDSPDrivers | New hire nervous
+2026-06-25T23:05:41.6043248Z [13/13] Processing 'barcode for Shopify'...
+2026-06-25T23:05:41.6043730Z Fetching https://www.reddit.com/search/.rss?q=barcode%20for%20Shopify&sort=new&limit=30 (Attempt 1)
+2026-06-25T23:05:41.6044186Z   HTTP 429
+2026-06-25T23:05:41.6044667Z Fetching https://old.reddit.com/search/.rss?q=barcode%20for%20Shopify&sort=new&limit=30 (Attempt 1)
+2026-06-25T23:05:41.6045366Z   HTTP 429
+2026-06-25T23:05:41.6045743Z Fetching https://www.reddit.com/search.json?q=barcode%20for%20Shopify&sort=new&limit=30 (Attempt 1)
+2026-06-25T23:05:41.6046192Z   HTTP 403
+2026-06-25T23:05:41.6046466Z All endpoints failed for 'barcode for Shopify', sleeping 5s...
+2026-06-25T23:05:41.6046989Z Fetching https://www.reddit.com/search/.rss?q=barcode%20for%20Shopify&sort=new&limit=30 (Attempt 2)
+2026-06-25T23:05:41.6047435Z   HTTP 429
+2026-06-25T23:05:41.6047800Z Fetching https://old.reddit.com/search/.rss?q=barcode%20for%20Shopify&sort=new&limit=30 (Attempt 2)
+2026-06-25T23:05:41.6048262Z   HTTP 429
+2026-06-25T23:05:41.6048644Z Fetching https://www.reddit.com/search.json?q=barcode%20for%20Shopify&sort=new&limit=30 (Attempt 2)
+2026-06-25T23:05:41.6049106Z   HTTP 403
+2026-06-25T23:06:37.7184235Z All endpoints failed for 'barcode for Shopify', sleeping 15s...
+2026-06-25T23:06:37.7185619Z Fetching https://www.reddit.com/search/.rss?q=barcode%20for%20Shopify&sort=new&limit=30 (Attempt 3)
+2026-06-25T23:06:37.7186398Z   HTTP 429
+2026-06-25T23:06:37.7186887Z Fetching https://old.reddit.com/search/.rss?q=barcode%20for%20Shopify&sort=new&limit=30 (Attempt 3)
+2026-06-25T23:06:37.7187475Z   HTTP 429
+2026-06-25T23:06:37.7187976Z Fetching https://www.reddit.com/search.json?q=barcode%20for%20Shopify&sort=new&limit=30 (Attempt 3)
+2026-06-25T23:06:37.7188546Z   HTTP 403
+2026-06-25T23:06:37.7188901Z All endpoints failed for 'barcode for Shopify', sleeping 30s...
+2026-06-25T23:06:37.7189570Z Fetching https://www.reddit.com/search/.rss?q=barcode%20for%20Shopify&sort=new&limit=30 (Attempt 4)
+2026-06-25T23:06:37.7190161Z   Fetched 27 posts. Breakdown:
+2026-06-25T23:06:37.7190715Z     - ID: 1ufaw09 | r/ChatGPT | Consolidate ecommerce exports into actionable reorder alerts
+2026-06-25T23:06:37.7191506Z     - ID: 1uf7lto | r/InventoryManagement | How do multi-brand Shopify retailers handle vendor SKUs vs u
+2026-06-25T23:06:37.7192299Z     - ID: 1uf7l87 | r/shopifyDev | Which Shopify catalog cleanup actions would you never automa
+2026-06-25T23:06:37.7193065Z     - ID: 1ueedoh | r/AgenticWorkers | Consolidate ecommerce exports into actionable reorder alerts
+2026-06-25T23:06:37.7193809Z     - ID: 1ueckaw | r/InventoryManagement | Receiving mistakes are underrated
+2026-06-25T23:06:37.7194828Z     - ID: 1udvej1 | r/ausbusiness | AU ecommerce back end — bookkeeping, payments, banking & sto
+2026-06-25T23:06:37.7196202Z     - ID: 1ud5v2b | r/DistributedCommerce | Best inventory management software for Shopify in 2026 - my 
+2026-06-25T23:06:37.7197161Z     - ID: 1u8xs8x | r/shopify | Shopify barcode app generates labels that won't scan on 19x5
+2026-06-25T23:06:37.7197865Z     - ID: 1u895a5 | r/InventoryManagement | Stocky is being discontinued in August 2026!
+2026-06-25T23:06:37.7198573Z     - ID: 1u893m3 | r/laSyncro | Stocky is going away after August 2026, here is how we think
+2026-06-25T23:06:37.7199312Z     - ID: 1u7el0e | r/smallbusiness | Shopify merchants with own warehouse: where does stock accur
+2026-06-25T23:06:37.7200088Z     - ID: 1u7efs4 | r/EcommerceMerchant | Case Study: 15 Hours a Week to Under One Hour: How Desert So
+2026-06-25T23:06:37.7200879Z     - ID: 1u3a9yw | r/u_Glad-Chemical7375 | I'm a backend engineer building MicroSaaS tools. Here is wha
+2026-06-25T23:06:37.7201640Z     - ID: 1u2yjjp | r/shopifyDev | Is your Shopify store invisible to ChatGPT and Google AI Ove
+2026-06-25T23:06:37.7202355Z     - ID: 1u2jvha | r/shipdayinc | 8 best delivery software for florists in 2026, ranked for in
+2026-06-25T23:06:37.7203089Z     - ID: 1u0amb8 | r/Cleverence | Still matching flooring, paint, and fixtures to paper slips 
+2026-06-25T23:06:37.7203842Z     - ID: 1ty52aj | r/u_StockTrim_4_SME | Which Inventory Forecasting Tool Is Best for SMBs in 2026?
+2026-06-25T23:06:37.7205167Z     - ID: 1txtt45 | r/u_inflowinventory | Stocky is shutting down — what retailers are actually losing
+2026-06-25T23:06:37.7206090Z     - ID: 1tvtev8 | r/Cleverence | Still hand‑keying supplier barcodes at the dock or job trail
+2026-06-25T23:06:37.7206715Z     - ID: 1tuqlm1 | r/LightspeedCommunity | A few questions for R-Series / fashion boutiques
+2026-06-25T23:06:37.7207293Z     - ID: 1tuhi9m | r/freeaiforever | Run a small business on $0 of tooling at AIfreeforever
+2026-06-25T23:06:37.7207792Z     - ID: 1tu58la | r/smallbusiness | Needing to buy 5000 UPC labels
+2026-06-25T23:06:37.7208273Z     - ID: 1ts69db | r/u_Shipday | 7 Best Delivery Software for Meal Prep Delivery: 2026 Rankin
+2026-06-25T23:06:37.7208787Z     - ID: 1ts64vo | r/shipdayinc | Best Delivery Management Software for 2026
+2026-06-25T23:06:37.7209294Z     - ID: 1trtb2e | r/Vivo | Anyone using these cases from Sunsky/Aliexpress for x300 ser
+2026-06-25T23:06:37.7209830Z     - ID: 1trt760 | r/SMBTechnology | Best Last Mile Delivery Software (2026 Ranking)
+2026-06-25T23:06:37.7210402Z     - ID: 1tquaa5 | r/CANADA_shopify | Canada Post Boxes for Shopify: Carrier Packaging vs Custom B
+2026-06-25T23:06:37.7210870Z No new relevant posts found today.
+2026-06-25T23:06:37.7211128Z Run complete.
+2026-06-25T23:06:37.8550062Z ##[group]Run git config --global user.name "github-actions[bot]"
+2026-06-25T23:06:37.8550577Z [36;1mgit config --global user.name "github-actions[bot]"[0m
+2026-06-25T23:06:37.8551076Z [36;1mgit config --global user.email "github-actions[bot]@users.noreply.github.com"[0m
+2026-06-25T23:06:37.8551521Z [36;1mgit add seen.json[0m
+2026-06-25T23:06:37.8551750Z [36;1m[0m
+2026-06-25T23:06:37.8551981Z [36;1m# Only commit and push if there are changes[0m
+2026-06-25T23:06:37.8552329Z [36;1mif ! git diff-index --quiet HEAD; then[0m
+2026-06-25T23:06:37.8552680Z [36;1m  git commit -m "Update seen.json [skip ci]"[0m
+2026-06-25T23:06:37.8552997Z [36;1m  git push[0m
+2026-06-25T23:06:37.8553206Z [36;1melse[0m
+2026-06-25T23:06:37.8553466Z [36;1m  echo "No new posts seen, seen.json is unchanged."[0m
+2026-06-25T23:06:37.8553781Z [36;1mfi[0m
+2026-06-25T23:06:37.8585795Z shell: /usr/bin/bash -e {0}
+2026-06-25T23:06:37.8586046Z env:
+2026-06-25T23:06:37.8586345Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+2026-06-25T23:06:37.8586805Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+2026-06-25T23:06:37.8587236Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+2026-06-25T23:06:37.8587634Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+2026-06-25T23:06:37.8588025Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+2026-06-25T23:06:37.8588410Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+2026-06-25T23:06:37.8588742Z ##[endgroup]
+2026-06-25T23:06:37.8762928Z [main 5111f61] Update seen.json [skip ci]
+2026-06-25T23:06:37.8763310Z  1 file changed, 16 insertions(+), 1 deletion(-)
+2026-06-25T23:06:38.6763470Z To https://github.com/Barcodescoder/barcode-monitor
+2026-06-25T23:06:38.6764156Z    cc894f8..5111f61  main -> main
+2026-06-25T23:06:38.6898135Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-06-25T23:06:38.6899408Z Post job cleanup.
+2026-06-25T23:06:38.8077172Z Cache hit occurred on the primary key setup-python-Linux-x64-24.04-Ubuntu-python-3.11.15-pip-1501a9871023a1c3f6449a62e166c8afe1e625c105f2123c923ccb47e8fca355, not saving cache.
+2026-06-25T23:06:38.8078913Z (node:2467) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-06-25T23:06:38.8080092Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-06-25T23:06:38.8222801Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-06-25T23:06:38.8224080Z Post job cleanup.
+2026-06-25T23:06:38.9049099Z [command]/usr/bin/git version
+2026-06-25T23:06:38.9092065Z git version 2.54.0
+2026-06-25T23:06:38.9127379Z Copying '/home/runner/.gitconfig' to '/home/runner/work/_temp/dff0089b-8630-461a-b524-104ba60f74cd/.gitconfig'
+2026-06-25T23:06:38.9138346Z Temporarily overriding HOME='/home/runner/work/_temp/dff0089b-8630-461a-b524-104ba60f74cd' before making global git config changes
+2026-06-25T23:06:38.9139464Z Adding repository directory to the temporary git global config as a safe directory
+2026-06-25T23:06:38.9144034Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/barcode-monitor/barcode-monitor
+2026-06-25T23:06:38.9205943Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-06-25T23:06:38.9236590Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-06-25T23:06:38.9510221Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-06-25T23:06:38.9539449Z http.https://github.com/.extraheader
+2026-06-25T23:06:38.9557501Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-06-25T23:06:38.9594410Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-06-25T23:06:38.9836247Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-06-25T23:06:38.9870373Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-06-25T23:06:39.0249698Z Cleaning up orphan processes
+2026-06-25T23:06:39.0645701Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

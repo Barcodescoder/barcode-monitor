@@ -1,0 +1,655 @@
+﻿2026-06-25T03:28:17.0896732Z Current runner version: '2.335.1'
+2026-06-25T03:28:17.0923040Z ##[group]Runner Image Provisioner
+2026-06-25T03:28:17.0923924Z Hosted Compute Agent
+2026-06-25T03:28:17.0924511Z Version: 20260611.554
+2026-06-25T03:28:17.0925255Z Commit: 5e0782fdc9014723d3be820dd114dd31555c2bd1
+2026-06-25T03:28:17.0925978Z Build Date: 2026-06-11T21:40:46Z
+2026-06-25T03:28:17.0926692Z Worker ID: {02b248e5-77da-4ad5-b459-70723f25ecce}
+2026-06-25T03:28:17.0927466Z Azure Region: eastus
+2026-06-25T03:28:17.0928101Z ##[endgroup]
+2026-06-25T03:28:17.0929625Z ##[group]Operating System
+2026-06-25T03:28:17.0930276Z Ubuntu
+2026-06-25T03:28:17.0931205Z 24.04.4
+2026-06-25T03:28:17.0931917Z LTS
+2026-06-25T03:28:17.0932437Z ##[endgroup]
+2026-06-25T03:28:17.0933040Z ##[group]Runner Image
+2026-06-25T03:28:17.0933655Z Image: ubuntu-24.04
+2026-06-25T03:28:17.0934217Z Version: 20260615.205.1
+2026-06-25T03:28:17.0935573Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260615.205/images/ubuntu/Ubuntu2404-Readme.md
+2026-06-25T03:28:17.0937254Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260615.205
+2026-06-25T03:28:17.0938240Z ##[endgroup]
+2026-06-25T03:28:17.0939426Z ##[group]GITHUB_TOKEN Permissions
+2026-06-25T03:28:17.0942302Z Contents: write
+2026-06-25T03:28:17.0942931Z Metadata: read
+2026-06-25T03:28:17.0943478Z ##[endgroup]
+2026-06-25T03:28:17.0945650Z Secret source: Actions
+2026-06-25T03:28:17.0946803Z Prepare workflow directory
+2026-06-25T03:28:17.1277868Z Prepare all required actions
+2026-06-25T03:28:17.1316651Z Getting action download info
+2026-06-25T03:28:17.3238930Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2026-06-25T03:28:17.3969441Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-06-25T03:28:17.5757977Z Complete job name: run-monitor
+2026-06-25T03:28:17.6503279Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-06-25T03:28:17.6512224Z ##[group]Run actions/checkout@v4
+2026-06-25T03:28:17.6513076Z with:
+2026-06-25T03:28:17.6513564Z   repository: Barcodescoder/barcode-monitor
+2026-06-25T03:28:17.6517852Z   token: ***
+2026-06-25T03:28:17.6518290Z   ssh-strict: true
+2026-06-25T03:28:17.6518726Z   ssh-user: git
+2026-06-25T03:28:17.6519186Z   persist-credentials: true
+2026-06-25T03:28:17.6519682Z   clean: true
+2026-06-25T03:28:17.6520127Z   sparse-checkout-cone-mode: true
+2026-06-25T03:28:17.6520860Z   fetch-depth: 1
+2026-06-25T03:28:17.6521300Z   fetch-tags: false
+2026-06-25T03:28:17.6521753Z   show-progress: true
+2026-06-25T03:28:17.6522210Z   lfs: false
+2026-06-25T03:28:17.6522674Z   submodules: false
+2026-06-25T03:28:17.6523125Z   set-safe-directory: true
+2026-06-25T03:28:17.6523871Z ##[endgroup]
+2026-06-25T03:28:17.7500236Z Syncing repository: Barcodescoder/barcode-monitor
+2026-06-25T03:28:17.7502596Z ##[group]Getting Git version info
+2026-06-25T03:28:17.7503430Z Working directory is '/home/runner/work/barcode-monitor/barcode-monitor'
+2026-06-25T03:28:17.7504571Z [command]/usr/bin/git version
+2026-06-25T03:28:17.7546639Z git version 2.54.0
+2026-06-25T03:28:17.7567949Z ##[endgroup]
+2026-06-25T03:28:17.7582167Z Temporarily overriding HOME='/home/runner/work/_temp/3ee5735b-53d4-4a90-bb12-6689825211df' before making global git config changes
+2026-06-25T03:28:17.7584185Z Adding repository directory to the temporary git global config as a safe directory
+2026-06-25T03:28:17.7588487Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/barcode-monitor/barcode-monitor
+2026-06-25T03:28:17.7634357Z Deleting the contents of '/home/runner/work/barcode-monitor/barcode-monitor'
+2026-06-25T03:28:17.7638168Z ##[group]Initializing the repository
+2026-06-25T03:28:17.7643126Z [command]/usr/bin/git init /home/runner/work/barcode-monitor/barcode-monitor
+2026-06-25T03:28:17.7734302Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-06-25T03:28:17.7735641Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-06-25T03:28:17.7736985Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-06-25T03:28:17.7738579Z hint: call:
+2026-06-25T03:28:17.7739253Z hint:
+2026-06-25T03:28:17.7740073Z hint: 	git config --global init.defaultBranch <name>
+2026-06-25T03:28:17.7741176Z hint:
+2026-06-25T03:28:17.7742392Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-06-25T03:28:17.7744049Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-06-25T03:28:17.7745050Z hint:
+2026-06-25T03:28:17.7745730Z hint: 	git branch -m <name>
+2026-06-25T03:28:17.7746292Z hint:
+2026-06-25T03:28:17.7746935Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-06-25T03:28:17.7748060Z Initialized empty Git repository in /home/runner/work/barcode-monitor/barcode-monitor/.git/
+2026-06-25T03:28:17.7751153Z [command]/usr/bin/git remote add origin https://github.com/Barcodescoder/barcode-monitor
+2026-06-25T03:28:17.7791547Z ##[endgroup]
+2026-06-25T03:28:17.7792789Z ##[group]Disabling automatic garbage collection
+2026-06-25T03:28:17.7795030Z [command]/usr/bin/git config --local gc.auto 0
+2026-06-25T03:28:17.7823995Z ##[endgroup]
+2026-06-25T03:28:17.7825139Z ##[group]Setting up auth
+2026-06-25T03:28:17.7830892Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-06-25T03:28:17.7862869Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-06-25T03:28:17.8172662Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-06-25T03:28:17.8202857Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-06-25T03:28:17.8416726Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-06-25T03:28:17.8449064Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-06-25T03:28:17.8666143Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-06-25T03:28:17.8700951Z ##[endgroup]
+2026-06-25T03:28:17.8701811Z ##[group]Fetching the repository
+2026-06-25T03:28:17.8710096Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +9bf12b375d8022f1f346fda09f7fd8851571a4d7:refs/remotes/origin/main
+2026-06-25T03:28:18.0429723Z From https://github.com/Barcodescoder/barcode-monitor
+2026-06-25T03:28:18.0432224Z  * [new ref]         9bf12b375d8022f1f346fda09f7fd8851571a4d7 -> origin/main
+2026-06-25T03:28:18.0479898Z ##[endgroup]
+2026-06-25T03:28:18.0481991Z ##[group]Determining the checkout info
+2026-06-25T03:28:18.0483703Z ##[endgroup]
+2026-06-25T03:28:18.0486087Z [command]/usr/bin/git sparse-checkout disable
+2026-06-25T03:28:18.0534902Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-06-25T03:28:18.0566121Z ##[group]Checking out the ref
+2026-06-25T03:28:18.0568765Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-06-25T03:28:18.0632708Z Switched to a new branch 'main'
+2026-06-25T03:28:18.0638547Z branch 'main' set up to track 'origin/main'.
+2026-06-25T03:28:18.0659390Z ##[endgroup]
+2026-06-25T03:28:18.0701250Z [command]/usr/bin/git log -1 --format=%H
+2026-06-25T03:28:18.0723319Z 9bf12b375d8022f1f346fda09f7fd8851571a4d7
+2026-06-25T03:28:18.1060775Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-06-25T03:28:18.1066794Z ##[group]Run actions/setup-python@v5
+2026-06-25T03:28:18.1067636Z with:
+2026-06-25T03:28:18.1068133Z   python-version: 3.11
+2026-06-25T03:28:18.1068719Z   cache: pip
+2026-06-25T03:28:18.1069250Z   check-latest: false
+2026-06-25T03:28:18.1079981Z   token: ***
+2026-06-25T03:28:18.1080827Z   update-environment: true
+2026-06-25T03:28:18.1081554Z   allow-prereleases: false
+2026-06-25T03:28:18.1082203Z   freethreaded: false
+2026-06-25T03:28:18.1082760Z ##[endgroup]
+2026-06-25T03:28:18.2447275Z ##[group]Installed versions
+2026-06-25T03:28:18.2537680Z (node:2234) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-06-25T03:28:18.2541141Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-06-25T03:28:18.2542557Z Successfully set up CPython (3.11.15)
+2026-06-25T03:28:18.2543884Z ##[endgroup]
+2026-06-25T03:28:18.2951048Z [command]/opt/hostedtoolcache/Python/3.11.15/x64/bin/pip cache dir
+2026-06-25T03:28:18.5785183Z /home/runner/.cache/pip
+2026-06-25T03:28:18.6639586Z pip cache is not found
+2026-06-25T03:28:18.6824679Z ##[group]Run pip install -r requirements.txt
+2026-06-25T03:28:18.6826395Z [36;1mpip install -r requirements.txt[0m
+2026-06-25T03:28:18.6987408Z shell: /usr/bin/bash -e {0}
+2026-06-25T03:28:18.6988713Z env:
+2026-06-25T03:28:18.6989975Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+2026-06-25T03:28:18.7062756Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+2026-06-25T03:28:18.7065585Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+2026-06-25T03:28:18.7068128Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+2026-06-25T03:28:18.7071054Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+2026-06-25T03:28:18.7073844Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+2026-06-25T03:28:18.7076197Z ##[endgroup]
+2026-06-25T03:28:19.4128440Z Collecting requests (from -r requirements.txt (line 1))
+2026-06-25T03:28:19.4754275Z   Downloading requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+2026-06-25T03:28:19.4895787Z Collecting feedparser (from -r requirements.txt (line 2))
+2026-06-25T03:28:19.4937905Z   Downloading feedparser-6.0.12-py3-none-any.whl.metadata (2.7 kB)
+2026-06-25T03:28:19.5166641Z Collecting google-genai (from -r requirements.txt (line 3))
+2026-06-25T03:28:19.5209005Z   Downloading google_genai-2.10.0-py3-none-any.whl.metadata (53 kB)
+2026-06-25T03:28:19.6761429Z Collecting pydantic (from -r requirements.txt (line 4))
+2026-06-25T03:28:19.6803665Z   Downloading pydantic-2.13.4-py3-none-any.whl.metadata (109 kB)
+2026-06-25T03:28:19.8416991Z Collecting charset_normalizer<4,>=2 (from requests->-r requirements.txt (line 1))
+2026-06-25T03:28:19.8469464Z   Downloading charset_normalizer-3.4.7-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (40 kB)
+2026-06-25T03:28:19.9052232Z Collecting idna<4,>=2.5 (from requests->-r requirements.txt (line 1))
+2026-06-25T03:28:19.9096205Z   Downloading idna-3.18-py3-none-any.whl.metadata (6.1 kB)
+2026-06-25T03:28:20.2590808Z Collecting urllib3<3,>=1.26 (from requests->-r requirements.txt (line 1))
+2026-06-25T03:28:20.2657219Z   Downloading urllib3-2.7.0-py3-none-any.whl.metadata (6.9 kB)
+2026-06-25T03:28:20.2827776Z Collecting certifi>=2023.5.7 (from requests->-r requirements.txt (line 1))
+2026-06-25T03:28:20.2867717Z   Downloading certifi-2026.6.17-py3-none-any.whl.metadata (2.5 kB)
+2026-06-25T03:28:20.2974282Z Collecting sgmllib3k (from feedparser->-r requirements.txt (line 2))
+2026-06-25T03:28:20.3011596Z   Downloading sgmllib3k-1.0.0.tar.gz (5.8 kB)
+2026-06-25T03:28:20.3073220Z   Installing build dependencies: started
+2026-06-25T03:28:21.0046168Z   Installing build dependencies: finished with status 'done'
+2026-06-25T03:28:21.0052081Z   Getting requirements to build wheel: started
+2026-06-25T03:28:21.3303355Z   Getting requirements to build wheel: finished with status 'done'
+2026-06-25T03:28:21.3315290Z   Preparing metadata (pyproject.toml): started
+2026-06-25T03:28:21.4971833Z   Preparing metadata (pyproject.toml): finished with status 'done'
+2026-06-25T03:28:21.5116208Z Collecting anyio<5.0.0,>=4.8.0 (from google-genai->-r requirements.txt (line 3))
+2026-06-25T03:28:21.5155217Z   Downloading anyio-4.14.1-py3-none-any.whl.metadata (4.6 kB)
+2026-06-25T03:28:21.5424889Z Collecting google-auth<3.0.0,>=2.48.1 (from google-auth[requests]<3.0.0,>=2.48.1->google-genai->-r requirements.txt (line 3))
+2026-06-25T03:28:21.5463219Z   Downloading google_auth-2.55.0-py3-none-any.whl.metadata (5.1 kB)
+2026-06-25T03:28:21.5645605Z Collecting httpx<1.0.0,>=0.28.1 (from google-genai->-r requirements.txt (line 3))
+2026-06-25T03:28:21.5685512Z   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+2026-06-25T03:28:21.5877457Z Collecting tenacity<9.2.0,>=8.2.3 (from google-genai->-r requirements.txt (line 3))
+2026-06-25T03:28:21.5921802Z   Downloading tenacity-9.1.4-py3-none-any.whl.metadata (1.2 kB)
+2026-06-25T03:28:21.6674917Z Collecting websockets<17.0,>=13.0.0 (from google-genai->-r requirements.txt (line 3))
+2026-06-25T03:28:21.6715256Z   Downloading websockets-16.0-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (6.8 kB)
+2026-06-25T03:28:21.6859013Z Collecting typing-extensions<5.0.0,>=4.14.0 (from google-genai->-r requirements.txt (line 3))
+2026-06-25T03:28:21.6896709Z   Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+2026-06-25T03:28:21.7040924Z Collecting distro<2,>=1.7.0 (from google-genai->-r requirements.txt (line 3))
+2026-06-25T03:28:21.7085812Z   Downloading distro-1.9.0-py3-none-any.whl.metadata (6.8 kB)
+2026-06-25T03:28:21.7227498Z Collecting sniffio (from google-genai->-r requirements.txt (line 3))
+2026-06-25T03:28:21.7272108Z   Downloading sniffio-1.3.1-py3-none-any.whl.metadata (3.9 kB)
+2026-06-25T03:28:21.7396031Z Collecting annotated-types>=0.6.0 (from pydantic->-r requirements.txt (line 4))
+2026-06-25T03:28:21.7432665Z   Downloading annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+2026-06-25T03:28:22.3722537Z Collecting pydantic-core==2.46.4 (from pydantic->-r requirements.txt (line 4))
+2026-06-25T03:28:22.3764092Z   Downloading pydantic_core-2.46.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+2026-06-25T03:28:22.3894354Z Collecting typing-inspection>=0.4.2 (from pydantic->-r requirements.txt (line 4))
+2026-06-25T03:28:22.3932270Z   Downloading typing_inspection-0.4.2-py3-none-any.whl.metadata (2.6 kB)
+2026-06-25T03:28:22.4150233Z Collecting pyasn1-modules>=0.2.1 (from google-auth<3.0.0,>=2.48.1->google-auth[requests]<3.0.0,>=2.48.1->google-genai->-r requirements.txt (line 3))
+2026-06-25T03:28:22.4190169Z   Downloading pyasn1_modules-0.4.2-py3-none-any.whl.metadata (3.5 kB)
+2026-06-25T03:28:22.5783542Z Collecting cryptography>=38.0.3 (from google-auth<3.0.0,>=2.48.1->google-auth[requests]<3.0.0,>=2.48.1->google-genai->-r requirements.txt (line 3))
+2026-06-25T03:28:22.6033111Z   Downloading cryptography-49.0.0-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (4.3 kB)
+2026-06-25T03:28:22.6227920Z Collecting httpcore==1.* (from httpx<1.0.0,>=0.28.1->google-genai->-r requirements.txt (line 3))
+2026-06-25T03:28:22.6265629Z   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+2026-06-25T03:28:22.6393300Z Collecting h11>=0.16 (from httpcore==1.*->httpx<1.0.0,>=0.28.1->google-genai->-r requirements.txt (line 3))
+2026-06-25T03:28:22.6432510Z   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+2026-06-25T03:28:22.7325709Z Collecting cffi>=2.0.0 (from cryptography>=38.0.3->google-auth<3.0.0,>=2.48.1->google-auth[requests]<3.0.0,>=2.48.1->google-genai->-r requirements.txt (line 3))
+2026-06-25T03:28:22.7369716Z   Downloading cffi-2.0.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.6 kB)
+2026-06-25T03:28:22.7489702Z Collecting pycparser (from cffi>=2.0.0->cryptography>=38.0.3->google-auth<3.0.0,>=2.48.1->google-auth[requests]<3.0.0,>=2.48.1->google-genai->-r requirements.txt (line 3))
+2026-06-25T03:28:22.7526099Z   Downloading pycparser-3.0-py3-none-any.whl.metadata (8.2 kB)
+2026-06-25T03:28:22.7975552Z Collecting pyasn1<0.7.0,>=0.6.1 (from pyasn1-modules>=0.2.1->google-auth<3.0.0,>=2.48.1->google-auth[requests]<3.0.0,>=2.48.1->google-genai->-r requirements.txt (line 3))
+2026-06-25T03:28:22.8014626Z   Downloading pyasn1-0.6.3-py3-none-any.whl.metadata (8.4 kB)
+2026-06-25T03:28:22.8122566Z Downloading requests-2.34.2-py3-none-any.whl (73 kB)
+2026-06-25T03:28:22.8183794Z Downloading charset_normalizer-3.4.7-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (214 kB)
+2026-06-25T03:28:22.8269430Z Downloading idna-3.18-py3-none-any.whl (65 kB)
+2026-06-25T03:28:22.8327079Z Downloading urllib3-2.7.0-py3-none-any.whl (131 kB)
+2026-06-25T03:28:22.8387415Z Downloading feedparser-6.0.12-py3-none-any.whl (81 kB)
+2026-06-25T03:28:22.8445558Z Downloading google_genai-2.10.0-py3-none-any.whl (957 kB)
+2026-06-25T03:28:22.8536107Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 958.0/958.0 kB 106.9 MB/s  0:00:00
+2026-06-25T03:28:22.8576092Z Downloading pydantic-2.13.4-py3-none-any.whl (472 kB)
+2026-06-25T03:28:22.8647198Z Downloading pydantic_core-2.46.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+2026-06-25T03:28:22.8753400Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 218.3 MB/s  0:00:00
+2026-06-25T03:28:22.8793025Z Downloading anyio-4.14.1-py3-none-any.whl (124 kB)
+2026-06-25T03:28:22.8855503Z Downloading distro-1.9.0-py3-none-any.whl (20 kB)
+2026-06-25T03:28:22.8912976Z Downloading google_auth-2.55.0-py3-none-any.whl (252 kB)
+2026-06-25T03:28:22.8973952Z Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+2026-06-25T03:28:22.9029871Z Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+2026-06-25T03:28:22.9090042Z Downloading tenacity-9.1.4-py3-none-any.whl (28 kB)
+2026-06-25T03:28:22.9146003Z Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+2026-06-25T03:28:22.9202539Z Downloading websockets-16.0-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (184 kB)
+2026-06-25T03:28:22.9289684Z Downloading annotated_types-0.7.0-py3-none-any.whl (13 kB)
+2026-06-25T03:28:22.9346291Z Downloading certifi-2026.6.17-py3-none-any.whl (133 kB)
+2026-06-25T03:28:22.9415283Z Downloading cryptography-49.0.0-cp311-abi3-manylinux_2_34_x86_64.whl (4.7 MB)
+2026-06-25T03:28:22.9582905Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.7/4.7 MB 314.9 MB/s  0:00:00
+2026-06-25T03:28:22.9623228Z Downloading cffi-2.0.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (215 kB)
+2026-06-25T03:28:22.9693132Z Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+2026-06-25T03:28:22.9749196Z Downloading pyasn1_modules-0.4.2-py3-none-any.whl (181 kB)
+2026-06-25T03:28:22.9808195Z Downloading pyasn1-0.6.3-py3-none-any.whl (83 kB)
+2026-06-25T03:28:22.9867871Z Downloading typing_inspection-0.4.2-py3-none-any.whl (14 kB)
+2026-06-25T03:28:22.9924792Z Downloading pycparser-3.0-py3-none-any.whl (48 kB)
+2026-06-25T03:28:22.9981006Z Downloading sniffio-1.3.1-py3-none-any.whl (10 kB)
+2026-06-25T03:28:23.0290982Z Building wheels for collected packages: sgmllib3k
+2026-06-25T03:28:23.0299029Z   Building wheel for sgmllib3k (pyproject.toml): started
+2026-06-25T03:28:23.2197341Z   Building wheel for sgmllib3k (pyproject.toml): finished with status 'done'
+2026-06-25T03:28:23.2203902Z   Created wheel for sgmllib3k: filename=sgmllib3k-1.0.0-py3-none-any.whl size=6090 sha256=1586e8d40878c7446d9bd13f8baf88ac32d36ee96259fa0f9bab8c4fc0012571
+2026-06-25T03:28:23.2206101Z   Stored in directory: /home/runner/.cache/pip/wheels/3b/25/2a/105d6a15df6914f4d15047691c6c28f9052cc1173e40285d03
+2026-06-25T03:28:23.2221245Z Successfully built sgmllib3k
+2026-06-25T03:28:23.2664585Z Installing collected packages: sgmllib3k, websockets, urllib3, typing-extensions, tenacity, sniffio, pycparser, pyasn1, idna, h11, feedparser, distro, charset_normalizer, certifi, annotated-types, typing-inspection, requests, pydantic-core, pyasn1-modules, httpcore, cffi, anyio, pydantic, httpx, cryptography, google-auth, google-genai
+2026-06-25T03:28:25.4168257Z 
+2026-06-25T03:28:25.4186138Z Successfully installed annotated-types-0.7.0 anyio-4.14.1 certifi-2026.6.17 cffi-2.0.0 charset_normalizer-3.4.7 cryptography-49.0.0 distro-1.9.0 feedparser-6.0.12 google-auth-2.55.0 google-genai-2.10.0 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.18 pyasn1-0.6.3 pyasn1-modules-0.4.2 pycparser-3.0 pydantic-2.13.4 pydantic-core-2.46.4 requests-2.34.2 sgmllib3k-1.0.0 sniffio-1.3.1 tenacity-9.1.4 typing-extensions-4.15.0 typing-inspection-0.4.2 urllib3-2.7.0 websockets-16.0
+2026-06-25T03:28:25.5398083Z ##[group]Run python monitor.py
+2026-06-25T03:28:25.5398402Z [36;1mpython monitor.py[0m
+2026-06-25T03:28:25.5432021Z shell: /usr/bin/bash -e {0}
+2026-06-25T03:28:25.5432280Z env:
+2026-06-25T03:28:25.5432547Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+2026-06-25T03:28:25.5433017Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+2026-06-25T03:28:25.5433452Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+2026-06-25T03:28:25.5433835Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+2026-06-25T03:28:25.5434214Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+2026-06-25T03:28:25.5434597Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+2026-06-25T03:28:25.5435233Z   GEMINI_API_KEY: ***
+2026-06-25T03:28:25.5435451Z   SMTP_USER: 
+2026-06-25T03:28:25.5435638Z   SMTP_PASS: 
+2026-06-25T03:28:25.5435820Z   MAIL_TO: 
+2026-06-25T03:28:25.5436011Z ##[endgroup]
+2026-06-25T03:30:49.3047455Z Starting daily Reddit Barcode Monitor...
+2026-06-25T03:30:49.3048040Z [1/13] Processing 'EAN-13'...
+2026-06-25T03:30:49.3048734Z Fetching https://www.reddit.com/search/.rss?q=EAN-13&sort=new&limit=30 (Attempt 1)
+2026-06-25T03:30:49.3049986Z   -> 1ueojr1 | Verdict: FAIL | This post is about finding people to play a game, not about buying retail barcodes or GS1 issues.
+2026-06-25T03:30:49.3051833Z   -> 1uenjnk | Verdict: FAIL | The post is about a customer receiving a clothing order, not about buying retail barcodes or GS1 frustration.
+2026-06-25T03:30:49.3053405Z   -> 1uelb2z | Verdict: FAIL | The post is about trading in a mobile game (Monopoly Go), not retail barcodes or GS1-related issues.
+2026-06-25T03:30:49.3054943Z   -> 1ueh6l2 | Verdict: FAIL | Post is about astrology, not retail barcodes or GS1 issues. No relevance to selling barcodes.
+2026-06-25T03:30:49.3056476Z   -> 1ueh3xp | Verdict: FAIL | The post discusses personal financial struggles and astrology, not retail barcodes or GS1-related issues.
+2026-06-25T03:30:49.3058123Z   -> 1uef7v6 | Verdict: FAIL | The post discusses personal financial predictions and astrology, unrelated to buying retail barcodes or GS1 issues.
+2026-06-25T03:30:49.3059859Z   -> 1ue82qt | Verdict: FAIL | The post is about personal astrological issues and life stagnation, with no mention of barcodes, selling products, or GS1.
+2026-06-25T03:30:49.3061835Z   -> 1ue7ycs | Verdict: FAIL | The post is about Vedic astrology and personal life stagnation, with no mention of barcodes, selling products, or GS1.
+2026-06-25T03:30:49.3063413Z   -> 1ue7mz5 | Verdict: FAIL | The post is about Vedic astrology and personal life stagnation, with no mention of retail barcodes, selling products, or GS1.
+2026-06-25T03:30:49.3064495Z   -> 1ue6ysf | Verdict: FAIL | The post is too vague and provides no information related to buying retail barcodes or frustration with GS1.
+2026-06-25T03:30:49.3065560Z   -> 1ue0o7j | Verdict: FAIL | The post is about hormone injections, not retail barcodes, selling products, or GS1 issues. It is completely unrelated.
+2026-06-25T03:30:49.3067014Z   -> 1udsz72 | Verdict: FAIL | The post is about trading Pokémon cards, not related to buying retail barcodes or GS1 frustration.
+2026-06-25T03:30:49.3067840Z   -> 1udor0x | Verdict: FAIL | The post is about a video game (Victoria 3) and its in-game mechanics, not retail barcodes or GS1.
+2026-06-25T03:30:49.3069342Z Gemini API error (Attempt 1): 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+2026-06-25T03:30:49.3070737Z   -> 1udnjof | Verdict: FAIL | The post is about selling Hot Wheels cars, not about buying retail barcodes or GS1 frustration.
+2026-06-25T03:30:49.3071648Z   -> 1udktc6 | Verdict: FAIL | This post's title and subreddit are unrelated to buying retail barcodes or GS1 frustration. No relevant keywords found.
+2026-06-25T03:30:49.3072767Z   -> 1udh3mv | Verdict: FAIL | The post discusses John Wayne biographies, which is unrelated to buying retail barcodes or GS1 issues.
+2026-06-25T03:30:49.3073613Z   -> 1uddro4 | Verdict: FAIL | The post is a personal finance/astrology question, completely unrelated to retail barcodes or GS1.
+2026-06-25T03:30:49.3074484Z   -> 1ud97op | Verdict: FAIL | The post discusses a technical issue with a Wii U console, unrelated to buying retail barcodes or GS1 complaints.
+2026-06-25T03:30:49.3075359Z   -> 1ud1r18 | Verdict: FAIL | The post is about Vedic astrology and has no relevance to buying retail barcodes or GS1 frustration.
+2026-06-25T03:30:49.3076191Z   -> 1uct82o | Verdict: FAIL | This post is a complaint about subreddit moderation, unrelated to buying retail barcodes or GS1 issues.
+2026-06-25T03:30:49.3077088Z   -> 1ucqh5r | Verdict: FAIL | The post is vague, in a medical subreddit, and provides no information about wanting to buy barcodes or GS1 frustration.
+2026-06-25T03:30:49.3077967Z   -> 1ucp5fm | Verdict: FAIL | The post is about collecting Nancy Drew books, not about buying retail barcodes or issues with GS1.
+2026-06-25T03:30:49.3078875Z   -> 1uckghf | Verdict: FAIL | This post is about a mobile soccer game, not related to buying retail barcodes or GS1 frustration. It's irrelevant to our business.
+2026-06-25T03:30:49.3080075Z   -> 1ucixz9 | Verdict: FAIL | The post tracks DDR5 RAM prices for LLM builders, using EANs for product identification, not for acquiring new retail barcodes.
+2026-06-25T03:30:49.3081606Z   -> 1uc7zhm | Verdict: FAIL | The post describes personal bag contents, not related to buying retail barcodes or GS1 frustration.
+2026-06-25T03:30:49.3082458Z   -> 1uc6b5w | Verdict: FAIL | This post is about a personal planner/journal, a hobby project, and has no mention of retail barcodes or GS1.
+2026-06-25T03:30:49.3083304Z   -> 1uc3wbv | Verdict: FAIL | The post is about selling computer cases, not about buying retail barcodes or frustration with GS1.
+2026-06-25T03:30:49.3083873Z [2/13] Processing 'EAN barcode'...
+2026-06-25T03:30:49.3084304Z Fetching https://www.reddit.com/search/.rss?q=EAN%20barcode&sort=new&limit=30 (Attempt 1)
+2026-06-25T03:30:49.3085122Z   -> 1uav7ks | Verdict: FAIL | Post discusses ISBNs and EAN prefixes, not a prospective buyer or GS1 complaint. Not relevant to selling retail barcodes.
+2026-06-25T03:30:49.3086063Z   -> 1u9j7kn | Verdict: FAIL | The user is trying to recover or reuse an existing UPC on a platform, not buy new barcodes or complaining about GS1.
+2026-06-25T03:30:49.3087215Z   -> 1u8ercg | Verdict: FAIL | The user is a consumer complaining about a book's international edition and quality, referencing an EAN code as an identifier. Not a prospective barcode buyer or GS1-frustrated seller.
+2026-06-25T03:30:49.3088430Z   -> 1u7f4rv | Verdict: FAIL | The user already has EANs registered via GS1 and is asking about labeling compliance, not buying new barcodes or complaining about GS1.
+2026-06-25T03:30:49.3089480Z   -> 1u4gu5o | Verdict: FAIL | The user is asking about barcode placement on artwork by a third-party service, not seeking to buy barcodes or complaining about GS1.
+2026-06-25T03:30:49.3090988Z   -> 1u4a1ie | Verdict: FAIL | The post describes a tool for generating and printing barcodes, not buying retail barcodes or complaining about GS1.
+2026-06-25T03:30:49.3092139Z   -> 1u42wnn | Verdict: FAIL | The post describes an app update focused on barcode tracking, scanning, and generating private-use EAN-13 codes, not buying retail barcodes or GS1 frustration.
+2026-06-25T03:30:49.3093421Z   -> 1u3ggxp | Verdict: FAIL | The user is checking product authenticity using an existing barcode, not looking to buy new ones or complaining about GS1.
+2026-06-25T03:30:49.3094433Z   -> 1u21bj9 | Verdict: FAIL | The post discusses quality control and product inspection for stationery imports, not the need for or issues with retail barcodes.
+2026-06-25T03:30:49.3095412Z   -> 1u1etzv | Verdict: FAIL | The post is about an app that scans barcodes for product safety, not about buying retail barcodes or GS1 frustration.
+2026-06-25T03:30:49.3096506Z   -> 1u0llnd | Verdict: FAIL | The post describes an inventory management app for scanning existing barcodes, not a need to buy retail barcodes for products.
+2026-06-25T03:30:49.3097605Z   -> 1u0aatt | Verdict: FAIL | The post is a technical question about managing item components within Netsuite's ERP system, not about buying retail barcodes or GS1 frustration.
+2026-06-25T03:30:49.3098639Z   -> 1tz7clr | Verdict: FAIL | Post describes a game using existing barcodes for in-game items. This is a hobby project, not a commercial need.
+2026-06-25T03:30:49.3099509Z   -> 1tz4fe0 | Verdict: FAIL | This post is an advertisement for a barcode generator app, not a prospective buyer or GS1 complaint.
+2026-06-25T03:30:49.3100346Z   -> 1tym8wy | Verdict: FAIL | The post is about building a foundation for a shed, not related to buying retail barcodes or GS1 issues.
+2026-06-25T03:30:49.3101601Z   -> 1tw9gaf | Verdict: FAIL | The post is selling hardware (a price checker kiosk with a barcode scanner), not seeking to buy retail barcodes or complaining about GS1.
+2026-06-25T03:30:49.3102648Z   -> 1tuis38 | Verdict: FAIL | This post is about a user who created a free barcode generator, not someone looking to buy retail barcodes or complaining about GS1.
+2026-06-25T03:30:49.3103699Z   -> 1tufi6e | Verdict: FAIL | This post is from a service provider offering a barcode lookup API for developers, not a prospective buyer or someone frustrated with GS1.
+2026-06-25T03:30:49.3104710Z   -> 1trvfq8 | Verdict: FAIL | The post is about a software library for scanning barcodes, not about buying retail barcodes or GS1 frustration.
+2026-06-25T03:30:49.3105612Z   -> 1trvaig | Verdict: FAIL | The post is about a barcode scanner library for developers, not about buying retail barcodes or issues with GS1.
+2026-06-25T03:30:49.3106624Z   -> 1trufod | Verdict: FAIL | The post is about a developer's barcode scanner and QR generator app, seeking UI/UX feedback. It's not about buying retail barcodes or GS1 frustration.
+2026-06-25T03:30:49.3107679Z   -> 1tqdctw | Verdict: FAIL | The post discusses correcting an existing barcode error on Amazon, not buying new barcodes or complaining about GS1.
+2026-06-25T03:30:49.3108723Z   -> 1tna7c0 | Verdict: FAIL | The post is about a thesis project using QR codes for product classification and PLC integration, not retail barcode acquisition or GS1 issues.
+2026-06-25T03:30:49.3109739Z   -> 1tlxemf | Verdict: FAIL | The post is about a barcode tattoo from a video game, not a commercial need for retail barcodes or GS1 frustration.
+2026-06-25T03:33:16.7171768Z   -> 1tksmk5 | Verdict: FAIL | The post is about an Odoo app for generating and printing labels with barcodes, not buying retail barcodes or GS1 frustration.
+2026-06-25T03:33:16.7173771Z   -> 1tkfwja | Verdict: FAIL | The user already has an EAN and is asking for Amazon FBA logistics advice regarding its use, not seeking to buy barcodes or complaining about GS1.
+2026-06-25T03:33:16.7175965Z   -> 1tkd0kw | Verdict: FAIL | The post discusses IP compliance and counterfeit merchandise risks for Amazon FBA sellers, not a need to buy retail barcodes or GS1 frustration.
+2026-06-25T03:33:16.7177152Z [3/13] Processing 'UPC-A'...
+2026-06-25T03:33:16.7178042Z Fetching https://www.reddit.com/search/.rss?q=UPC-A&sort=new&limit=30 (Attempt 1)
+2026-06-25T03:33:16.7179758Z   -> 1uew6bg | Verdict: FAIL | The post is about troubleshooting a lawnmower engine, not about buying retail barcodes or GS1 frustration.
+2026-06-25T03:33:16.7181564Z   -> 1uew45k | Verdict: FAIL | The post is about repairing a lawn mower, not about buying retail barcodes or issues with GS1.
+2026-06-25T03:33:16.7183681Z   -> 1uev6c5 | Verdict: FAIL | The post is about buying Pokémon TCG products, not retail barcodes or GS1 issues. 'UPCs' refers to 'Ultra Premium Collections'.
+2026-06-25T03:33:16.7185520Z   -> 1ueup3r | Verdict: FAIL | The user is looking to buy a product using its UPC as an identifier, not to obtain barcodes for their own products.
+2026-06-25T03:33:16.7187394Z   -> 1ueu36e | Verdict: FAIL | The post discusses university choices for Chemical Engineering, not retail barcodes or GS1 issues.
+2026-06-25T03:33:16.7189232Z   -> 1uetcxh | Verdict: FAIL | The post is about Pokémon card raffles, not about buying retail barcodes for products or issues with GS1.
+2026-06-25T03:33:16.7191322Z   -> 1uelxsv | Verdict: FAIL | The user is a musician experiencing delays with a digital music distributor, not seeking to buy retail barcodes for physical products or complaining about GS1.
+2026-06-25T03:33:16.7192788Z   -> 1uekdem | Verdict: FAIL | The post is about a cat's veterinary 
+2026-06-25T03:33:16.7193805Z   -> 1ueiqvo | Verdict: FAIL | The post is about mold in a toilet, not related to buying retail barcodes or GS1 frustration.
+2026-06-25T03:33:16.7195349Z   -> 1uehpiq | Verdict: FAIL | The post is about a data analyst's remote work experience with an e-commerce client, not about buying retail barcodes or GS1 issues.
+2026-06-25T03:33:16.7197197Z   -> 1ueh872 | Verdict: FAIL | The post discusses potential buyer scams on an e-commerce platform, not the need for or issues with retail barcodes.
+2026-06-25T03:33:16.7198388Z   -> 1ueg0go | Verdict: FAIL | The post is about scanning a UPC code at a concert for a surprise, not buying retail barcodes or GS1 frustration.
+2026-06-25T03:33:16.7199929Z   -> 1ueedoh | Verdict: FAIL | The post describes an AI-agent skill for inventory management and reordering, not for buying retail barcodes or complaining about GS1.
+2026-06-25T03:33:16.7201879Z   -> 1uee4ge | Verdict: FAIL | The post is about university scholarships and has no relation to retail barcodes or GS1.
+2026-06-25T03:33:16.7203419Z   -> 1uedwkm | Verdict: FAIL | The post is about university scholarships and student advice, not about buying retail barcodes or GS1 issues.
+2026-06-25T03:33:16.7205140Z   -> 1uedqhe | Verdict: FAIL | The post is about university scholarships and admissions, not retail barcodes or GS1 issues. 'UPC' refers to a university.
+2026-06-25T03:33:16.7206866Z   -> 1uedh8x | Verdict: FAIL | This post is about music album variants and releases, not about buying retail barcodes or frustration with GS1.
+2026-06-25T03:33:16.7208614Z   -> 1uea33j | Verdict: FAIL | This post is about organizing Pokemon cards in a binder, a hobby project. It does not involve buying retail barcodes or GS1 issues.
+2026-06-25T03:33:16.7211349Z Gemini API error (Attempt 1): 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+2026-06-25T03:33:16.7213102Z   -> 1ue9uaj | Verdict: FAIL | The post discusses mobile number portability (UPC = Unique Porting Code), not retail barcodes for products.
+2026-06-25T03:33:16.7214006Z   -> 1ue6511 | Verdict: FAIL | The post is about identifying a fake UPC on a Pokemon card, not buying retail barcodes or complaining about GS1.
+2026-06-25T03:33:16.7214885Z   -> 1ue4k3l | Verdict: FAIL | The post title and content are unrelated to retail barcodes, buying/selling products, or GS1 frustration.
+2026-06-25T03:33:16.7215779Z   -> 1ue4agb | Verdict: FAIL | The post is about a Walmart seller needing a test report for existing UPCs, not buying new barcodes or GS1 frustration.
+2026-06-25T03:33:16.7216690Z   -> 1ue3vny | Verdict: FAIL | This post is about a video game leak, completely unrelated to retail barcodes, selling products, or GS1 issues.
+2026-06-25T03:33:16.7217840Z   -> 1ue2z4c | Verdict: FAIL | The post is a consumer asking for a product review for a water heater descaler kit, not about buying or obtaining retail barcodes.
+2026-06-25T03:33:16.7218764Z   -> 1ue2439 | Verdict: FAIL | This post is about selling used shoes, not about buying retail barcodes or expressing frustration with GS1.
+2026-06-25T03:33:16.7219607Z   -> 1ue1ity | Verdict: FAIL | The post is about verifying a sealed Pokemon card product, not buying retail barcodes or GS1 frustration.
+2026-06-25T03:33:16.7220853Z   -> 1udxe3c | Verdict: FAIL | The post discusses home renovation and failed inspections, not retail barcodes or issues with GS1.
+2026-06-25T03:33:16.7221515Z [4/13] Processing 'UPC barcode'...
+2026-06-25T03:33:16.7221951Z Fetching https://www.reddit.com/search/.rss?q=UPC%20barcode&sort=new&limit=30 (Attempt 1)
+2026-06-25T03:33:16.7223393Z   -> 1udvbm5 | Verdict: FAIL | User is identifying a vintage toy using its existing UPC, not seeking to buy or obtain new barcodes.
+2026-06-25T03:33:16.7225041Z   -> 1udvb79 | Verdict: FAIL | The user is asking for help identifying a doll using its UPC, not looking to buy or obtain barcodes for selling products.
+2026-06-25T03:33:16.7226185Z   -> 1udpt0o | Verdict: FAIL | User is trying to identify an existing product using its barcode, not looking to buy barcodes or complaining about GS1.
+2026-06-25T03:33:16.7227137Z   -> 1udfgqx | Verdict: FAIL | This post is a guide on quality control for manufacturing bicycles for Amazon FBA. It does not mention barcodes or GS1.
+2026-06-25T03:33:16.7228268Z   -> 1ubacmj | Verdict: FAIL | The post describes a personal hobby project (a nail polish tracking app) and explicitly states it's not for business. It does not mention buying barcodes or GS1 frustration.
+2026-06-25T03:33:16.7229519Z   -> 1u8xv2x | Verdict: FAIL | The post is about a Walmart employee wanting to use a personal barcode scanner for internal store operations, not buying or complaining about retail barcodes.
+2026-06-25T03:33:16.7230837Z   -> 1u8t00t | Verdict: FAIL | The user is asking to identify a UPC number on a comic, not looking to buy barcodes or complaining about GS1.
+2026-06-25T03:33:16.7231809Z   -> 1u7whyp | Verdict: FAIL | This post discusses internal inventory location systems and scanning within a retail store, not buying barcodes or GS1 issues.
+2026-06-25T03:33:16.7232854Z   -> 1u7hvu0 | Verdict: FAIL | The post discusses cashier experiences, scanner quirks, and POS software interpretation of UPCs, not buying barcodes or GS1 frustration.
+2026-06-25T03:33:16.7233876Z   -> 1u6f8ze | Verdict: FAIL | Post discusses footwear quality control and factory inspections for Amazon FBA, not barcode purchasing or GS1 issues.
+2026-06-25T03:33:16.7234843Z   -> 1u69ffk | Verdict: FAIL | User is verifying an existing product's barcode for authenticity, not seeking to buy new barcodes or complaining about GS1.
+2026-06-25T03:33:16.7235843Z   -> 1u2z0k8 | Verdict: FAIL | The post discusses quality control for custom promotional products for Amazon FBA sellers, not barcode acquisition or GS1 issues.
+2026-06-25T03:33:16.7236898Z   -> 1u2w74e | Verdict: PASS | Post discusses a company stopping GS1 UPC/barcode prefix payments, indicating potential dissatisfaction with GS1's fee structure.
+2026-06-25T03:33:16.7237930Z   -> 1u20y2x | Verdict: FAIL | The post discusses quality control and inspection services for imported stationery, not buying retail barcodes or GS1 issues.
+2026-06-25T03:33:16.7239014Z   -> 1u1sh32 | Verdict: FAIL | The user already has GS1-registered UPCs and is complaining about Amazon's FNSKU labeling errors, not seeking to buy barcodes or frustrated with GS1.
+2026-06-25T03:33:16.7240072Z   -> 1u1a3u1 | Verdict: FAIL | The post discusses Amazon FBA labeling issues and FNSKU labels, not a need to buy retail barcodes or GS1 frustration.
+2026-06-25T03:33:16.7241282Z   -> 1u0nmg2 | Verdict: FAIL | Post is about finding retail deals and scanning existing barcodes, not buying new ones or complaining about GS1.
+2026-06-25T03:33:16.7242411Z   -> 1tzutxp | Verdict: FAIL | User has an existing UPC and is asking about a physical defect affecting scanning, not buying new barcodes or GS1 issues.
+2026-06-25T03:33:16.7243438Z   -> 1tzuq18 | Verdict: FAIL | The post is from a retail employee frustrated with internal store data and product location, not seeking to buy barcodes or complaining about GS1.
+2026-06-25T03:33:16.7244469Z   -> 1tzk421 | Verdict: PASS | User is planning a product launch on Amazon and considering investing in a UPC barcode instead of using GTIN exemption.
+2026-06-25T03:33:16.7245534Z   -> 1tykdit | Verdict: FAIL | The post is about reselling products that already have UPC barcodes, not seeking to buy new ones or complaining about GS1.
+2026-06-25T03:33:16.7246159Z [5/13] Processing 'GTIN'...
+2026-06-25T03:33:16.7246534Z Fetching https://www.reddit.com/search/.rss?q=GTIN&sort=new&limit=30 (Attempt 1)
+2026-06-25T03:35:40.3849746Z   -> 1uexz3x | Verdict: FAIL | This post is about deducing information from a fridge, not related to buying retail barcodes or GS1 issues.
+2026-06-25T03:35:40.3851135Z   -> 1uevgbn | Verdict: FAIL | The post is about a user's cat and has no relevance to buying retail barcodes or GS1 frustration.
+2026-06-25T03:35:40.3852467Z   -> 1udvej1 | Verdict: FAIL | The post discusses e-commerce backend, bookkeeping, payments, and inventory management systems, but does not mention needing to buy retail barcodes or frustration with GS1.
+2026-06-25T03:35:40.3853958Z   -> 1udh1h8 | Verdict: FAIL | This is a case study from an agency about fixing Google Ads and product feed issues, not a request to buy barcodes or a GS1 complaint.
+2026-06-25T03:35:40.3855174Z   -> 1ud72pk | Verdict: FAIL | User has a GTIN exemption but faces a Walmart system error. Not seeking to buy barcodes or complaining about GS1.
+2026-06-25T03:35:40.3856316Z   -> 1ucx7wh | Verdict: FAIL | The post is about personal interests (plants) and work, with no mention of retail barcodes, selling products, or GS1.
+2026-06-25T03:35:40.3857447Z   -> 1ucu7dg | Verdict: FAIL | The post discusses a video game (RimWorld) and in-game power management, not retail barcodes or GS1 issues.
+2026-06-25T03:35:40.3858888Z Gemini API error (Attempt 1): 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+2026-06-25T03:35:40.3860338Z   -> 1ucikg1 | Verdict: FAIL | The post discusses a consumer's experience with a new tofu product, not barcode purchasing or GS1 frustration.
+2026-06-25T03:35:40.3861630Z   -> 1ubvg9t | Verdict: FAIL | This post is about an exam, not retail barcodes, buying them, or GS1 issues. It is irrelevant.
+2026-06-25T03:35:40.3862560Z   -> 1ubumy0 | Verdict: FAIL | The post is about an exam workspace, not related to buying retail barcodes or GS1 issues.
+2026-06-25T03:35:40.3863528Z   -> 1ubu4vb | Verdict: FAIL | The post discusses NEET exam rough space, which is unrelated to buying retail barcodes or GS1 issues.
+2026-06-25T03:35:40.3864590Z   -> 1ubtfjq | Verdict: FAIL | The post title and content are unrelated to buying retail barcodes or GS1 frustration. No commercial intent.
+2026-06-25T03:35:40.3865810Z   -> 1ubpccc | Verdict: FAIL | The post discusses inventory discrepancies for an existing GTIN within Walmart Fulfillment Services, not buying barcodes or GS1 issues.
+2026-06-25T03:35:40.3867378Z Gemini API error (Attempt 1): 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+2026-06-25T03:35:40.3868715Z   -> 1uae3gs | Verdict: FAIL | The post discusses e-commerce content architecture and AI search optimization, not the need to buy retail barcodes or issues with GS1.
+2026-06-25T03:35:40.3869986Z Gemini API error (Attempt 1): 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+2026-06-25T03:35:40.3871816Z   -> 1uae38n | Verdict: FAIL | Post discusses ecommerce content architecture and AI search, not buying retail barcodes or GS1 frustration.
+2026-06-25T03:35:40.3872855Z   -> 1u9cono | Verdict: FAIL | The post describes how barcode scanning works within inventory and warehouse management software, not a need to buy retail barcodes or GS1 frustration.
+2026-06-25T03:35:40.3873902Z   -> 1u9ahl6 | Verdict: FAIL | The post is about cooling packs for rabbits during a heatwave, not about buying retail barcodes or GS1 frustration.
+2026-06-25T03:35:40.3874907Z   -> 1u8hfp1 | Verdict: FAIL | This post is about a video game mod, not retail barcodes, selling products, or GS1 frustration.
+2026-06-25T03:35:40.3875714Z   -> 1u7jyxf | Verdict: FAIL | The user is trying to use a GTIN exemption on Amazon, not looking to buy barcodes or complaining about GS1.
+2026-06-25T03:35:40.3876528Z   -> 1u7apzu | Verdict: FAIL | This post is a humor submission and has no relevance to buying retail barcodes or GS1 frustration.
+2026-06-25T03:35:40.3877417Z   -> 1u78rxn | Verdict: FAIL | The post discusses an expiration date, not buying retail barcodes or frustration with GS1. It's unrelated to barcode sales.
+2026-06-25T03:35:40.3878411Z   -> 1u6f0qn | Verdict: FAIL | The post discusses Amazon Brand Registry and trademark classes for listing products, not buying retail barcodes or GS1 frustration.
+2026-06-25T03:35:40.3879404Z   -> 1u6exng | Verdict: FAIL | The post discusses Amazon Brand Registry and trademark classes, not a need to buy retail barcodes or frustration with GS1.
+2026-06-25T03:35:40.3880316Z   -> 1u6eb95 | Verdict: PASS | User is asking about GTIN exemption for selling on Amazon, indicating a potential need for retail barcodes.
+2026-06-25T03:35:40.3881350Z   -> 1u5ti9h | Verdict: FAIL | This post is about trading game items (Epr mods, food items) in a gaming subreddit, not retail barcodes or GS1 frustration.
+2026-06-25T03:35:40.3882218Z   -> 1u42ef1 | Verdict: FAIL | The post is about a cat and personal life, not related to buying retail barcodes or GS1 frustration.
+2026-06-25T03:35:40.3883262Z   -> 1u34s5p | Verdict: FAIL | The post discusses AI agents in e-commerce and the importance of complete product data, including GTINs, but does not express a need to buy barcodes or frustration with GS1.
+2026-06-25T03:35:40.3884047Z [6/13] Processing 'GS1'...
+2026-06-25T03:35:40.3884430Z Fetching https://www.reddit.com/search/.rss?q=GS1&sort=new&limit=30 (Attempt 1)
+2026-06-25T03:35:40.3885158Z   -> 1ueotu7 | Verdict: FAIL | This post is about video game fan art, completely unrelated to retail barcodes, selling products, or GS1 issues.
+2026-06-25T03:35:40.3885994Z   -> 1ueho0i | Verdict: FAIL | The post is about flight simulation, not retail barcodes, selling products, or GS1 frustration.
+2026-06-25T03:35:40.3887181Z   -> 1uegqgc | Verdict: FAIL | The post title is in Arabic and the content is empty. It does not mention buying barcodes or GS1 frustration.
+2026-06-25T03:35:40.3888043Z   -> 1uecr4z | Verdict: FAIL | The post discusses World Cup statistics, not retail barcodes, purchasing them, or GS1-related frustrations.
+2026-06-25T03:35:40.3888907Z   -> 1udwfsc | Verdict: FAIL | The post is about a nostalgic memory of a book and has no relation to buying or selling retail barcodes or GS1.
+2026-06-25T03:35:40.3889740Z   -> 1udltho | Verdict: FAIL | The post is about a student asking for advice on a math review for an exam, not retail barcodes or GS1.
+2026-06-25T03:35:40.3890720Z   -> 1udlqh9 | Verdict: FAIL | The post is about video game modifications for "Golden Sun" games, not retail barcodes or GS1 issues for products.
+2026-06-25T03:35:40.3891559Z   -> 1udlkc8 | Verdict: FAIL | This post is about in-game emotes for a Roblox game, not retail barcodes or GS1 frustration.
+2026-06-25T03:35:40.3892347Z   -> 1udfsyg | Verdict: FAIL | The post title and subreddit are in Arabic and do not relate to barcodes, selling products, or GS1 issues.
+2026-06-25T03:35:40.3893410Z   -> 1udev7b | Verdict: FAIL | The post discusses UPSC exam preparation and study materials, not retail barcodes or issues with GS1 (the barcode organization).
+2026-06-25T03:35:40.3894431Z   -> 1uddfal | Verdict: FAIL | The post is about improving hand strength for academic exams (UPSC Mains, General Studies papers), not retail barcodes or GS1.
+2026-06-25T03:35:40.3895341Z   -> 1uddeee | Verdict: FAIL | The post discusses improving hand strength for writing exams, not buying retail barcodes or GS1 issues.
+2026-06-25T03:35:40.3896195Z   -> 1udd2fs | Verdict: FAIL | The post discusses a bicycle model "Ventum GS1 2020" and a purchase decision, not retail barcodes or GS1 issues.
+2026-06-25T03:35:40.3897213Z   -> 1ucx2o3 | Verdict: FAIL | The post discusses academic preparation for a civil services exam, not retail barcodes, selling products, or GS1 issues.
+2026-06-25T03:35:40.3898159Z   -> 1ucx0px | Verdict: FAIL | The post is about study schedules and exam preparation for UPSC, not related to buying retail barcodes or GS1 issues.
+2026-06-25T03:35:40.3899047Z   -> 1ucwbx3 | Verdict: PASS | User needs barcodes for their D2C brand to sell on Amazon and is frustrated with GS1's high pricing in India.
+2026-06-25T03:35:40.3899896Z   -> 1ucu3mx | Verdict: PASS | User needs barcodes for Amazon, frustrated with GS1's high initial and renewal costs for their D2C brand.
+2026-06-25T03:35:40.3901212Z   -> 1ucspnu | Verdict: FAIL | The post describes a tool for organizing and tagging scanned exam answer sheets, not for obtaining or complaining about retail barcodes.
+2026-06-25T03:35:40.3902314Z   -> 1ucrlkb | Verdict: FAIL | The post discusses inventory and lot tracking software for food manufacturers, not the purchase of retail barcodes or GS1 issues.
+2026-06-25T03:35:40.3903275Z   -> 1ucjs0p | Verdict: FAIL | The post is about exam preparation and study strategies, not about buying retail barcodes or issues with GS1.
+2026-06-25T03:35:40.3904194Z   -> 1uch7wg | Verdict: FAIL | The post discusses a company's IFS certification renewal, which is unrelated to buying retail barcodes or GS1 frustration.
+2026-06-25T03:35:40.3905096Z   -> 1ucggj6 | Verdict: FAIL | The post is about career advice and a resume review, not related to buying retail barcodes or GS1 issues.
+2026-06-25T03:35:40.3906014Z   -> 1ucbliq | Verdict: FAIL | This post is about UPSC exam preparation, specifically General Studies Paper 1 (GS1), not retail barcodes or the GS1 organization.
+2026-06-25T03:35:40.3906999Z   -> 1uc5i44 | Verdict: FAIL | Post is unrelated to barcodes, selling products, or GS1. It's about a TikTok video, not a prospective buyer or GS1 complaint.
+2026-06-25T03:38:00.9085584Z   -> 1uby2r7 | Verdict: FAIL | The post discusses study materials for the UPSC exam (General Studies papers GS1, GS2, GS3), not retail barcodes or GS1 issues.
+2026-06-25T03:38:00.9087965Z   -> 1ubsdjk | Verdict: FAIL | The post is too vague and lacks any indication of wanting to buy retail barcodes or frustration with GS1.
+2026-06-25T03:38:00.9089023Z [7/13] Processing 'buy barcode'...
+2026-06-25T03:38:00.9089774Z Fetching https://www.reddit.com/search/.rss?q=buy%20barcode&sort=new&limit=30 (Attempt 1)
+2026-06-25T03:38:00.9091805Z   -> 1uesng6 | Verdict: FAIL | The post discusses a product recall and customer service issues, mentioning barcodes only as administrative information for returns. It is not about buying barcodes or GS1 frustration.
+2026-06-25T03:38:00.9094171Z   -> 1uepkxk | Verdict: FAIL | The post is about a vintage pencil sharpener and casually mentions the lack of a barcode as an indicator of age, not a need to buy or a complaint about GS1.
+2026-06-25T03:38:00.9096201Z   -> 1uen4vg | Verdict: FAIL | This post is selling a lab tube labeling system that prints various codes, including 2D matrix codes, not seeking retail barcodes.
+2026-06-25T03:38:00.9097947Z   -> 1uehf6n | Verdict: FAIL | Post discusses scanning existing book barcodes for resale, not buying new barcodes or GS1 issues. Not relevant.
+2026-06-25T03:38:00.9099965Z   -> 1ue9b1r | Verdict: FAIL | Post is about a public transport app, not retail barcodes, selling products, or GS1 frustration. Not relevant to our business.
+2026-06-25T03:38:00.9102407Z   -> 1ue50cp | Verdict: FAIL | The post is about applying eyeliner and uses "barcode" metaphorically to describe a bad makeup look. It is not about buying or obtaining retail barcodes, nor is it about GS1 frustration.
+2026-06-25T03:38:00.9104148Z   -> 1ue2vmf | Verdict: FAIL | The post describes scanning existing book barcodes to identify resale value on Amazon, not buying new barcodes or complaining about GS1.
+2026-06-25T03:38:00.9105545Z   -> 1ue0eit | Verdict: FAIL | The post describes a personal inventory app that scans existing barcodes on consumer products for personal use, not for selling products or obtaining new barcodes.
+2026-06-25T03:38:00.9106725Z   -> 1udxwpu | Verdict: FAIL | The post discusses personal struggles and mental health, with no mention of retail barcodes, selling products, or GS1.
+2026-06-25T03:38:00.9107780Z   -> 1udrzri | Verdict: FAIL | The post is a product review about lip glosses. The mention of barcodes is incidental to product packaging, not about buying or GS1 frustration.
+2026-06-25T03:38:00.9108798Z   -> 1udrs94 | Verdict: FAIL | The user is looking to buy specific vinyl records, not retail barcodes for their own products or complaining about GS1.
+2026-06-25T03:38:00.9109810Z   -> 1ud04rl | Verdict: FAIL | The post is about reselling existing products that already have barcodes. The user is not looking to buy new barcodes or complaining about GS1.
+2026-06-25T03:38:00.9111218Z   -> 1uctun3 | Verdict: FAIL | This post is a consumer complaint about a sales tax refund and store return process at TJ Maxx, not about buying retail barcodes or GS1 frustration.
+2026-06-25T03:38:00.9112304Z   -> 1uckigi | Verdict: FAIL | The user is asking for label design software for printing barcodes, not looking to buy retail barcodes or complaining about GS1.
+2026-06-25T03:38:00.9113302Z   -> 1uck1oh | Verdict: FAIL | The post is about concert ticket authenticity and scanning, not about buying retail barcodes for products or GS1 frustration.
+2026-06-25T03:38:00.9114307Z   -> 1ucfzbn | Verdict: FAIL | The post discusses using an app's barcode history feature for personal grocery tracking, not buying retail barcodes or GS1 issues.
+2026-06-25T03:38:00.9115352Z   -> 1ucfhwg | Verdict: FAIL | The post is about exchanging concert tickets and verifying ticket barcodes, not about buying retail barcodes for products or GS1 issues.
+2026-06-25T03:38:00.9116326Z   -> 1uc1tyn | Verdict: FAIL | The post is about issues with event tickets and venue access, not about buying retail barcodes or GS1 frustration.
+2026-06-25T03:38:00.9117222Z   -> 1uc0s1t | Verdict: FAIL | The post is about selling concert tickets, not about buying retail barcodes for products or frustration with GS1.
+2026-06-25T03:38:00.9118154Z   -> 1ubtbp7 | Verdict: FAIL | The post is about label design software and printing compatibility, not about buying retail barcodes or GS1 frustration.
+2026-06-25T03:38:00.9119134Z   -> 1ubq8w3 | Verdict: FAIL | The post discusses general remote side hustles like surveys and data entry, not retail barcodes, selling products, or GS1 issues.
+2026-06-25T03:38:00.9120109Z   -> 1ubof1j | Verdict: FAIL | The post lists various 'beermoney' ideas like surveys and apps, not related to buying retail barcodes or GS1 frustration.
+2026-06-25T03:38:00.9121442Z   -> 1ubk3re | Verdict: FAIL | The post discusses personal weight loss and medical experiences, not buying retail barcodes or GS1 issues.
+2026-06-25T03:38:00.9122546Z   -> 1ubikyl | Verdict: FAIL | The post is about buying a concert ticket from a reseller and concerns about ticket validity and duplicates, not retail barcodes for products.
+2026-06-25T03:38:00.9123244Z [8/13] Processing 'buy barcodes'...
+2026-06-25T03:38:00.9123682Z Fetching https://www.reddit.com/search/.rss?q=buy%20barcodes&sort=new&limit=30 (Attempt 1)
+2026-06-25T03:38:00.9124139Z [9/13] Processing 'get barcodes'...
+2026-06-25T03:38:00.9124702Z Fetching https://www.reddit.com/search/.rss?q=get%20barcodes&sort=new&limit=30 (Attempt 1)
+2026-06-25T03:38:00.9125116Z   HTTP 429
+2026-06-25T03:38:00.9125460Z Fetching https://old.reddit.com/search/.rss?q=get%20barcodes&sort=new&limit=30 (Attempt 1)
+2026-06-25T03:38:00.9125868Z   HTTP 429
+2026-06-25T03:38:00.9126209Z Fetching https://www.reddit.com/search.json?q=get%20barcodes&sort=new&limit=30 (Attempt 1)
+2026-06-25T03:38:00.9126617Z   HTTP 403
+2026-06-25T03:38:00.9126868Z All endpoints failed for 'get barcodes', sleeping 3s...
+2026-06-25T03:38:00.9127333Z Fetching https://www.reddit.com/search/.rss?q=get%20barcodes&sort=new&limit=30 (Attempt 2)
+2026-06-25T03:38:00.9127745Z   HTTP 429
+2026-06-25T03:38:00.9128186Z Fetching https://old.reddit.com/search/.rss?q=get%20barcodes&sort=new&limit=30 (Attempt 2)
+2026-06-25T03:38:00.9128599Z   HTTP 429
+2026-06-25T03:38:00.9128931Z Fetching https://www.reddit.com/search.json?q=get%20barcodes&sort=new&limit=30 (Attempt 2)
+2026-06-25T03:38:00.9129348Z   HTTP 403
+2026-06-25T03:38:00.9129587Z All endpoints failed for 'get barcodes', sleeping 8s...
+2026-06-25T03:38:00.9130039Z Fetching https://www.reddit.com/search/.rss?q=get%20barcodes&sort=new&limit=30 (Attempt 3)
+2026-06-25T03:38:00.9130895Z   -> 1uerqbr | Verdict: FAIL | The post discusses a barcode scanner app for personal use, not buying retail barcodes or GS1 issues.
+2026-06-25T03:38:00.9131804Z   -> 1ueqwe0 | Verdict: FAIL | This post discusses car registration exemptions, not retail barcodes or GS1 frustrations. It's unrelated to our business.
+2026-06-25T03:38:00.9132688Z   -> 1ueoxem | Verdict: FAIL | This post is about a freebie deal for Fanta, not about buying retail barcodes or GS1 frustration.
+2026-06-25T03:38:00.9133639Z   -> 1uel9m4 | Verdict: FAIL | The post is about an Instacart shopper complaining about customer fraud and damaged items, not about buying retail barcodes or GS1 issues.
+2026-06-25T03:38:00.9134747Z   -> 1uejaek | Verdict: FAIL | The post describes a personal travel experience and government bureaucracy related to citizenship and passports, not retail barcodes or GS1.
+2026-06-25T03:38:00.9135776Z   -> 1ueipc6 | Verdict: FAIL | The post is about a cashier's job performance and scanning speed, not about buying retail barcodes or issues with GS1.
+2026-06-25T03:38:00.9136718Z   -> 1uehpf4 | Verdict: FAIL | The post is about an administrative barcode sheet for an SSDI claim, not retail barcodes for selling products or GS1 issues.
+2026-06-25T03:38:00.9155027Z   -> 1uefvnm | Verdict: FAIL | The post describes features of a health tracking app, not related to buying retail barcodes or GS1 issues.
+2026-06-25T03:38:00.9156416Z   -> 1ueffc6 | Verdict: FAIL | The post discusses entertainment (Thai BL couples) and has no relation to retail barcodes or GS1.
+2026-06-25T03:38:00.9157997Z   -> 1uee3us | Verdict: FAIL | The post discusses calorie tracking apps and their barcode scanning features, which is not relevant to selling retail barcodes or GS1 frustration.
+2026-06-25T03:38:00.9159114Z   -> 1uedfba | Verdict: FAIL | The post describes an asset tracking app, not a need to buy retail barcodes or frustration with GS1.
+2026-06-25T03:38:00.9160133Z   -> 1uedcut | Verdict: FAIL | The post describes a grocery management app that uses a barcode scanner for personal inventory, not for buying retail barcodes or complaining about GS1.
+2026-06-25T03:38:00.9161614Z   -> 1ueckaw | Verdict: FAIL | The post discusses using barcodes for inventory management and receiving processes, not acquiring retail barcodes for products or issues with GS1.
+2026-06-25T03:38:00.9162672Z   -> 1ue9zcs | Verdict: FAIL | The post discusses a serial number on a used console for trade-in, not buying retail barcodes or GS1 frustration.
+2026-06-25T03:38:00.9163635Z   -> 1ue4mlm | Verdict: FAIL | The user is identifying a vinyl record, not seeking to buy retail barcodes for selling products or complaining about GS1.
+2026-06-25T03:38:00.9164543Z   -> 1ue4cd7 | Verdict: FAIL | The user is identifying a vinyl record, not seeking to buy retail barcodes or expressing frustration with GS1.
+2026-06-25T03:38:00.9165981Z   -> 1ue3ec1 | Verdict: FAIL | The post is about scanning a barcode on a graded Pokémon card for validity, not buying retail barcodes or GS1 frustration.
+2026-06-25T03:38:00.9166998Z   -> 1ue0wlc | Verdict: FAIL | The post discusses issues with event tickets and their barcodes for stadium entry, not retail barcodes for selling products.
+2026-06-25T03:38:00.9167981Z   -> 1udzv3i | Verdict: FAIL | The post is a customer complaint about electronic price tags at Walmart, not about buying barcodes or GS1 frustration.
+2026-06-25T03:40:16.2636787Z   -> 1udx5i7 | Verdict: FAIL | Post is about event tickets in Apple Wallet, not retail barcodes for selling products or GS1 issues.
+2026-06-25T03:40:16.2638828Z   -> 1udvhcr | Verdict: FAIL | The post discusses coupon barcodes for a brow wax at Ulta, not retail product barcodes for selling goods.
+2026-06-25T03:40:16.2641273Z   -> 1udt2bd | Verdict: FAIL | This post is about reselling event tickets on Vivid Seats, not about buying retail barcodes or issues with GS1.
+2026-06-25T03:40:16.2642480Z [10/13] Processing 'product barcode'...
+2026-06-25T03:40:16.2643333Z Fetching https://www.reddit.com/search/.rss?q=product%20barcode&sort=new&limit=30 (Attempt 1)
+2026-06-25T03:40:16.2644530Z   -> 1uey2ls | Verdict: FAIL | The post is about an app that scans food labels and barcodes, not about buying retail barcodes or GS1 frustration.
+2026-06-25T03:40:16.2645676Z   -> 1uelpl2 | Verdict: FAIL | The post discusses fake identification documents and their legal/ethical implications, not retail barcodes or GS1.
+2026-06-25T03:40:16.2646883Z   -> 1uejgmm | Verdict: FAIL | The post discusses software for batch traceability in pharma manufacturing, not buying retail barcodes or GS1 frustration.
+2026-06-25T03:40:16.2648207Z   -> 1uecyp4 | Verdict: FAIL | The post discusses inventory management and POS systems, focusing on using existing barcodes for stock control, not buying new ones or GS1 issues.
+2026-06-25T03:40:16.2649557Z   -> 1ue7o5a | Verdict: FAIL | Post describes internal factory barcode tracking, not a need to buy retail barcodes for selling products or frustration with GS1.
+2026-06-25T03:40:16.2651056Z   -> 1ue6f5g | Verdict: FAIL | Post discusses using barcode labels for inventory accuracy and management, not buying retail barcodes or GS1 frustration.
+2026-06-25T03:40:16.2652191Z   -> 1udnxhv | Verdict: FAIL | The post is about a barcode scanning app, not about buying retail barcodes or frustration with GS1.
+2026-06-25T03:40:16.2653089Z   -> 1udmz15 | Verdict: FAIL | The post is about managing inventory across multiple warehouses, not about buying retail barcodes or GS1 frustration.
+2026-06-25T03:40:16.2654110Z   -> 1udmbjj | Verdict: FAIL | The post is about generating barcodes using Excel Copilot for supply chain/inventory, not buying retail barcodes or GS1 frustration.
+2026-06-25T03:40:16.2655027Z   -> 1udknev | Verdict: FAIL | Post is about tools, not retail barcodes or GS1 issues. No indication of barcode buying intent.
+2026-06-25T03:40:16.2655882Z   -> 1udj76p | Verdict: FAIL | The post is about a skincare app with a barcode scanner feature, not about buying retail barcodes or GS1 frustration.
+2026-06-25T03:40:16.2656922Z   -> 1udj3wa | Verdict: FAIL | The user is looking for an inventory management system with barcode scanning capabilities, not to buy retail barcodes or complaining about GS1.
+2026-06-25T03:40:16.2657997Z   -> 1udgoax | Verdict: FAIL | The post discusses workplace incidents and supervisor issues, not the purchase of retail barcodes or frustration with GS1.
+2026-06-25T03:40:16.2658970Z   -> 1udfc1q | Verdict: FAIL | The post discusses quality control inspections for bicycles for Amazon FBA sellers. It does not mention barcodes or GS1.
+2026-06-25T03:40:16.2659921Z   -> 1ud31ia | Verdict: FAIL | The post is about verifying the legitimacy of an e-commerce website for purchasing a cosmetic product, not barcodes.
+2026-06-25T03:40:16.2661379Z   -> 1ud2ym6 | Verdict: FAIL | The post is about a PLC engineer's career transition into AI/Computer Vision, mentioning barcode systems as part of their experience. It does not indicate a need to buy retail barcodes or frustration with GS1.
+2026-06-25T03:40:16.2662934Z   -> 1ud106e | Verdict: FAIL | The post discusses packaging localization and label translation, not the need to buy retail barcodes or frustration with GS1.
+2026-06-25T03:40:16.2664070Z   -> 1ud0nw4 | Verdict: FAIL | The post discusses garment production tech packs and mentions "barcode issues" generally, but does not indicate a need to buy retail barcodes or frustration with GS1.
+2026-06-25T03:40:16.2664849Z [11/13] Processing 'retail barcode'...
+2026-06-25T03:40:16.2665410Z Fetching https://www.reddit.com/search/.rss?q=retail%20barcode&sort=new&limit=30 (Attempt 1)
+2026-06-25T03:40:16.2665853Z   HTTP 429
+2026-06-25T03:40:16.2666212Z Fetching https://old.reddit.com/search/.rss?q=retail%20barcode&sort=new&limit=30 (Attempt 1)
+2026-06-25T03:40:16.2666635Z   HTTP 429
+2026-06-25T03:40:16.2666984Z Fetching https://www.reddit.com/search.json?q=retail%20barcode&sort=new&limit=30 (Attempt 1)
+2026-06-25T03:40:16.2667407Z   HTTP 403
+2026-06-25T03:40:16.2667657Z All endpoints failed for 'retail barcode', sleeping 3s...
+2026-06-25T03:40:16.2668141Z Fetching https://www.reddit.com/search/.rss?q=retail%20barcode&sort=new&limit=30 (Attempt 2)
+2026-06-25T03:40:16.2668827Z   -> 1ueiig2 | Verdict: FAIL | This is a surreal narrative, not a query about buying retail barcodes or frustration with GS1.
+2026-06-25T03:40:16.2669774Z   -> 1udfy37 | Verdict: FAIL | The post discusses new retail technology for store operations, product location, and scanning. It is not about buying barcodes or GS1 issues.
+2026-06-25T03:40:16.2671041Z   -> 1ud1l29 | Verdict: FAIL | This post is a news story about a stolen chocolate shipment, not related to buying retail barcodes or GS1 issues.
+2026-06-25T03:40:16.2671992Z   -> 1ucs142 | Verdict: FAIL | The post discusses payment processing and merchant churn, not the acquisition of retail barcodes or frustration with GS1.
+2026-06-25T03:40:16.2672949Z   -> 1uclciq | Verdict: FAIL | The post is about developing and seeking feedback for POS software, not about buying retail barcodes or GS1 issues.
+2026-06-25T03:40:16.2674079Z   -> 1ubofyy | Verdict: FAIL | The post is a review of a replica sneaker supplier and product. The mention of "barcode" is descriptive of the product's tag, not an inquiry about buying or issues with retail barcodes.
+2026-06-25T03:40:16.2675218Z   -> 1uba7k6 | Verdict: FAIL | The post is about collecting vintage perfumes, a hobby. The mention of barcodes is descriptive, not a commercial inquiry.
+2026-06-25T03:40:16.2676197Z   -> 1ub68fc | Verdict: FAIL | The post is about barcode scanning and label printing in banking operations, not about buying retail barcodes or GS1 frustration.
+2026-06-25T03:40:16.2677241Z   -> 1ub3odd | Verdict: FAIL | This is a piece of creative writing, likely from a comic, using "barcode" metaphorically. It's not about buying barcodes or GS1 frustration.
+2026-06-25T03:40:16.2678330Z   -> 1uahv9g | Verdict: FAIL | The post discusses packaging design systems and barcode zones within that context, not the purchase of retail barcodes or frustration with GS1.
+2026-06-25T03:40:16.2679405Z   -> 1uah8xg | Verdict: FAIL | The post is about an Instacart shopper's issue with scanning QR codes and order processing, not buying retail barcodes or GS1 frustration.
+2026-06-25T03:40:16.2680747Z   -> 1uae19n | Verdict: FAIL | The post describes a repair-shop workflow system that generates internal barcode labels for inventory management, not retail barcodes for product sales.
+2026-06-25T03:40:16.2681788Z   -> 1ua6gls | Verdict: FAIL | The post discusses collecting Banksy art and charity bags, not buying retail barcodes or issues with GS1.
+2026-06-25T03:40:16.2682701Z   -> 1ua07q7 | Verdict: FAIL | The post lists general "beermoney" ideas like surveys and micro-tasks. It does not mention barcodes or any need to buy them.
+2026-06-25T03:40:16.2683686Z   -> 1u9uf83 | Verdict: FAIL | The post asks for POS system and barcode scanner recommendations, not for purchasing retail barcodes or complaining about GS1.
+2026-06-25T03:40:16.2684781Z   -> 1u9jov3 | Verdict: FAIL | The post discusses AI in wholesale operations software, not the need to purchase retail barcodes or issues with GS1.
+2026-06-25T03:40:16.2685756Z   -> 1u9hcqa | Verdict: FAIL | This post is a complaint about USPS employee behavior and shipping policies, not about obtaining retail barcodes or issues with GS1.
+2026-06-25T03:40:16.2686732Z   -> 1u9ahu2 | Verdict: FAIL | The post discusses accounting software for large businesses, not retail barcodes, buying barcodes, or GS1 issues.
+2026-06-25T03:40:16.2687694Z   -> 1u9ah1e | Verdict: FAIL | The post is about accounting software for large businesses, not retail barcodes or GS1 frustration.
+2026-06-25T03:40:16.2688579Z   -> 1u946pn | Verdict: FAIL | This is a press release announcing a product launch, not someone wanting to buy retail barcodes or complaining about GS1.
+2026-06-25T03:40:16.2689212Z [12/13] Processing 'barcode for Amazon'...
+2026-06-25T03:40:16.2689688Z Fetching https://www.reddit.com/search/.rss?q=barcode%20for%20Amazon&sort=new&limit=30 (Attempt 1)
+2026-06-25T03:40:16.2690144Z   HTTP 429
+2026-06-25T03:40:16.2690734Z Fetching https://old.reddit.com/search/.rss?q=barcode%20for%20Amazon&sort=new&limit=30 (Attempt 1)
+2026-06-25T03:40:16.2691184Z   HTTP 429
+2026-06-25T03:40:16.2691554Z Fetching https://www.reddit.com/search.json?q=barcode%20for%20Amazon&sort=new&limit=30 (Attempt 1)
+2026-06-25T03:40:16.2691994Z   HTTP 403
+2026-06-25T03:40:16.2692258Z All endpoints failed for 'barcode for Amazon', sleeping 3s...
+2026-06-25T03:40:16.2692774Z Fetching https://www.reddit.com/search/.rss?q=barcode%20for%20Amazon&sort=new&limit=30 (Attempt 2)
+2026-06-25T03:40:16.2693591Z   -> 1uelm4j | Verdict: FAIL | The post discusses drone delivery infrastructure and a 2D barcode used for drone positioning, not retail product barcodes.
+2026-06-25T03:40:16.2694514Z   -> 1ud2qw4 | Verdict: FAIL | The post is about an Amazon Flex driver's delivery issue, not about buying retail barcodes or GS1 frustration.
+2026-06-25T03:40:16.2695471Z   -> 1uc2q81 | Verdict: PASS | The user is a first-time Amazon seller asking about barcode requirements for their own brand product, indicating a need to obtain one.
+2026-06-25T03:40:16.2696498Z   -> 1ubvih9 | Verdict: FAIL | The user is scanning an existing product barcode to verify authenticity, not seeking to buy new barcodes or complaining about GS1.
+2026-06-25T03:41:12.7796742Z   -> 1ubnnrx | Verdict: FAIL | The post discusses quality control and inspection services for bathroom accessories, not the purchase or acquisition of retail barcodes.
+2026-06-25T03:41:12.7799518Z   -> 1ua9l6r | Verdict: FAIL | The post describes a personal project for book discovery and price comparison, including a barcode scanner. It does not indicate a need to buy retail barcodes or frustration with GS1.
+2026-06-25T03:41:12.7801328Z   -> 1ua21i1 | Verdict: FAIL | The post is a consumer complaint about a counterfeit product on Amazon, not a business seeking to buy barcodes or frustrated with GS1.
+2026-06-25T03:41:12.7802503Z   -> 1u9aexo | Verdict: FAIL | The post discusses scanning product barcodes for Amazon returns, not buying barcodes or GS1 frustration.
+2026-06-25T03:41:12.7803587Z   -> 1u8s1kp | Verdict: FAIL | Post is about Amazon delivery driver training and internal logistics, not seeking retail barcodes or complaining about GS1.
+2026-06-25T03:41:12.7804714Z   -> 1u8l82c | Verdict: FAIL | The post describes a scanning app for existing book barcodes to aid resale, not buying new barcodes or GS1 frustration.
+2026-06-25T03:41:12.7805977Z   -> 1u8e8ed | Verdict: FAIL | The post describes a customer service interaction at a UPS store regarding shipping labels and packaging, not the purchase of retail barcodes or GS1 frustration.
+2026-06-25T03:41:12.7807185Z   -> 1u7w6yn | Verdict: FAIL | The post discusses 'beermoney' ideas like surveys and cashback apps, not retail barcodes or GS1 issues.
+2026-06-25T03:41:12.7808687Z   -> 1u7ol0j | Verdict: FAIL | The post is about a customer's experience receiving used items from Amazon, mentioning LPN barcodes in that context. It is not about buying retail barcodes or GS1 frustration.
+2026-06-25T03:41:12.7809612Z [13/13] Processing 'barcode for Shopify'...
+2026-06-25T03:41:12.7810173Z Fetching https://www.reddit.com/search/.rss?q=barcode%20for%20Shopify&sort=new&limit=30 (Attempt 1)
+2026-06-25T03:41:12.7810933Z   HTTP 429
+2026-06-25T03:41:12.7811326Z Fetching https://old.reddit.com/search/.rss?q=barcode%20for%20Shopify&sort=new&limit=30 (Attempt 1)
+2026-06-25T03:41:12.7811792Z   HTTP 429
+2026-06-25T03:41:12.7812334Z Fetching https://www.reddit.com/search.json?q=barcode%20for%20Shopify&sort=new&limit=30 (Attempt 1)
+2026-06-25T03:41:12.7812794Z   HTTP 403
+2026-06-25T03:41:12.7813068Z All endpoints failed for 'barcode for Shopify', sleeping 3s...
+2026-06-25T03:41:12.7813600Z Fetching https://www.reddit.com/search/.rss?q=barcode%20for%20Shopify&sort=new&limit=30 (Attempt 2)
+2026-06-25T03:41:12.7814059Z   HTTP 429
+2026-06-25T03:41:12.7814439Z Fetching https://old.reddit.com/search/.rss?q=barcode%20for%20Shopify&sort=new&limit=30 (Attempt 2)
+2026-06-25T03:41:12.7814897Z   HTTP 429
+2026-06-25T03:41:12.7815267Z Fetching https://www.reddit.com/search.json?q=barcode%20for%20Shopify&sort=new&limit=30 (Attempt 2)
+2026-06-25T03:41:12.7815707Z   HTTP 403
+2026-06-25T03:41:12.7815976Z All endpoints failed for 'barcode for Shopify', sleeping 8s...
+2026-06-25T03:41:12.7816495Z Fetching https://www.reddit.com/search/.rss?q=barcode%20for%20Shopify&sort=new&limit=30 (Attempt 3)
+2026-06-25T03:41:12.7816933Z   HTTP 429
+2026-06-25T03:41:12.7817294Z Fetching https://old.reddit.com/search/.rss?q=barcode%20for%20Shopify&sort=new&limit=30 (Attempt 3)
+2026-06-25T03:41:12.7817733Z   HTTP 429
+2026-06-25T03:41:12.7818094Z Fetching https://www.reddit.com/search.json?q=barcode%20for%20Shopify&sort=new&limit=30 (Attempt 3)
+2026-06-25T03:41:12.7818531Z   HTTP 403
+2026-06-25T03:41:12.7818798Z All endpoints failed for 'barcode for Shopify', sleeping 20s...
+2026-06-25T03:41:12.7819251Z Failed to fetch any data for keyword: 'barcode for Shopify' after 3 retries.
+2026-06-25T03:41:12.7819550Z 
+2026-06-25T03:41:12.7819659Z --- TEST RUN: SMTP credentials missing ---
+2026-06-25T03:41:12.7819974Z Would have emailed the following matches:
+2026-06-25T03:41:12.7821100Z  - I don't know if anyone mentioned this before, but Intellivision/Amico Entertainment stopped paying for their GS1 UPC/barcode prefix a (seemingly) long time ago (r/Intellivision_Amico)
+2026-06-25T03:41:12.7822222Z    Reason: Post discusses a company stopping GS1 UPC/barcode prefix payments, indicating potential dissatisfaction with GS1's fee structure.
+2026-06-25T03:41:12.7823103Z    Link: https://www.reddit.com/r/Intellivision_Amico/comments/1u2w74e/i_dont_know_if_anyone_mentioned_this_before_but/
+2026-06-25T03:41:12.7823671Z  - GTIN exemption vs UPC code (r/AmazonFBA)
+2026-06-25T03:41:12.7824240Z    Reason: User is planning a product launch on Amazon and considering investing in a UPC barcode instead of using GTIN exemption.
+2026-06-25T03:41:12.7825122Z    Link: https://www.reddit.com/r/AmazonFBA/comments/1tzk421/gtin_exemption_vs_upc_code/
+2026-06-25T03:41:12.7826163Z  - Brand Registry / GTIN exemption — does it apply across all categories, or only the one I first registered under? (r/SellingOnAmazonFBA)
+2026-06-25T03:41:12.7827003Z    Reason: User is asking about GTIN exemption for selling on Amazon, indicating a potential need for retail barcodes.
+2026-06-25T03:41:12.7827783Z    Link: https://www.reddit.com/r/SellingOnAmazonFBA/comments/1u6eb95/brand_registry_gtin_exemption_does_it_apply/
+2026-06-25T03:41:12.7828421Z  - TIL that a barcode costs atleast 48k rupees in India (r/indianstartups)
+2026-06-25T03:41:12.7829044Z    Reason: User needs barcodes for their D2C brand to sell on Amazon and is frustrated with GS1's high pricing in India.
+2026-06-25T03:41:12.7829802Z    Link: https://www.reddit.com/r/indianstartups/comments/1ucwbx3/til_that_a_barcode_costs_atleast_48k_rupees_in/
+2026-06-25T03:41:12.7830815Z  - TIL that a barcode costs atleast 48k rupees (r/india)
+2026-06-25T03:41:12.7831367Z    Reason: User needs barcodes for Amazon, frustrated with GS1's high initial and renewal costs for their D2C brand.
+2026-06-25T03:41:12.7832069Z    Link: https://www.reddit.com/r/india/comments/1ucu3mx/til_that_a_barcode_costs_atleast_48k_rupees/
+2026-06-25T03:41:12.7832617Z  - First ever product listing - packaging? (UK) (r/AmazonSeller)
+2026-06-25T03:41:12.7833303Z    Reason: The user is a first-time Amazon seller asking about barcode requirements for their own brand product, indicating a need to obtain one.
+2026-06-25T03:41:12.7834256Z    Link: https://www.reddit.com/r/AmazonSeller/comments/1uc2q81/first_ever_product_listing_packaging_uk/
+2026-06-25T03:41:12.7834763Z ------------------------------------------
+2026-06-25T03:41:12.7834953Z 
+2026-06-25T03:41:12.7835035Z Run complete.
+2026-06-25T03:41:12.9034731Z ##[group]Run git config --global user.name "github-actions[bot]"
+2026-06-25T03:41:12.9035257Z [36;1mgit config --global user.name "github-actions[bot]"[0m
+2026-06-25T03:41:12.9035750Z [36;1mgit config --global user.email "github-actions[bot]@users.noreply.github.com"[0m
+2026-06-25T03:41:12.9036179Z [36;1mgit add seen.json[0m
+2026-06-25T03:41:12.9036401Z [36;1m[0m
+2026-06-25T03:41:12.9036632Z [36;1m# Only commit and push if there are changes[0m
+2026-06-25T03:41:12.9036964Z [36;1mif ! git diff-index --quiet HEAD; then[0m
+2026-06-25T03:41:12.9037289Z [36;1m  git commit -m "Update seen.json [skip ci]"[0m
+2026-06-25T03:41:12.9037580Z [36;1m  git push[0m
+2026-06-25T03:41:12.9037789Z [36;1melse[0m
+2026-06-25T03:41:12.9038041Z [36;1m  echo "No new posts seen, seen.json is unchanged."[0m
+2026-06-25T03:41:12.9038347Z [36;1mfi[0m
+2026-06-25T03:41:12.9069901Z shell: /usr/bin/bash -e {0}
+2026-06-25T03:41:12.9070148Z env:
+2026-06-25T03:41:12.9070566Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+2026-06-25T03:41:12.9071006Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+2026-06-25T03:41:12.9071455Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+2026-06-25T03:41:12.9071837Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+2026-06-25T03:41:12.9072222Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+2026-06-25T03:41:12.9072607Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+2026-06-25T03:41:12.9072930Z ##[endgroup]
+2026-06-25T03:41:12.9244620Z [main 1d8c75b] Update seen.json [skip ci]
+2026-06-25T03:41:12.9245234Z  1 file changed, 254 insertions(+), 1 deletion(-)
+2026-06-25T03:41:13.7110942Z To https://github.com/Barcodescoder/barcode-monitor
+2026-06-25T03:41:13.7112000Z    9bf12b3..1d8c75b  main -> main
+2026-06-25T03:41:13.7253751Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-06-25T03:41:13.7255820Z Post job cleanup.
+2026-06-25T03:41:13.8501803Z (node:2592) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-06-25T03:41:13.8503070Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-06-25T03:41:13.8684581Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/barcode-monitor/barcode-monitor --files-from manifest.txt --use-compress-program zstdmt
+2026-06-25T03:41:14.0292871Z (node:2592) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-06-25T03:41:14.3104089Z Sent 14570881 of 14570881 (100.0%), 47.9 MBs/sec
+2026-06-25T03:41:14.4630101Z Cache saved with the key: setup-python-Linux-x64-24.04-Ubuntu-python-3.11.15-pip-1501a9871023a1c3f6449a62e166c8afe1e625c105f2123c923ccb47e8fca355
+2026-06-25T03:41:14.4782698Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-06-25T03:41:14.4783951Z Post job cleanup.
+2026-06-25T03:41:14.5580811Z [command]/usr/bin/git version
+2026-06-25T03:41:14.5617110Z git version 2.54.0
+2026-06-25T03:41:14.5649571Z Copying '/home/runner/.gitconfig' to '/home/runner/work/_temp/bfd8cd94-b4c0-4728-b9ba-7980e843f449/.gitconfig'
+2026-06-25T03:41:14.5658750Z Temporarily overriding HOME='/home/runner/work/_temp/bfd8cd94-b4c0-4728-b9ba-7980e843f449' before making global git config changes
+2026-06-25T03:41:14.5660133Z Adding repository directory to the temporary git global config as a safe directory
+2026-06-25T03:41:14.5664050Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/barcode-monitor/barcode-monitor
+2026-06-25T03:41:14.5698677Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-06-25T03:41:14.5730322Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-06-25T03:41:14.5949727Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-06-25T03:41:14.5974098Z http.https://github.com/.extraheader
+2026-06-25T03:41:14.5984856Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-06-25T03:41:14.6015265Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-06-25T03:41:14.6231600Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-06-25T03:41:14.6260003Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-06-25T03:41:14.6603425Z Cleaning up orphan processes
+2026-06-25T03:41:14.7016561Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

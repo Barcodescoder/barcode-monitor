@@ -11,13 +11,14 @@ import re
 import requests
 import feedparser
 from google import genai
+from google.genai import types
 from pydantic import BaseModel, Field
 
 # --- CONFIGURATION ---
 KEYWORDS = [
     'EAN-13', 'EAN barcode', 'UPC-A', 'UPC barcode', 'GTIN', 'GS1',
     'buy barcode', 'buy barcodes', 'get barcodes', 'product barcode',
-    'retail barcode', 'barcode for Amazon', 'barcode for Shopify'
+    'retail barcode', 'barcode for Shopify'
 ]
 EXCLUDED_SUBREDDITS = {
     'vedic_astrology_free', 'vedicastrologyexperts', 'vedicastromedia', 'jyotisha_astro', 
@@ -177,10 +178,11 @@ def filter_with_gemini(post, client):
     prompt = f"""You are screening Reddit posts for a company that SELLS retail barcodes (EAN-13, UPC-A, UPC-E, GTIN) to businesses.
 
 Flag a post as relevant ONLY if it shows one of these:
-1. Someone wanting to BUY or obtain retail barcodes to sell physical products in shops or on online marketplaces (Amazon, eBay, Shopify, etc.).
+1. Someone wanting to BUY or obtain retail barcodes to sell physical products in shops or on online marketplaces (eBay, Shopify, etc.).
 2. Someone frustrated with or complaining about GS1 — its pricing, membership fees, renewal costs, or sign-up process.
 
 Do NOT flag:
+- ANY posts where the user is specifically trying to list on Amazon or wants help with Amazon barcode requirements. Amazon recently changed their policy to require GS1 barcodes, so we cannot help them.
 - Questions about scanning, reading, or decoding barcodes
 - Generating or printing barcodes in software/code
 - ISBN, FNSKU, QR codes, or Data Matrix questions
@@ -212,43 +214,97 @@ Content: {post['snippet']}
     # Fallback if both attempts fail
     return True, "AI check failed — manual review"
 
+# --- AI DRAFTING ---
+def draft_reply(post, client):
+    system_instruction = """You are monitoring Reddit to help users who are confused or complaining about the high cost of GS1 barcodes. 
+Your goal is to provide a very brief, direct, and factual alternative.
+
+Key knowledge:
+- GS1 is the largest barcode supplier, but they are expensive with annual fees.
+- Resellers provide functional, legal barcodes with NO annual license fees (one-off payment).
+- The International Barcodes Network is a trustworthy network of such resellers.
+
+Strict Guidelines for your reply:
+- Tone: Extremely brief, direct, and factual. Avoid AI-sounding fluff, fake empathy (e.g., "I totally get it!"), and unnecessary pleasantries.
+- Length: 2-3 sentences max. 
+- Content: Directly answer their core issue. ALWAYS mention the "International Barcodes Network" as the trustworthy reseller alternative. 
+- Value Prop: Highlight that our barcodes have NO annual license fees and are affordable for small businesses.
+- Relevance: DO NOT mention Amazon or specific retailers (like Walmart/Macy's). If the post mentions Amazon, do not encourage them to use our barcodes for Amazon, as Amazon now strictly requires GS1 barcodes. Match the region of the user if relevant, avoid US-centric examples for non-US posts.
+- Do NOT sound like an AI. No generic intros or outros.
+
+Example of a perfect reply:
+GS1 is the largest barcode supplier in the world, but not the only one. You can get functional, legal barcodes from trustworthy barcode resellers such as the International Barcodes Network. These barcodes don't have annual license fees either, so they are much more affordable and practical for a small business than joining GS1."""
+
+    prompt = f"""Please draft a Reddit reply to the following post:
+
+Subreddit: r/{post['sub']}
+Title: {post['title']}
+Body: {post.get('selftext', post['snippet'])}
+"""
+    for attempt in range(2):
+        try:
+            response = client.models.generate_content(
+                model=MODEL_ID,
+                contents=prompt,
+                config=types.GenerateContentConfig(
+                    system_instruction=system_instruction,
+                    temperature=0.7,
+                ),
+            )
+            return response.text
+        except Exception as e:
+            print(f"Gemini draft error (Attempt {attempt+1}): {e}")
+            time.sleep(2)
+    return "Failed to draft reply."
+
 # --- SLACK NOTIFICATION ---
 def send_slack_digest(matches, stats):
     if not matches:
-        print("No matches to send.")
-        return True
+        blocks = [
+            {
+                "type": "header",
+                "text": {
+                    "type": "plain_text",
+                    "text": f"✅ Barcode Lead Monitor — Run Complete ({datetime.now().strftime('%d %b')})"
+                }
+            },
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "No new relevant posts found today."
+                }
+            }
+        ]
+    else:
+        blocks = [
+            {
+                "type": "header",
+                "text": {
+                    "type": "plain_text",
+                    "text": f"🚨 Barcode Leads — {len(matches)} new ({datetime.now().strftime('%d %b')})"
+                }
+            },
+            {"type": "divider"}
+        ]
 
-    if not SLACK_WEBHOOK_URL:
-        print("\n--- TEST RUN: SLACK_WEBHOOK_URL missing ---")
-        print("Would have sent the following matches to Slack:")
         for m in matches:
-            print(f" - {m['title']} (r/{m['sub']})")
-            print(f"   Reason: {m['reason']}")
-            print(f"   Link: {m['link']}")
-        print("------------------------------------------\n")
-        # In test mode without a webhook, we pretend it succeeded so they get marked as seen
-        return True
-
-    blocks = [
-        {
-            "type": "header",
-            "text": {
-                "type": "plain_text",
-                "text": f"🚨 Barcode Leads — {len(matches)} new ({datetime.now().strftime('%d %b')})"
-            }
-        },
-        {"type": "divider"}
-    ]
-
-    for m in matches:
-        blocks.append({
-            "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": f"*{m['title']}*\nr/{m['sub']} | by {m['author']} | {m['published']}\n> *AI Reason:* {m['reason']}\n<{m['link']}|View Post>"
-            }
-        })
-        blocks.append({"type": "divider"})
+            blocks.append({
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": f"*{m['title']}*\\nr/{m['sub']} | by {m['author']} | {m['published']}\\n> *AI Reason:* {m['reason']}\\n<{m['link']}|View Post>"
+                }
+            })
+            if 'drafted_reply' in m and m['drafted_reply']:
+                blocks.append({
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": f"🤖 *Drafted Reply:*\n>{m['drafted_reply'].replace(chr(10), chr(10) + '>')}"
+                    }
+                })
+            blocks.append({"type": "divider"})
 
     failed_text = f" | *Failed Keywords:* {len(stats['failed_keywords'])}" if stats['failed_keywords'] else ""
     blocks.append({
@@ -260,6 +316,15 @@ def send_slack_digest(matches, stats):
             }
         ]
     })
+
+    if not SLACK_WEBHOOK_URL:
+        print("\n--- TEST RUN: SLACK_WEBHOOK_URL missing ---")
+        print("Would have sent the following blocks to Slack:")
+        import json
+        print(json.dumps(blocks, indent=2))
+        print("------------------------------------------\n")
+        # In test mode without a webhook, we pretend it succeeded so they get marked as seen
+        return True
 
     payload = {"blocks": blocks}
 
@@ -319,6 +384,8 @@ def main():
             print(f"  -> {post['id']} | Verdict: {'PASS' if relevant else 'FAIL'} | {reason}")
             
             if relevant:
+                print("    Drafting reply...")
+                post['drafted_reply'] = draft_reply(post, client)
                 matches.append(post)
             else:
                 # Mark irrelevant posts as seen immediately
@@ -327,14 +394,15 @@ def main():
         # Polite throttle
         time.sleep(10)
         
-    if matches:
-        if send_slack_digest(matches, stats):
-            # Only mark relevant posts as seen if Slack succeeded
-            for m in matches:
-                seen[m['id']] = datetime.now(timezone.utc).timestamp()
-        else:
-            print("Slack delivery failed. Relevant posts not marked as seen.")
-    else:
+    slack_success = send_slack_digest(matches, stats)
+    
+    if matches and slack_success:
+        # Only mark relevant posts as seen if Slack succeeded
+        for m in matches:
+            seen[m['id']] = datetime.now(timezone.utc).timestamp()
+    elif matches and not slack_success:
+        print("Slack delivery failed. Relevant posts not marked as seen.")
+    elif not matches:
         print("No new relevant posts found today.")
         
     # Always save seen (which now includes all irrelevant posts from today + successful matches)
