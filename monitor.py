@@ -194,7 +194,7 @@ Post Title: {post['title']}
 Subreddit: r/{post['sub']}
 Content: {post['snippet']}
 """
-    for attempt in range(2):
+    for attempt in range(5):
         try:
             response = client.models.generate_content(
                 model=MODEL_ID,
@@ -209,9 +209,9 @@ Content: {post['snippet']}
             return data.get('relevant', False), data.get('reason', '')
         except Exception as e:
             print(f"Gemini API error (Attempt {attempt+1}): {e}")
-            time.sleep(2)
+            time.sleep(5 + (attempt * 5)) # 5, 10, 15, 20, 25 seconds
             
-    # Fallback if both attempts fail
+    # Fallback if all attempts fail
     return True, "AI check failed — manual review"
 
 # --- AI DRAFTING ---
@@ -241,7 +241,7 @@ Subreddit: r/{post['sub']}
 Title: {post['title']}
 Body: {post.get('selftext', post['snippet'])}
 """
-    for attempt in range(2):
+    for attempt in range(5):
         try:
             response = client.models.generate_content(
                 model=MODEL_ID,
@@ -254,7 +254,7 @@ Body: {post.get('selftext', post['snippet'])}
             return response.text
         except Exception as e:
             print(f"Gemini draft error (Attempt {attempt+1}): {e}")
-            time.sleep(2)
+            time.sleep(5 + (attempt * 5))
     return "Failed to draft reply."
 
 # --- SLACK NOTIFICATION ---
