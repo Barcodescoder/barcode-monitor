@@ -216,8 +216,8 @@ Content: {post['snippet']}
 
 # --- AI DRAFTING ---
 def draft_reply(post, client):
-    system_instruction = """You are monitoring Reddit to help users who are confused or complaining about the high cost of GS1 barcodes. 
-Your goal is to provide a very brief, direct, and factual alternative.
+    system_instruction = """You are monitoring Reddit to help users who need retail barcodes (UPC/EAN) or are frustrated by the high cost of GS1 barcodes. 
+Your goal is to provide a very brief, direct, and factual alternative to GS1.
 
 Key knowledge:
 - GS1 is the largest barcode supplier, but they are expensive with annual fees.
@@ -227,7 +227,7 @@ Key knowledge:
 Strict Guidelines for your reply:
 - Tone: Extremely brief, direct, and factual. Avoid AI-sounding fluff, fake empathy (e.g., "I totally get it!"), and unnecessary pleasantries.
 - Length: 2-3 sentences max. 
-- Content: Directly answer their core issue. ALWAYS mention the "International Barcodes Network" as the trustworthy reseller alternative. 
+- Content: Directly answer their core issue. ALWAYS mention the "International Barcodes Network" as the trustworthy reseller alternative. If they just need barcodes to list products, tell them they can get them easily from resellers. DO NOT refuse to answer just because they aren't complaining about GS1.
 - Value Prop: Highlight that our barcodes have NO annual license fees and are affordable for small businesses.
 - Relevance: DO NOT mention Amazon or specific retailers (like Walmart/Macy's). If the post mentions Amazon, do not encourage them to use our barcodes for Amazon, as Amazon now strictly requires GS1 barcodes. Match the region of the user if relevant, avoid US-centric examples for non-US posts.
 - Do NOT sound like an AI. No generic intros or outros.
@@ -293,7 +293,7 @@ def send_slack_digest(matches, stats):
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": f"*{m['title']}*\\nr/{m['sub']} | by {m['author']} | {m['published']}\\n> *AI Reason:* {m['reason']}\\n<{m['link']}|View Post>"
+                    "text": f"*{m['title']}*\nr/{m['sub']} | by {m['author']} | {m['published']}\n> *AI Reason:* {m['reason']}\n<{m['link']}|View Post>"
                 }
             })
             if 'drafted_reply' in m and m['drafted_reply']:
